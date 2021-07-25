@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "A-OTF";
+    src: url(./A-OTF-A1MinchoStd-Bold.otf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "wt024";
+    src: url(./wt024.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
