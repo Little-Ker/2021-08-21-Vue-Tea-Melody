@@ -5,21 +5,19 @@
 
       <h1>News</h1>
       <NewsList />
-      
-    <!-- <Slide />
-    <AboutText/> -->
-    <!-- <h1>This is an about news</h1> -->
+      <!-- <Loading /> -->
   </div>
 </template>
 
 <script>
 import NewsList from '@/components/NewsList.vue'
+// import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'News',
   components: {
-    NewsList
-    // AboutText
+    NewsList,
+    // Loading
   },
 }
 </script>
@@ -28,6 +26,14 @@ export default {
     .navBarMargin {
         margin-top: 75px;
     }
+
+    .news {
+        width: 100%;
+        height: 100%;
+        background-image: url('../assets/bg/bg02.jpg');
+        z-index: -10;
+    }
+  
     .banner {
         /* width: 100%; */
         background-color: #aff;
