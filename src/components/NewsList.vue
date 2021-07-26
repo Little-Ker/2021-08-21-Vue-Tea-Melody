@@ -4,14 +4,14 @@
             <ul class="chooseWrap">
                 <li v-for='(item, index) in chooseAry' :key='index'>
                     <div class="typeBtn">
-                        <input :id="`type0${index}}`" checked type="radio" name='newsType' :value="item.value">
+                        <input v-model="chooseType" :id="`type0${index}}`" type="radio" name='newsType' :value="item.value">
                         <label :for="`type0${index}}`" class="radioStyle"><p>{{item.type}}</p></label>  
                     </div>
                 </li>
             </ul>
-            <div class="topMargin"></div>
+            <div class="topPadding"></div>
             <ul class="newsWrap">
-                <li v-for="(item, index) in newsData.news" :key='index'>
+                <li v-for="(item, index) in showChooseNews" :key='index'>
                     <div class="card">
                         <div class="newsImg">
                             <img :src='item.img' alt="">
@@ -26,7 +26,7 @@
                     </div>
                 </li>
             </ul>
-            <div class="topMargin"></div>
+            <div class="topPadding"></div>
         </div>
     </div>
 </template>
@@ -38,7 +38,7 @@ export default {
     name: 'NewsList',
     data() {
         return {
-            chooseIndex: 0,
+            chooseType: 'all',
             pageIndex: 0,
             chooseAry: [
                 { type: '全部', value: 'all' },
@@ -48,6 +48,15 @@ export default {
                 { type: '新店資訊', value: 'shop' },
             ],
             newsData
+        }
+    },
+    computed: {
+        showChooseNews() {
+            if (this.chooseType !== 'all') {
+                return this.newsData.news.filter(item => {
+                    return item.type === this.chooseType
+                })
+            } return this.newsData.news
         }
     }
 }
@@ -63,8 +72,8 @@ export default {
         /* font-family: A-OTF; */
     }
 
-    .topMargin {
-        margin: 20px;
+    .topPadding {
+        padding: 20px;
     }
 
     ol, ul {
@@ -98,9 +107,14 @@ export default {
     }
 
     .card {
+        cursor: pointer;
         width: 97%;
-        margin: 5px;
+        margin: 15px 5px;
         /* border: 1px solid #ccc; */
+        background-color: #fff;
+        /* border-radius: 15px; */
+        border-radius: 5px;
+        overflow: hidden;
         box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.418);
     }
 
@@ -125,7 +139,6 @@ export default {
         position: relative;
         display: flex;
         justify-content: center;
-        overflow: hidden;
     }
 
     .newsImg img {
@@ -169,21 +182,37 @@ export default {
         width: 100%;
     }
 
-    @media (max-width: 1050px) {
+    @media (max-width: 1215px) {
         .newsWrap li {
             width: 33.33%;
         }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 916px) {
         .newsWrap li {
             width: 50%;
         }
+
+        .topPadding {
+            padding: 10px;
+        }
+
+        .card {
+            margin: 10px 5px;
+        }
     }
 
-    @media (max-width: 450px) {
+    @media (max-width: 616px) {
         .newsWrap li {
             width: 100%;
+        }
+
+        .topPadding {
+            padding: 0px;
+        }
+
+        .card {
+            margin: 7px 5px;
         }
     }
 
@@ -196,6 +225,7 @@ export default {
     }
 
     label p {
+        position: relative;
         box-sizing: border-box;
         width: 80px;
         height: 43px;
@@ -203,6 +233,7 @@ export default {
         color: #8bc672;
         z-index: 2;
         font-weight: 600;
+        transition: .3s;
     }
 
     .radioStyle {
@@ -225,7 +256,7 @@ export default {
         width: 0%;
         height: 100%;
         background-color: #8bc672;
-        z-index: -1;
+        /* z-index: -1; */
         transition: .6s;
     }
 
