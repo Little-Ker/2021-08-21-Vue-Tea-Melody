@@ -36,7 +36,7 @@ export default {
     return {
       navList: [
         { path:'/about', title:'關於我們' ,icon: require('../assets/nav/home1.png'), iconHover: require('../assets/nav/home2.png') },
-        { path:'/about', title:'活動新訊' ,icon: require('../assets/nav/news1.png'), iconHover: require('../assets/nav/news2.png') },
+        { path:'/news', title:'最新消息' ,icon: require('../assets/nav/news1.png'), iconHover: require('../assets/nav/news2.png') },
         { path:'/about', title:'飲品訂購' ,icon: require('../assets/nav/drink1.png'), iconHover: require('../assets/nav/drink2.png') },
         { path:'/about', title:'門市據點' ,icon: require('../assets/nav/point1.png'), iconHover: require('../assets/nav/point2.png') },
         { path:'/about', title:'聯絡我們' ,icon: require('../assets/nav/contact1.png'), iconHover: require('../assets/nav/contact2.png') }
@@ -80,7 +80,7 @@ export default {
   }
 
   #nav {
-    max-width: 1920px;
+    max-width: 1160px;
     margin: auto;
     width: 100%;
     padding: 0px 10px;

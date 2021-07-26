@@ -88,7 +88,6 @@ export default {
     }
 
     .upFooter {
-        max-width: 960px;
         height: 100%;
     }
 
@@ -158,11 +157,13 @@ export default {
         border-radius: 50%;
         background-color: #fff;
         color: #8bc672;
+        /* color: #8bc6726e; */
         font-weight: bold;
         font-size: 50px;
         margin: auto;
         margin-top: 50px;
         position: relative;
+        overflow: hidden;
     }
 
     .btn p {
@@ -177,7 +178,7 @@ export default {
     }
 
     .footer {
-        max-width: 960px;
+        max-width: 1160px;
         margin: auto;
         padding: 30px 20px;
         color: #fff;
@@ -191,8 +192,8 @@ export default {
     .footerColor {
         width: 100%;
         height: 100%;
-        opacity: 0.9;
         background-color: #8bc672;
+        /* background-color: #8bc6726e; */
         background-blend-mode: screen;
     }
 </style>

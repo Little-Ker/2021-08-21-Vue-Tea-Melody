@@ -1,6 +1,6 @@
 <template>
 <!-- slide -->
-  <div class="slide" @mouseleave = 'createTimer' @mouseover = 'clearClock'>
+  <div class="slide navBarMargin" @mouseleave = 'createTimer' @mouseover = 'clearClock'>
       <div class="sildeImg" v-for='(item, index) in imgAry' :key="index">
           <img :class='item.className' :src="item.imgName" alt="">
       </div>
@@ -102,9 +102,12 @@ export default {
     opacity: 0;
   }
 
+  .navBarMargin {
+        margin-top: 75px;
+    }
+
   .slide {
     position: relative;
-    margin-top: 75px;
   }
 
   img {

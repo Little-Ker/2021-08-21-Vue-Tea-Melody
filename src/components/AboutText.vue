@@ -119,7 +119,7 @@ p {
 
 .about {
     position: relative;
-    max-width: 920px;
+    max-width: 1160px;
     margin: auto;
     overflow: hidden;
 }
