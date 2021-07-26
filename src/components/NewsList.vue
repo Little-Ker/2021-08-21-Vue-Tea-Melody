@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="newsList">
-            <ul class="chooseList">
+            <ul class="chooseWrap">
                 <li v-for='(item, index) in chooseAry' :key='index'>
                     <div class="typeBtn">
                         <input :id="`type0${index}}`" checked type="radio" name='newsType' :value="item.value">
@@ -9,22 +9,45 @@
                     </div>
                 </li>
             </ul>
+            <div class="topMargin"></div>
+            <ul class="newsWrap">
+                <li v-for="(item, index) in newsData.news" :key='index'>
+                    <div class="card">
+                        <div class="newsImg">
+                            <img :src='item.img' alt="">
+                            <div class="more">MORE</div>
+                        </div>
+                        <div class="textBlock">
+                            <div class="title">{{item.title}}</div>
+                            <div class="left greenBlock"></div>
+                            <div class="left date">{{item.date}}</div>
+                            <div class="clearBox"></div>
+                        </div>  
+                    </div>
+                </li>
+            </ul>
+            <div class="topMargin"></div>
         </div>
     </div>
 </template>
 
 <script>
+import newsData from '../assets/data/newsData.json';
+
 export default {
     name: 'NewsList',
     data() {
         return {
+            chooseIndex: 0,
+            pageIndex: 0,
             chooseAry: [
                 { type: '全部', value: 'all' },
                 { type: '新品上市', value: 'newDrink' },
                 { type: '活動新訊', value: 'active' },
                 { type: '食安報告', value: 'report' },
                 { type: '新店資訊', value: 'shop' },
-            ]
+            ],
+            newsData
         }
     }
 }
@@ -34,9 +57,14 @@ export default {
     * {
         margin: 0;
         padding: 0;
-        box-sizing: content-box;
+        box-sizing: border-box;
+        font-family: "CenturyGothicRegular","微軟正黑體","Microsoft JhengHei","MHei","STHeitiTC-Light",sans-serif,Arial,Helvetica,"Helvetica Neue",Tahoma,Verdana;
         /* font-family: wt024; */
         /* font-family: A-OTF; */
+    }
+
+    .topMargin {
+        margin: 20px;
     }
 
     ol, ul {
@@ -44,11 +72,123 @@ export default {
     }
 
     .newsList {
-        max-width: 920px;
+        max-width: 1260px;
         margin: auto;
+        width: 100%;
     }
 
-    .chooseList {
+    .left {
+        float: left;
+    }
+
+    .clearBox {
+        clear: both;
+    }
+
+    /* 新聞欄 */
+
+    .newsWrap {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .newsWrap li {
+        width: 25%;
+    }
+
+    .card {
+        width: 97%;
+        margin: 5px;
+        /* border: 1px solid #ccc; */
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.418);
+    }
+
+    .textBlock {
+        padding: 15px 20px;
+        text-align: left;
+    }
+
+    .textBlock .title {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .greenBlock {
+        width: 4px;
+        height: 25px;
+        margin: 0px 12px 0px 2px;
+        background-color: #8bc672;
+    }
+
+    .newsImg {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .newsImg img {
+        vertical-align: bottom;
+    }
+
+    .newsImg::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: -100%;
+        background: rgba(12, 12, 12, 0.6);
+        transition: .5s;
+    }
+
+    .card:hover .newsImg::before {
+        left: 0%;
+    }
+
+    .card:hover .more {
+        opacity: 1;
+    }
+
+    .more {
+        position: absolute;
+        bottom: 12%;
+        border: 2px solid #fff;
+        color: #fff;
+        width: 40%;
+        height: 25%;
+        opacity: 0;
+        transition: .5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .card img {
+        width: 100%;
+    }
+
+    @media (max-width: 1050px) {
+        .newsWrap li {
+            width: 33.33%;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .newsWrap li {
+            width: 50%;
+        }
+    }
+
+    @media (max-width: 450px) {
+        .newsWrap li {
+            width: 100%;
+        }
+    }
+
+    /* 選單 */
+    .chooseWrap {
         text-align: center;
         display: flex;
         justify-content: center;
@@ -58,19 +198,18 @@ export default {
     label p {
         box-sizing: border-box;
         width: 80px;
-        height: 40px;
+        height: 43px;
         border: 2px solid #8bc672;
         color: #8bc672;
         z-index: 2;
-        font-weight: bold;
+        font-weight: 600;
     }
 
     .radioStyle {
         cursor: pointer;
         display: inline-block;
         width: 80px;
-        height: 40px;
-        line-height: 40px;
+        line-height: 38px;
         margin: 5px 5px;
         /* background-color: #fff; */
         color: #8bc672;

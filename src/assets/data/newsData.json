@@ -1,0 +1,42 @@
+{
+    "news": [{
+            "id": 1,
+            "title": "十二韻新門店開幕 - 龍井中央店",
+            "type": "shop",
+            "date": "2021-07-21",
+            "img": "./static/news/news01.jpg",
+            "content": "111"
+        },
+        {
+            "id": 2,
+            "title": "食安公告",
+            "type": "report",
+            "date": "2021-07-25",
+            "img": "./static/news/news01.jpg",
+            "content": "222"
+        }, {
+            "id": 3,
+            "title": "十二韻新門店開幕 - 龍井中央店",
+            "type": "shop",
+            "date": "2021-07-21",
+            "img": "./static/news/news01.jpg",
+            "content": "111"
+        },
+        {
+            "id": 4,
+            "title": "食安公告",
+            "type": "report",
+            "date": "2021-07-25",
+            "img": "./static/news/news01.jpg",
+            "content": "222"
+        },
+        {
+            "id": 5,
+            "title": "食安公告",
+            "type": "report",
+            "date": "2021-07-25",
+            "img": "./static/news/news01.jpg",
+            "content": "222"
+        }
+    ]
+}

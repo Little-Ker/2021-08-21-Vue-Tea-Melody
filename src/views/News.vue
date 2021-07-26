@@ -38,6 +38,5 @@ export default {
         /* background-size: contain; */
          background-position:55% 50%;
         background-attachment: fixed;
-
     }
 </style>
