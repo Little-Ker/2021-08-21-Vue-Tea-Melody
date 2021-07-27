@@ -5,19 +5,16 @@
 
       <h1>News</h1>
       <NewsList />
-      <!-- <Loading /> -->
   </div>
 </template>
 
 <script>
 import NewsList from '@/components/NewsList.vue'
-// import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'News',
   components: {
     NewsList,
-    // Loading
   },
 }
 </script>

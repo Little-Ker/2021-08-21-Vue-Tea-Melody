@@ -1,5 +1,5 @@
 <template>
-    <div class="loading">
+    <div v-show="isShowLoading" class="loading">
         <span></span>
         <span></span>
         <span></span>
@@ -10,7 +10,29 @@
 
 <script>
 export default {
-  name: 'Loading'
+    name: 'Loading',
+    computed: {
+        isShowLoading() {
+            return this.$store.state.isShowLoading; 
+        }
+    },
+    methods: {
+        createRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        },
+    },
+    watch: {
+        isShowLoading() {
+            if (!this.isShowLoading) return;
+
+            let randomSec = this.createRandom(500, 1500)
+            console.log('randomSec',randomSec);
+            this.timeout = setTimeout(() => {
+                this.$store.dispatch('GETSHOWLOADING',false)
+                clearTimeout(this.timeout);
+            }, randomSec);
+        }
+    }
 }
 </script>
 

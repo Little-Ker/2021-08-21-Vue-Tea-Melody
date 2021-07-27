@@ -16,6 +16,7 @@
           </div>
       </div>
     </div>
+    <Loading />
     <router-view></router-view>
     <Footer/>
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
@@ -25,12 +26,14 @@
 
 <script>
 // @ is an alias to /src
+import Loading from '@/components/Loading.vue'
 import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'Home',
   components: {
-    Footer
+    Footer,
+    Loading
   },
   data() {
     return {

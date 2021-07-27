@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import newsData from '../assets/data/newsData.json';
 
 export default {
     name: 'NewsList',
@@ -46,17 +45,28 @@ export default {
                 { type: '活動新訊', value: 'active' },
                 { type: '食安報告', value: 'report' },
                 { type: '新店資訊', value: 'shop' },
-            ],
-            newsData
+            ]
         }
     },
     computed: {
+        newsData() {
+            return this.$store.state.newsData; 
+        },
         showChooseNews() {
             if (this.chooseType !== 'all') {
-                return this.newsData.news.filter(item => {
+                return this.newsData.filter(item => {
                     return item.type === this.chooseType
                 })
-            } return this.newsData.news
+            } return this.newsData
+        }
+    },
+    mounted() {
+        this.$store.dispatch('GETNEWS', this.newsData)
+    },
+    watch: {
+        // 選項有改變，需跑loading畫面
+        chooseType() {
+            this.$store.dispatch('GETSHOWLOADING',true)
         }
     }
 }
