@@ -139,6 +139,7 @@ export default {
         position: relative;
         display: flex;
         justify-content: center;
+        overflow: hidden;
     }
 
     .newsImg img {
@@ -150,13 +151,16 @@ export default {
         position: absolute;
         width: 100%;
         height: 100%;
-        left: -100%;
+        bottom: -100%;
+        /* left: -100%; */
         background: rgba(12, 12, 12, 0.6);
         transition: .5s;
     }
 
     .card:hover .newsImg::before {
-        left: 0%;
+        /* left: 0%; */
+        height: 100%;
+        bottom: 0%;
     }
 
     .card:hover .more {
@@ -230,6 +234,8 @@ export default {
         width: 80px;
         height: 43px;
         border: 2px solid #8bc672;
+        border-left: 0px;
+        border-right: 0px;
         color: #8bc672;
         z-index: 2;
         font-weight: 600;
@@ -241,7 +247,7 @@ export default {
         display: inline-block;
         width: 80px;
         line-height: 38px;
-        margin: 5px 5px;
+        margin: 5px 10px;
         /* background-color: #fff; */
         color: #8bc672;
         position: relative;
@@ -253,15 +259,15 @@ export default {
         position: absolute;
         left: 0;
         top: 0;
-        width: 0%;
-        height: 100%;
+        width: 100%;
+        height: 0%;
         background-color: #8bc672;
         /* z-index: -1; */
         transition: .6s;
     }
 
     .radioStyle:hover:before {
-        width: 180%;
+        height: 180%;
     }
 
     label p:hover {

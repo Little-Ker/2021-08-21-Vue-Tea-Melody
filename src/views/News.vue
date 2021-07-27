@@ -27,13 +27,23 @@ export default {
         margin-top: 75px;
     }
 
-    .news {
+    /* .news {
         width: 100%;
         height: 100%;
         background-image: url('../assets/bg/bg02.jpg');
         z-index: -10;
+    } */
+
+    .news {
+        width: 100%;
+        height: 100%;
+        background-image: url('../assets/about/aboutBg.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        z-index: -10;
     }
-  
+
     .banner {
         /* width: 100%; */
         background-color: #aff;
