@@ -82,6 +82,10 @@ export default {
         /* font-family: A-OTF; */
     }
 
+    .container {
+        margin: 0px 15px;
+    }
+
     .topPadding {
         padding: 20px;
     }

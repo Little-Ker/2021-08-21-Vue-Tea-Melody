@@ -8,7 +8,7 @@ export default createStore({
     },
     mutations: {
         SETNEWS(state, newsData) {
-            state.newsData = newsData;
+            state.newsData = newsData.reverse();
         },
         SETSHOWLOADING(state, isShowLoading) {
             state.isShowLoading = isShowLoading;

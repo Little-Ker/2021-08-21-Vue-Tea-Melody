@@ -1,42 +1,50 @@
 {
     "news": [{
             "id": 1,
-            "title": "十二韻新門店開幕 - 龍井中央店",
-            "type": "shop",
-            "date": "2021-07-21",
-            "img": "./static/news/news01.jpg",
-            "content": "111"
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "每一口喝得到滿滿的原粒燕麥，滾動飽滿的顆粒嚼感Q彈啵啵。"
         },
         {
             "id": 2,
-            "title": "食安公告",
-            "type": "report",
-            "date": "2021-07-25",
-            "img": "./static/news/news01.jpg",
-            "content": "222"
+            "title": "十二韻新門店開幕 - 苗栗店",
+            "type": "shop",
+            "date": "2021-03-26",
+            "img": "./static/news/news03.jpg",
+            "content": "苗栗第一家十二韻即將在5月開幕，熱情歡迎您的蒞臨。"
         }, {
             "id": 3,
-            "title": "十二韻新門店開幕 - 龍井中央店",
-            "type": "shop",
-            "date": "2021-07-21",
+            "title": "十二韻 - 陪您一起防疫",
+            "type": "active",
+            "date": "2021-05-16",
             "img": "./static/news/news01.jpg",
-            "content": "111"
+            "content": "為配合政府防疫政策，來店消費務必佩戴好口罩。"
         },
         {
             "id": 4,
-            "title": "食安公告",
+            "title": "堅持品質 - 100%台灣茶",
             "type": "report",
-            "date": "2021-07-25",
-            "img": "./static/news/news01.jpg",
-            "content": "222"
+            "date": "2021-06-01",
+            "img": "./static/news/news04.jpg",
+            "content": "每一杯台灣茶都有我們的用心與堅持。"
         },
         {
             "id": 5,
-            "title": "食安公告",
+            "title": "十二韻新門店開幕 - 台中店",
+            "type": "shop",
+            "date": "2021-06-25",
+            "img": "./static/news/news03.jpg",
+            "content": "台中十二韻即將在6月開幕，熱情歡迎您的蒞臨。"
+        },
+        {
+            "id": 6,
+            "title": "品質檢驗 - 安心好茶",
             "type": "report",
-            "date": "2021-07-25",
-            "img": "./static/news/news01.jpg",
-            "content": "222"
+            "date": "2021-06-06",
+            "img": "./static/news/news04.jpg",
+            "content": "十二韻全系列茶品100%台灣南投在地產製原葉茶香。"
         }
     ]
 }

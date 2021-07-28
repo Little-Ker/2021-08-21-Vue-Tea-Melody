@@ -56,7 +56,7 @@ export default {
     methods: {
         // 回到到最上面
         goTop() {
-             $('html,body').animate({ scrollTop: 0 }, 'slow');
+            $('html,body').animate({ scrollTop: 0 }, 'slow');
         }
     },
 }

@@ -7,7 +7,7 @@
           </div>
           <div class="rightWrap">
             <div @mouseover='hover' v-for='(item,index) in navList' :key='index' class="link">
-              <router-link :to='item.path' class="nav-item">
+              <router-link @click="goTop" :to='item.path' class="nav-item">
                 <img class='overHover' :src='item.icon' alt="">
                 <img class='showHover' :src='item.iconHover' alt="">
                 <p>{{item.title}}</p>
@@ -25,6 +25,9 @@
 </template>
 
 <script>
+import jQuery from "jquery";
+const $ = jQuery;
+window.$ = $;
 // @ is an alias to /src
 import Loading from '@/components/Loading.vue'
 import Footer from '@/components/Footer.vue'
@@ -47,6 +50,10 @@ export default {
     }
   },
   methods: {
+    goTop() {
+        $('html,body').scrollTop(0, 0);
+        // $('html,body').animate({ scrollTop: 0 }, 'slow');
+    }
     // reover() {
       // console.log(11);
       // const str = document.querySelector('.overHover')

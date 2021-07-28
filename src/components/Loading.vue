@@ -24,10 +24,11 @@ export default {
     watch: {
         isShowLoading() {
             if (!this.isShowLoading) return;
+            // document.body.style.overflow = 'hidden'
 
             let randomSec = this.createRandom(500, 1500)
-            console.log('randomSec',randomSec);
             this.timeout = setTimeout(() => {
+                // document.body.style.overflow = 'scroll'
                 this.$store.dispatch('GETSHOWLOADING',false)
                 clearTimeout(this.timeout);
             }, randomSec);
