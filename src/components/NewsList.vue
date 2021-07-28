@@ -19,9 +19,10 @@
                         </div>
                         <div class="textBlock">
                             <div class="title">{{item.title}}</div>
-                            <div class="left greenBlock"></div>
-                            <div class="left date">{{item.date}}</div>
-                            <div class="clearBox"></div>
+                            <div class="date">
+                                <div class="greenBlock"></div>
+                                <div>{{item.date}}</div>
+                            </div>
                         </div>  
                     </div>
                 </li>
@@ -100,12 +101,9 @@ export default {
         width: 100%;
     }
 
-    .left {
-        float: left;
-    }
-
-    .clearBox {
-        clear: both;
+    .date {
+        display: flex;
+        align-items: center;
     }
 
     /* 新聞欄 */

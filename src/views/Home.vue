@@ -17,6 +17,7 @@
       </div>
     </div>
     <Loading />
+    <NewsPage />
     <router-view></router-view>
     <Footer/>
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
@@ -31,12 +32,14 @@ window.$ = $;
 // @ is an alias to /src
 import Loading from '@/components/Loading.vue'
 import Footer from '@/components/Footer.vue'
+import NewsPage from '@/components/NewsPage.vue'
 
 export default {
   name: 'Home',
   components: {
     Footer,
-    Loading
+    Loading,
+    NewsPage
   },
   data() {
     return {
@@ -96,6 +99,7 @@ export default {
     padding: 0px 10px;
     display: flex;
     justify-content: space-between;
+    margin-left: auto;
   }
 
   .rightWrap {

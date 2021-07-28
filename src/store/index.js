@@ -8,7 +8,7 @@ export default createStore({
     },
     mutations: {
         SETNEWS(state, newsData) {
-            state.newsData = newsData.reverse();
+            state.newsData = newsData;
         },
         SETSHOWLOADING(state, isShowLoading) {
             state.isShowLoading = isShowLoading;
@@ -16,7 +16,7 @@ export default createStore({
     },
     actions: {
         GETNEWS(context) {
-            context.commit('SETNEWS', newsData.news);
+            context.commit('SETNEWS', newsData.news.reverse());
         },
         GETSHOWLOADING(context, isShowLoading) {
             context.commit('SETSHOWLOADING', isShowLoading);

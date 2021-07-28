@@ -9,6 +9,10 @@
 </template>
 
 <script>
+import jQuery from "jquery";
+const $ = jQuery;
+window.$ = $;
+
 export default {
     name: 'Loading',
     computed: {
@@ -20,15 +24,25 @@ export default {
         createRandom(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
         },
+
+        // 禁用滾動條
+        stopScrollBar() {
+            var tops = $(document).scrollTop();
+            $(document).bind("scroll",function (){$(document).scrollTop(tops); });
+
+        },
+        startScrollBar() {
+            $(document).unbind("scroll");
+        }
     },
     watch: {
         isShowLoading() {
             if (!this.isShowLoading) return;
-            // document.body.style.overflow = 'hidden'
+            this.stopScrollBar();
 
             let randomSec = this.createRandom(500, 1500)
             this.timeout = setTimeout(() => {
-                // document.body.style.overflow = 'scroll'
+                this.startScrollBar();
                 this.$store.dispatch('GETSHOWLOADING',false)
                 clearTimeout(this.timeout);
             }, randomSec);

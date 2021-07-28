@@ -1,0 +1,217 @@
+<template>
+    <div v-if="isShowOverlay" class="newsPage">
+        <transition @after-leave='afterLeaveFn' name='bounce' appear>
+            <div v-if="isShowNews" class="newsBg">
+                <div @click="closeNews" class="closeBtn">
+                    <div class="cross"></div>
+                </div>
+                <div class="editor">
+                    <div class="title"><p>燕麥系列 - 穀動上市</p></div>
+                    <div class="date">
+                        <div class="greenBlock"></div>
+                        <p>2021-03-01</p>
+                    </div>
+                    <div class="text">
+                        吸得到燕麥原粒飽滿的顆粒 ～<br>
+                        每一口都好Q好有嚼勁！<br>
+                        還有超推薦的 ～ 燕麥宇治抹茶 ～
+                    </div>
+                </div>
+                <img src="../assets/news/news02.jpg" alt="">
+            </div>
+        </transition>
+    </div>
+</template>
+
+<script>
+import jQuery from "jquery";
+const $ = jQuery;
+window.$ = $;
+
+export default {
+    name: 'NewsPage',
+    data() {
+        return {
+            isShowOverlay: false,
+            isShowNews: false
+        }
+    },
+    methods: {
+        showNews() {
+            this.stopScrollBar();
+            this.isShowOverlay = true,
+            this.isShowNews = true
+            var tops = $(document).scrollTop();
+            $(document).bind("scroll",function (){$(document).scrollTop(tops); });
+        },
+        closeNews() {
+            this.isShowNews = false
+            $(document).unbind("scroll");
+        },
+        afterLeaveFn() {
+            this.startScrollBar();
+            this.isShowOverlay = false;
+        },
+        // 禁用滾動條
+        stopScrollBar() {
+            var tops = $(document).scrollTop();
+            $(document).bind("scroll",function (){$(document).scrollTop(tops); });
+
+        },
+        startScrollBar() {
+            $(document).unbind("scroll");
+        }
+    },
+    watch: {
+        isShowOverlay() {
+            if (this.isShowOverlay) this.showNews();
+        }
+    }
+}
+</script>
+
+<style scoped>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: left;
+    font-family: "CenturyGothicRegular","微軟正黑體","Microsoft JhengHei","MHei","STHeitiTC-Light",sans-serif,Arial,Helvetica,"Helvetica Neue",Tahoma,Verdana;
+}
+
+/* 進出場動畫 */
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+
+.bounce-leave-active {
+  animation: fade-in .5s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+      opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+      opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.text {
+    line-height: 26px;
+    margin: 10px 0px;
+}
+
+.title p {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.date .greenBlock {
+    width: 4px;
+    height: 25px;
+    margin: 0px 12px 0px 2px;
+    background-color: #8bc672;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+}
+
+img {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.closeBtn {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+.closeBtn:hover {
+    background-color: rgba(204, 204, 204, 0.404);
+}
+
+.cross {
+    position: absolute;
+    top: 24px;
+    left: 11px;
+    width: 30px;
+    height: 3px;
+    background-color: #666;
+    transform: rotate(45deg);
+    border-radius: 20px;
+}
+
+.cross::before {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background-color: #666;
+    transform: rotate(90deg);
+    border-radius: 20px;
+}
+
+.newsBg {
+    max-width: 640px;
+    max-height: 720px;
+    width: 100%;
+    height: 90%;
+    padding: 3% 5%;
+
+    background-color: #fff;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 12px;
+    
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.newsPage {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 460px) {
+    .newsBg {
+        height: 80%;
+    }
+}
+
+</style>
