@@ -12,7 +12,7 @@
             <div class="topPadding"></div>
             <ul class="newsWrap">
                 <li v-for="(item, index) in showChooseNews" :key='index'>
-                    <div class="card">
+                    <div @click="chooseNewsCard(item.id)" class="card">
                         <div class="newsImg">
                             <img :src='item.img' alt="">
                             <div class="more">MORE</div>
@@ -59,6 +59,12 @@ export default {
                     return item.type === this.chooseType
                 })
             } return this.newsData
+        }
+    },
+    methods: {
+        chooseNewsCard(id) {
+            this.$store.dispatch('GETSHOWOVERLAY', true)
+            this.$store.dispatch('GetChooseNewsId', id)
         }
     },
     mounted() {

@@ -6,18 +6,16 @@
                     <div class="cross"></div>
                 </div>
                 <div class="editor">
-                    <div class="title"><p>燕麥系列 - 穀動上市</p></div>
+                    <div class="title"><p>{{showChooseNews.title}}</p></div>
                     <div class="date">
                         <div class="greenBlock"></div>
-                        <p>2021-03-01</p>
+                        <p>{{showChooseNews.date}}</p>
                     </div>
                     <div class="text">
-                        吸得到燕麥原粒飽滿的顆粒 ～<br>
-                        每一口都好Q好有嚼勁！<br>
-                        還有超推薦的 ～ 燕麥宇治抹茶 ～
+                        {{showChooseNews.content}}
                     </div>
                 </div>
-                <img src="../assets/news/news02.jpg" alt="">
+                <img :src="showChooseNews.img" alt="">
             </div>
         </transition>
     </div>
@@ -32,14 +30,29 @@ export default {
     name: 'NewsPage',
     data() {
         return {
-            isShowOverlay: false,
             isShowNews: false
         }
+    },
+    computed: {
+        isShowOverlay() {
+            return this.$store.state.isShowOverlay;
+        },
+        newsData() {
+            return this.$store.state.newsData;
+        },
+        chooseNewsIndex() {
+            return this.$store.state.chooseNewsIndex;
+        },
+        showChooseNews() {
+            return this.newsData.filter(item => {
+                return item.id === this.chooseNewsIndex
+            })[0];
+        },
     },
     methods: {
         showNews() {
             this.stopScrollBar();
-            this.isShowOverlay = true,
+            this.$store.dispatch('GETSHOWOVERLAY', true);
             this.isShowNews = true
             var tops = $(document).scrollTop();
             $(document).bind("scroll",function (){$(document).scrollTop(tops); });
@@ -50,7 +63,7 @@ export default {
         },
         afterLeaveFn() {
             this.startScrollBar();
-            this.isShowOverlay = false;
+            this.$store.dispatch('GETSHOWOVERLAY', false);
         },
         // 禁用滾動條
         stopScrollBar() {
