@@ -16,9 +16,14 @@ window.$ = $;
 export default {
     name: 'Loading',
     computed: {
-        isShowLoading() {
-            return this.$store.state.isShowLoading; 
-        }
+        isShowLoading: {
+            get() {
+                return this.$store.state.isShowLoading;
+            },
+            set(val) {
+                return this.$store.commit('SetShowLoading',val);
+            }
+        },
     },
     methods: {
         createRandom(min, max) {
@@ -43,7 +48,7 @@ export default {
             let randomSec = this.createRandom(500, 1500)
             this.timeout = setTimeout(() => {
                 this.startScrollBar();
-                this.$store.dispatch('GETSHOWLOADING',false)
+                this.isShowLoading = false;
                 clearTimeout(this.timeout);
             }, randomSec);
         }

@@ -54,8 +54,29 @@ export default {
         newsData() {
             return this.$store.state.newsData;
         },
-        newsPageIndex() {
-            return this.$store.state.newsPageIndex;
+        newsPageIndex: {
+            get() {
+                return this.$store.state.newsPageIndex;
+            },
+            set(val) {
+                return this.$store.commit('SetChooseNewsPageIndex',val);
+            }
+        },
+        isShowLoading: {
+            get() {
+                return this.$store.state.isShowLoading;
+            },
+            set(val) {
+                return this.$store.commit('SetShowLoading',val);
+            }
+        },
+        isShowOverlay: {
+            get() {
+                return this.$store.state.isShowOverlay;
+            },
+            set(val) {
+                return this.$store.commit('SetShowOverlay',val);
+            }
         },
         chooseNewsType: {
             get() {
@@ -65,16 +86,32 @@ export default {
                 return this.$store.commit('SetChooseNewsType',val);
             }
         },
+        chooseNewsIndex: {
+            get() {
+                return this.$store.state.chooseNewsIndex;
+            },
+            set(val) {
+                return this.$store.commit('SetChooseNewsIndex',val);
+            }
+        },
+        chooseNewsData: {
+            get() {
+                return this.$store.state.chooseNewsData;
+            },
+            set(val) {
+                return this.$store.commit('SetChooseNewsData',val);
+            }
+        },
         showChooseNews() {
             let chooseNewsData = this.newsData;
             if (this.chooseNewsType !== 'all') {
                 chooseNewsData = this.newsData.filter(item => item.type === this.chooseNewsType)
             }
-            this.$store.dispatch('GetChooseNewsData', chooseNewsData)
+            this.setChooseNewsData(chooseNewsData);
             return chooseNewsData
         },
         showSomeNews() {
-            const showOnceCount = 11;
+            const showOnceCount = this.$store.state.oncePageNewsCount;
             const startNewsIndex = (showOnceCount * (this.newsPageIndex - 1) < 0) ? 0 : showOnceCount * (this.newsPageIndex - 1);
             const endNewsIndex = ((showOnceCount * this.newsPageIndex) >= this.showChooseNews.length) ? (this.showChooseNews.length) : (showOnceCount * this.newsPageIndex);
             const dataAry = this.showChooseNews.slice(startNewsIndex, endNewsIndex);
@@ -82,9 +119,12 @@ export default {
         }
     },
     methods: {
+        setChooseNewsData(chooseNewsData) {
+            this.chooseNewsData = chooseNewsData;
+        },
         chooseNewsCard(id) {
-            this.$store.dispatch('GETSHOWOVERLAY', true)
-            this.$store.dispatch('GetChooseNewsId', id)
+            this.isShowOverlay = true;
+            this.chooseNewsIndex = id;
         },
         goTop() {
             // console.log($(".chooseWrap").offset().top);
@@ -93,16 +133,16 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('GETNEWS', this.newsData)
+        this.$store.dispatch('GetNews')
     },
     watch: {
         // 選項有改變，需跑loading畫面
         chooseNewsType() {
-            this.$store.dispatch('GETSHOWLOADING',true)
-            this.$store.dispatch('GetChooseNewsPageIndex',1)
+            this.isShowLoading = true;
+            this.newsPageIndex = 1;
         },
         newsPageIndex() {
-            this.$store.dispatch('GETSHOWLOADING',true)
+            this.isShowLoading = true;
             this.goTop();
         }
     }
@@ -115,8 +155,6 @@ export default {
         padding: 0;
         box-sizing: border-box;
         font-family: "CenturyGothicRegular","微軟正黑體","Microsoft JhengHei","MHei","STHeitiTC-Light",sans-serif,Arial,Helvetica,"Helvetica Neue",Tahoma,Verdana;
-        /* font-family: wt024; */
-        /* font-family: A-OTF; */
     }
 
     .container {

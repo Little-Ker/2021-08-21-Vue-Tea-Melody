@@ -40,13 +40,10 @@ export default {
           }
       },
       getTotalPage() {
-          const count = 11;
+          const count = this.$store.state.oncePageNewsCount;
           const addPage = ((this.getChooseNewsNum % count) !== 0) ? 1 : 0;
           const totalPage = Math.floor((this.getChooseNewsNum / count) + addPage);
           return totalPage;
-      },
-      getChooseNewsData() {
-          return this.$store.state.chooseNewsData;
       },
       chooseNewsType() {
           return this.$store.state.chooseNewsType;
@@ -67,7 +64,6 @@ export default {
       }
   },
   mounted() {
-      this.$store.dispatch('GetChooseNewsPageIndex',this.newsPageIndex);
       this.timeout = setTimeout(() => {
          this.showIndexBtn();
          clearTimeout(this.timeout);

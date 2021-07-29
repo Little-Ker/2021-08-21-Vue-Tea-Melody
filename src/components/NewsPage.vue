@@ -34,8 +34,13 @@ export default {
         }
     },
     computed: {
-        isShowOverlay() {
-            return this.$store.state.isShowOverlay;
+        isShowOverlay: {
+            get() {
+                return this.$store.state.isShowOverlay;
+            },
+            set(val) {
+                return this.$store.commit('SetShowOverlay',val);
+            }
         },
         newsData() {
             return this.$store.state.newsData;
@@ -52,7 +57,6 @@ export default {
     methods: {
         showNews() {
             this.stopScrollBar();
-            this.$store.dispatch('GETSHOWOVERLAY', true);
             this.isShowNews = true
             var tops = $(document).scrollTop();
             $(document).bind("scroll",function (){$(document).scrollTop(tops); });
@@ -63,7 +67,7 @@ export default {
         },
         afterLeaveFn() {
             this.startScrollBar();
-            this.$store.dispatch('GETSHOWOVERLAY', false);
+            this.isShowOverlay = false;
         },
         // 禁用滾動條
         stopScrollBar() {
