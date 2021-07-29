@@ -2,7 +2,7 @@
   <div class="newsPageLimit">
     <ul>
         <li>
-            <div @click="addPage(-1)" v-if="pageIndex !== 1" class="block">
+            <div @click="addPage(-1)" v-if="newsPageIndex !== 1" class="block">
                 <div class="leftBtn btn"></div>
             </div>
         </li>
@@ -12,7 +12,7 @@
             </div>
         </li>
         <li>
-            <div @click="addPage(1)" v-if="pageIndex !== getTotalPage" class="block">
+            <div @click="addPage(1)" v-if="newsPageIndex !== getTotalPage" class="block">
                 <div class="rightBtn btn"></div>
             </div>
         </li>
@@ -28,16 +28,22 @@ window.$ = $;
 export default {
   name: 'NewsPageLimit',
   data() {
-      return {
-          pageIndex: 1,
-      }
+      return {}
   },
   computed: {
       getChooseNewsNum() {
           return this.$store.state.chooseNewsData.length;
       },
+      newsPageIndex: {
+          get() {
+            return this.$store.state.newsPageIndex;
+          },
+          set(val) {
+            return this.$store.commit('SetChooseNewsPageIndex',val);
+          }
+      },
       getTotalPage() {
-          const count = 9;
+          const count = 11;
           const addPage = ((this.getChooseNewsNum % count) !== 0) ? 1 : 0;
           const totalPage = Math.floor((this.getChooseNewsNum / count) + addPage);
           return totalPage;
@@ -45,30 +51,34 @@ export default {
       getChooseNewsData() {
           return this.$store.state.chooseNewsData;
       },
-      getChooseNewsType() {
+      chooseNewsType() {
           return this.$store.state.chooseNewsType;
       }
   },
   methods: {
       choosePage(num) {
-          this.pageIndex = num;
-          this.showIndexBtn();
+          this.newsPageIndex = num;
       },
       addPage(num) {
-        this.pageIndex = this.pageIndex + num;
-        this.showIndexBtn();
+        this.newsPageIndex = this.newsPageIndex + num;
       },
       showIndexBtn() {
           $('.block').removeClass('chooseIndexBg');
           $('.block p').removeClass('chooseIndexColor');
-          $(`ul li:nth-child(${this.pageIndex + 1}) .block`).addClass('chooseIndexBg');
-          $(`ul li:nth-child(${this.pageIndex + 1}) p`).addClass('chooseIndexColor');
+          $(`ul li:nth-child(${this.newsPageIndex + 1}) .block`).addClass('chooseIndexBg');
+          $(`ul li:nth-child(${this.newsPageIndex + 1}) p`).addClass('chooseIndexColor');
       }
   },
+  mounted() {
+      this.$store.dispatch('GetChooseNewsPageIndex',this.newsPageIndex);
+  },
   watch: {
-      getChooseNewsType() {
-          this.pageIndex = 1;
-          this.getTotalPage();
+      chooseNewsType() {
+          this.newsPageIndex = 1;
+          this.showIndexBtn();
+      },
+      newsPageIndex() {
+          this.showIndexBtn();
       }
   }
 }

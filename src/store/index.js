@@ -9,6 +9,7 @@ export default createStore({
         chooseNewsIndex: 0,
         chooseNewsData: [],
         chooseNewsType: 'all',
+        newsPageIndex: 1,
     },
     mutations: {
         SETNEWS(state, newsData) {
@@ -28,6 +29,9 @@ export default createStore({
         },
         SetChooseNewsType(state, chooseNewsType) {
             state.chooseNewsType = chooseNewsType;
+        },
+        SetChooseNewsPageIndex(state, newsPageIndex) {
+            state.newsPageIndex = newsPageIndex;
         }
     },
     actions: {
@@ -55,6 +59,10 @@ export default createStore({
         // 選擇最新消息的種類
         GetChooseNewsType(context, chooseNewsType) {
             context.commit('SetChooseNewsType', chooseNewsType);
+        },
+        // 選擇後消息的頁面index
+        GetChooseNewsPageIndex(context, newsPageIndex) {
+            context.commit('SetChooseNewsPageIndex', newsPageIndex);
         },
     },
     modules: {}

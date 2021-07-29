@@ -154,6 +154,13 @@
             "date": "2021-03-01",
             "img": "./static/news/news02.jpg",
             "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 23,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
         }
     ]
 }

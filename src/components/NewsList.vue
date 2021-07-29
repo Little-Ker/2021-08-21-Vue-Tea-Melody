@@ -4,14 +4,14 @@
             <ul class="chooseWrap">
                 <li v-for='(item, index) in chooseAry' :key='index'>
                     <div class="typeBtn">
-                        <input v-model="chooseType" :id="`type0${index}}`" type="radio" name='newsType' :value="item.value">
+                        <input v-model="chooseNewsType" :id="`type0${index}}`" type="radio" name='newsType' :value="item.value">
                         <label :for="`type0${index}}`" class="radioStyle"><p>{{item.type}}</p></label>  
                     </div>
                 </li>
             </ul>
             <div class="topPadding"></div>
             <ul class="newsWrap">
-                <li v-for="(item, index) in showChooseNews" :key='index'>
+                <li v-for="(item, index) in showSomeNews" :key='index'>
                     <div @click="chooseNewsCard(item.id)" class="card">
                         <div class="newsImg">
                             <img :src='item.img' alt="">
@@ -33,13 +33,14 @@
 </template>
 
 <script>
+import jQuery from "jquery";
+const $ = jQuery;
+window.$ = $;
 
 export default {
     name: 'NewsList',
     data() {
         return {
-            chooseType: 'all',
-            pageIndex: 0,
             chooseAry: [
                 { type: '全部', value: 'all' },
                 { type: '新品上市', value: 'newDrink' },
@@ -51,21 +52,44 @@ export default {
     },
     computed: {
         newsData() {
-            return this.$store.state.newsData; 
+            return this.$store.state.newsData;
+        },
+        newsPageIndex() {
+            return this.$store.state.newsPageIndex;
+        },
+        chooseNewsType: {
+            get() {
+                return this.$store.state.chooseNewsType;
+            },
+            set(val) {
+                return this.$store.commit('SetChooseNewsType',val);
+            }
         },
         showChooseNews() {
             let chooseNewsData = this.newsData;
-            if (this.chooseType !== 'all') {
-                chooseNewsData = this.newsData.filter(item => item.type === this.chooseType)
+            if (this.chooseNewsType !== 'all') {
+                chooseNewsData = this.newsData.filter(item => item.type === this.chooseNewsType)
             }
             this.$store.dispatch('GetChooseNewsData', chooseNewsData)
             return chooseNewsData
+        },
+        showSomeNews() {
+            const showOnceCount = 11;
+            const startNewsIndex = (showOnceCount * (this.newsPageIndex - 1) < 0) ? 0 : showOnceCount * (this.newsPageIndex - 1);
+            const endNewsIndex = ((showOnceCount * this.newsPageIndex) >= this.showChooseNews.length) ? (this.showChooseNews.length) : (showOnceCount * this.newsPageIndex);
+            const dataAry = this.showChooseNews.slice(startNewsIndex, endNewsIndex);
+            return dataAry;
         }
     },
     methods: {
         chooseNewsCard(id) {
             this.$store.dispatch('GETSHOWOVERLAY', true)
             this.$store.dispatch('GetChooseNewsId', id)
+        },
+        goTop() {
+            // console.log($(".chooseWrap").offset().top);
+            // $('html,body').animate({ scrollTop: 300 }, 'slow');
+            $('html,body').scrollTop(300)
         }
     },
     mounted() {
@@ -73,8 +97,13 @@ export default {
     },
     watch: {
         // 選項有改變，需跑loading畫面
-        chooseType() {
+        chooseNewsType() {
             this.$store.dispatch('GETSHOWLOADING',true)
+            this.$store.dispatch('GetChooseNewsPageIndex',1)
+        },
+        newsPageIndex() {
+            // this.$store.dispatch('GETSHOWLOADING',true)
+            this.goTop();
         }
     }
 }
