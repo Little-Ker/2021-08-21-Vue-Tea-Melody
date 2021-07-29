@@ -102,7 +102,7 @@ export default {
             this.$store.dispatch('GetChooseNewsPageIndex',1)
         },
         newsPageIndex() {
-            // this.$store.dispatch('GETSHOWLOADING',true)
+            this.$store.dispatch('GETSHOWLOADING',true)
             this.goTop();
         }
     }

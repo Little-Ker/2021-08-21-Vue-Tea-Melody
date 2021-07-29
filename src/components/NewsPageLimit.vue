@@ -27,9 +27,6 @@ window.$ = $;
 
 export default {
   name: 'NewsPageLimit',
-  data() {
-      return {}
-  },
   computed: {
       getChooseNewsNum() {
           return this.$store.state.chooseNewsData.length;
@@ -71,6 +68,10 @@ export default {
   },
   mounted() {
       this.$store.dispatch('GetChooseNewsPageIndex',this.newsPageIndex);
+      this.timeout = setTimeout(() => {
+         this.showIndexBtn();
+         clearTimeout(this.timeout);
+      }, 500);
   },
   watch: {
       chooseNewsType() {
