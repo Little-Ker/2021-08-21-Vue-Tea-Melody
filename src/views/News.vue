@@ -5,16 +5,19 @@
 
       <h1>News</h1>
       <NewsList />
+      <NewsPageLimit />
   </div>
 </template>
 
 <script>
 import NewsList from '@/components/NewsList.vue'
+import NewsPageLimit from '@/components/NewsPageLimit.vue'
 
 export default {
   name: 'News',
   components: {
     NewsList,
+    NewsPageLimit
   },
 }
 </script>
@@ -24,14 +27,14 @@ export default {
         margin-top: 75px;
     }
 
-    /* .news {
+    .news {
         width: 100%;
         height: 100%;
         background-image: url('../assets/bg/bg02.jpg');
         z-index: -10;
-    } */
+    }
 
-    .news {
+    /* .news {
         width: 100%;
         height: 100%;
         background-image: url('../assets/about/aboutBg.png');
@@ -39,11 +42,11 @@ export default {
         background-repeat: no-repeat;
         background-attachment: fixed;
         z-index: -10;
-    }
+    } */
 
     .banner {
         /* width: 100%; */
-        background-color: #aff;
+        /* background-color: #fff; */
         height: 450px;
         background-image: url('../assets/news/pic1.jpg');
         background-repeat: no-repeat;

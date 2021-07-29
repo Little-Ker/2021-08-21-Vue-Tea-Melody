@@ -7,6 +7,8 @@ export default createStore({
         isShowOverlay: false,
         newsData: [],
         chooseNewsIndex: 0,
+        chooseNewsData: [],
+        chooseNewsType: 'all',
     },
     mutations: {
         SETNEWS(state, newsData) {
@@ -20,12 +22,19 @@ export default createStore({
         },
         SetChooseNewsIndex(state, chooseNewsIndex) {
             state.chooseNewsIndex = chooseNewsIndex;
+        },
+        SetChooseNewsData(state, chooseNewsData) {
+            state.chooseNewsData = chooseNewsData;
+        },
+        SetChooseNewsType(state, chooseNewsType) {
+            state.chooseNewsType = chooseNewsType;
         }
     },
     actions: {
         // 更新所有最新消息
         GETNEWS(context) {
-            context.commit('SETNEWS', newsData.news.reverse());
+            context.commit('SETNEWS', newsData.news);
+            // context.commit('SETNEWS', newsData.news.reverse());
         },
         // 是否顯示loading畫面
         GETSHOWLOADING(context, isShowLoading) {
@@ -38,6 +47,14 @@ export default createStore({
         // 選擇的最新消息id
         GetChooseNewsId(context, chooseNewsIndex) {
             context.commit('SetChooseNewsIndex', chooseNewsIndex);
+        },
+        // 選擇的最新消息
+        GetChooseNewsData(context, chooseNewsData) {
+            context.commit('SetChooseNewsData', chooseNewsData);
+        },
+        // 選擇最新消息的種類
+        GetChooseNewsType(context, chooseNewsType) {
+            context.commit('SetChooseNewsType', chooseNewsType);
         },
     },
     modules: {}

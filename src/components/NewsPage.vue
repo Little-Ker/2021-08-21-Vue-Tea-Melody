@@ -69,7 +69,6 @@ export default {
         stopScrollBar() {
             var tops = $(document).scrollTop();
             $(document).bind("scroll",function (){$(document).scrollTop(tops); });
-
         },
         startScrollBar() {
             $(document).unbind("scroll");
@@ -194,7 +193,7 @@ img {
     max-width: 640px;
     max-height: 720px;
     width: 100%;
-    height: 90%;
+    height: 80%;
     padding: 3% 5%;
 
     background-color: #fff;
@@ -223,7 +222,7 @@ img {
 
 @media (max-width: 460px) {
     .newsBg {
-        height: 80%;
+        height: 75%;
     }
 }
 

@@ -54,11 +54,12 @@ export default {
             return this.$store.state.newsData; 
         },
         showChooseNews() {
+            let chooseNewsData = this.newsData;
             if (this.chooseType !== 'all') {
-                return this.newsData.filter(item => {
-                    return item.type === this.chooseType
-                })
-            } return this.newsData
+                chooseNewsData = this.newsData.filter(item => item.type === this.chooseType)
+            }
+            this.$store.dispatch('GetChooseNewsData', chooseNewsData)
+            return chooseNewsData
         }
     },
     methods: {

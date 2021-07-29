@@ -21,30 +21,139 @@
             "date": "2021-05-16",
             "img": "./static/news/news01.jpg",
             "content": "為配合政府防疫政策，來店消費務必佩戴好口罩。"
-        },
-        {
+        }, {
             "id": 3,
             "title": "堅持品質 - 100%台灣茶",
             "type": "report",
             "date": "2021-06-01",
             "img": "./static/news/news04.jpg",
             "content": "每一杯台灣茶都有我們的用心與堅持。"
-        },
-        {
+        }, {
             "id": 4,
             "title": "十二韻新門店開幕 - 台中店",
             "type": "shop",
             "date": "2021-06-05",
             "img": "./static/news/news03.jpg",
             "content": "台中十二韻即將在6月開幕，熱情歡迎您的蒞臨。"
-        },
-        {
+        }, {
             "id": 5,
             "title": "品質檢驗 - 安心好茶",
             "type": "report",
             "date": "2021-06-06",
             "img": "./static/news/news04.jpg",
             "content": "十二韻全系列茶品100%台灣南投在地產製原葉茶香。"
+        }, {
+            "id": 6,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 7,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 9,
+            "title": "十二韻新門店開幕 - 台中店",
+            "type": "shop",
+            "date": "2021-06-05",
+            "img": "./static/news/news03.jpg",
+            "content": "台中十二韻即將在6月開幕，熱情歡迎您的蒞臨。"
+        }, {
+            "id": 10,
+            "title": "堅持品質 - 100%台灣茶",
+            "type": "report",
+            "date": "2021-06-01",
+            "img": "./static/news/news04.jpg",
+            "content": "每一杯台灣茶都有我們的用心與堅持。"
+        }, {
+            "id": 11,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 12,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 13,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 14,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 15,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 16,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 17,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 18,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 19,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 20,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 21,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
+        }, {
+            "id": 22,
+            "title": "燕麥系列 - 穀動上市",
+            "type": "newDrink",
+            "date": "2021-03-01",
+            "img": "./static/news/news02.jpg",
+            "content": "吸得到燕麥原粒飽滿的顆，每一口都好Q好有嚼勁！"
         }
     ]
 }
