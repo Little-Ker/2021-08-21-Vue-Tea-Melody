@@ -1,7 +1,7 @@
 <template>
-    <div v-if="isShowOverlay" class="newsPage">
+    <div @click="closeNews" v-if="isShowOverlay" class="newsPage">
         <transition @after-leave='afterLeaveFn' name='bounce' appear>
-            <div v-if="isShowNews" class="newsBg">
+            <div @click="closeNews" v-if="isShowNews" class="newsBg">
                 <div @click="closeNews" class="closeBtn">
                     <div class="cross"></div>
                 </div>
