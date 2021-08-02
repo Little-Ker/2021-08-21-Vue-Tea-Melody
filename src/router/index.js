@@ -15,6 +15,11 @@ const routes = [{
             name: 'News',
             component: () =>
                 import ('../views/News.vue')
+        }, {
+            path: '/shopPoint',
+            name: 'ShopPoint',
+            component: () =>
+                import ('../views/ShopPoint.vue')
         }]
     },
     // {
