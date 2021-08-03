@@ -30,7 +30,7 @@
                     <div class="textBlock">
                         <img src="../assets/map/mapIcon33.png" alt=""><p><b>{{item.shopName}}</b></p>
                         <img src="../assets/map/mapIcon22.png" alt=""><p>{{item.phone}}</p>
-                        <img src="../assets/map/mapIcon11.png" alt=""><p>{{item.address}}</p> 
+                        <img class="addressImg" src="../assets/map/mapIcon11.png" alt=""><p class="address">{{item.address}}</p> 
                     </div>
                 </div> 
             </div>
@@ -219,13 +219,14 @@ export default {
     width: 30px;
     height: 30px;
     transition: .1s;
+    position: relative;
 }
 
 #mapBlock {
     z-index: 1;
     height: 460px;
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     box-shadow: 0px 1px 5px rgb(0 0 0 / 42%);
 }
 
@@ -234,6 +235,11 @@ export default {
     display: flex;
     width: 100%;
     padding: 14px 0px;
+}
+
+.textBlock p {
+    display: inline-block;
+    width: 33.33%;
 }
 
 .textBlock:hover img {
@@ -320,13 +326,68 @@ select option {
 }
 
 @media (max-width: 433px) {
-    #mapBlock {
-        /* height: 500px; */
-        /* width: 90%; */
+    .textBlock {
+        flex-wrap: wrap;
+    }
+
+    .textBlock p {
+        width: 40%;
+    }
+
+    .textBlock .address {
+        margin-top: 10px;
+        width: 90%;
+    }
+
+    .textBlock .addressImg {
+        margin-top: 10px;
     }
 
     .choose {
-        display: block;
+        justify-content: center;
+    }
+
+    .chooseCity, .chooseArea {
+        margin: 5px;
+    }
+
+    .chooseCity p, .chooseArea p{
+        display: none;
+    }
+
+    #mapBlock {
+        margin-bottom: 18px;
+    }
+
+    select {
+        width: 110px;
+        font-size: 14px;
+        padding: 8px 13px 8px 8px;
+    }
+
+    .right {
+        float: none;
+    }
+}
+
+@media (max-width: 370px) {
+    .textBlock .address {
+        margin-top: 0px;
+        width: 80%;
+    }
+
+    .textBlock p {
+        width: 80%;
+    }
+
+    .textBlock .addressImg {
+        margin-top: 0px;
+    }
+
+    select {
+        width: 110px;
+        font-size: 14px;
+        padding: 8px 13px 8px 8px;
     }
 }
 

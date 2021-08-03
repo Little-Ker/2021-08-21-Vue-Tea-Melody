@@ -43,7 +43,7 @@ export default {
     .shpoPoint p::before {
       content: '';
       display: inline-block;
-      width: 50px;
+      width: 45px;
       height: 1px;
       background: #918c85;
       transform: translateY(-4px);
@@ -53,7 +53,7 @@ export default {
     .shpoPoint p::after {
       content: '';
       display: inline-block;
-      width: 50px;
+      width: 45px;
       height: 1px;
       background: #918c85;
       transform: translateY(-4px);
