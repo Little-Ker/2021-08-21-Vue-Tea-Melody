@@ -9,7 +9,6 @@
                     </div>
                 </li>
             </ul>
-            <div class="topPadding"></div>
             <ul class="newsWrap">
                 <li v-for="(item, index) in showSomeNews" :key='index'>
                     <div @click="chooseNewsCard(item.id)" class="card">

@@ -1,26 +1,40 @@
 <template>
     <div class="map">
-        <div class="choose">
-            <div class="chooseCity">
-                縣市
-                <select id="cityName" class="form-control" v-model="select.city">
-                    <!-- <option value="null">請選擇縣市</option> -->
-                    <option :value="item.city" v-for="item in cityList" :key="item.city">
-                        {{ item.city }}
-                    </option>
-                </select>
+        <div id="mapBlock"></div>
+        <div class="container">
+            <div class="choose right">
+                <div class="chooseCity">
+                    <p>縣市</p>
+                    <select id="cityName" class="form-control" v-model="select.city">
+                        <!-- <option value="null">請選擇縣市</option> -->
+                        <option :value="item.city" v-for="item in cityList" :key="item.city">
+                            {{ item.city }}
+                        </option>
+                    </select>
+                    <span class="customSelect"></span>
+                </div>
+                <div class="chooseArea">
+                    <p>地區</p>
+                    <select id="areaName" class="form-control" v-model="select.area">
+                        <option value="null">請選擇地區</option>
+                        <option :value="item.area" v-for="item in areaList" :key="item.area">
+                            {{ item.area }}
+                        </option>
+                    </select>
+                    <span class="customSelect"></span>
+                </div>
             </div>
-            <div class="chooseArea">
-                地區
-                <select id="areaName" class="form-control" v-model="select.area">
-                    <option value="null">請選擇地區</option>
-                    <option :value="item.area" v-for="item in areaList" :key="item.area">
-                        {{ item.area }}
-                    </option>
-                </select>
+            <div class="clearBox"></div>
+            <div class="shopList">
+                <div class="shop" v-for="item in shopList" :key="item">
+                    <div class="textBlock">
+                        <img src="../assets/map/mapIcon33.png" alt=""><p><b>{{item.shopName}}</b></p>
+                        <img src="../assets/map/mapIcon22.png" alt=""><p>{{item.phone}}</p>
+                        <img src="../assets/map/mapIcon11.png" alt=""><p>{{item.address}}</p> 
+                    </div>
+                </div> 
             </div>
         </div>
-        <div id="mapBlock"></div>
     </div>
 </template>
 
@@ -112,7 +126,7 @@ export default {
 
             // 客製化icon
             const customIcon = L.icon({
-                iconUrl: require('../assets/mapPoint.png'),
+                iconUrl: require('../assets/map/mapPoint3.png'),
                 iconSize: [42, 42],
             });
         
@@ -128,8 +142,8 @@ export default {
                 ).addTo(openStreetMap);
 
                 // 點選標記時有說明框
-                marker.bindPopup(`<p><strong style="font-size: 20px;">${shop.shopName}</strong></p>
-                    <p style="font-size: 15px;">地址: ${shop.address}<br>電話: ${shop.phone}<br></p>`);
+                marker.bindPopup(`<p><strong style="font-size: 20px; color:#6ba723; letter-spacing: 1px">${shop.shopName}</strong></p>
+                    <p style="font-size: 14px; letter-spacing: 2px;">地址: ${shop.address}<br>電話: ${shop.phone}<br></p>`);
 
                 // 滑鼠靠近地標時有說明文字
                 marker.bindTooltip(`${shop.shopName}`, {
@@ -160,19 +174,20 @@ export default {
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 19,
+            minZoom: 9,
         }).addTo(openStreetMap);
 
         this.updateMap();
 
-        // // 點擊地圖取得經緯度
-        // var popup = L.popup();
-        // function onMapClick(e) {
-        //     popup
-        //         .setLatLng(e.latlng)
-        //         .setContent("經緯度座標：" + e.latlng.toString())
-        //         .openOn(openStreetMap);
-        // }
-        // openStreetMap.on('click', onMapClick);
+        // 點擊地圖取得經緯度
+        var popup = L.popup();
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("經緯度座標：" + e.latlng.toString())
+                .openOn(openStreetMap);
+        }
+        openStreetMap.on('click', onMapClick);
     },
 }
 </script>
@@ -182,28 +197,136 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+}
+
+.right {
+    float: right;
+}
+
+.clearBox {
+    clear: both;
+}
+
+.container {
+    max-width: 1280px;
+    margin: auto;
+}
+
+.shop img {
+    opacity: 0;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    transition: .1s;
 }
 
 #mapBlock {
-    max-width: 1280px;
     z-index: 1;
-    height: 560px;
-    width: 90%;
-    margin: auto;
+    height: 460px;
+    width: 100%;
+    margin-bottom: 40px;
+    box-shadow: 0px 1px 5px rgb(0 0 0 / 42%);
+}
+
+.textBlock {
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    padding: 14px 0px;
+}
+
+.textBlock:hover img {
+    opacity: 1;
+}
+
+.textBlock:hover {
+    background-color: #eee;
+}
+
+.shopList {
+    border-top: 2px solid #333;
+    margin: 20px 10px 30px 10px;
+}
+
+.shopList p {
+    text-align: left;
+    display: inline-block;
+    width: 33.33%;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+}
+
+.shop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px dashed #ccc;
+}
+
+.choose {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px 10px 0px;
 }
 
 .map {
     padding-bottom: 40px;
 }
-
-.choose {
-    margin-bottom: 30px;
+       
+select:focus + .customSelect {
+    border-color: #555;
+    transform: rotate(225deg);
 }
 
-@media (max-width: 460px) {
+.customSelect {
+    border-top: 3px solid #ccc;
+    border-left: 3px solid #ccc;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    position: absolute;
+    right: 10px;
+    bottom: 13px;
+    transition: .3s;
+}
+
+select {
+    background-color: rgba(255, 255, 255, 0);
+    width: 135px;
+    color: #333;
+    padding: 10px 15px 10px 10px;
+    letter-spacing: 1px;
+    font-size: 16px;
+    line-height: 18px;
+    cursor: pointer;
+    appearance: none;
+    border: 1px solid #999;
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+}
+
+.chooseCity, .chooseArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 0px 20px 30px;
+    position: relative;
+}
+
+select option {
+    color: gray;
+    border: 3px solid #333;
+}
+
+@media (max-width: 433px) {
     #mapBlock {
-        height: 500px;
-        width: 90%;
+        /* height: 500px; */
+        /* width: 90%; */
+    }
+
+    .choose {
+        display: block;
     }
 }
 
