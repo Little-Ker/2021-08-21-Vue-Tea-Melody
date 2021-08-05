@@ -20,6 +20,11 @@ const routes = [{
             name: 'ShopPoint',
             component: () =>
                 import ('../views/ShopPoint.vue')
+        }, {
+            path: '/contact',
+            name: 'Contact',
+            component: () =>
+                import ('../views/Contact.vue')
         }]
     },
     // {

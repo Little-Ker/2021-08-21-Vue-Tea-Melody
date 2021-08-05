@@ -48,7 +48,7 @@ export default {
         { path:'/news', title:'最新消息' ,icon: require('../assets/nav/news1.png'), iconHover: require('../assets/nav/news2.png') },
         { path:'/about', title:'飲品訂購' ,icon: require('../assets/nav/drink1.png'), iconHover: require('../assets/nav/drink2.png') },
         { path:'/shopPoint', title:'門市據點' ,icon: require('../assets/nav/point1.png'), iconHover: require('../assets/nav/point2.png') },
-        { path:'/about', title:'聯絡我們' ,icon: require('../assets/nav/contact1.png'), iconHover: require('../assets/nav/contact2.png') }
+        { path:'/contact', title:'聯絡我們' ,icon: require('../assets/nav/contact1.png'), iconHover: require('../assets/nav/contact2.png') }
       ]
     }
   },

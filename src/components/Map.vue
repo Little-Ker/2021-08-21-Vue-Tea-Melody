@@ -325,7 +325,7 @@ select option {
     border: 3px solid #333;
 }
 
-@media (max-width: 433px) {
+@media (max-width: 525px) {
     .textBlock {
         flex-wrap: wrap;
     }
