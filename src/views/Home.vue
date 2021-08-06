@@ -17,6 +17,7 @@
       </div>
     </div>
     <Loading />
+    <ShoppingCar />
     <NewsPage />
     <router-view></router-view>
     <Footer/>
@@ -33,13 +34,15 @@ window.$ = $;
 import Loading from '@/components/Loading.vue'
 import Footer from '@/components/Footer.vue'
 import NewsPage from '@/components/NewsPage.vue'
+import ShoppingCar from '@/components/ShoppingCar.vue'
 
 export default {
   name: 'Home',
   components: {
     Footer,
     Loading,
-    NewsPage
+    NewsPage,
+    ShoppingCar
   },
   data() {
     return {

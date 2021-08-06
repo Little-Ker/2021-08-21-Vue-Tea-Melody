@@ -49,10 +49,12 @@ export default {
     }
 
     .contact h1 {
+      font-family: 'simsun';
       margin-top: 130px;
     }
 
     .contact p {
+      font-family: 'simsun';
       margin-bottom: 30px;
       letter-spacing: 2px;
     }
