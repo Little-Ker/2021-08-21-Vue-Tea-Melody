@@ -1,23 +1,29 @@
 <template>
     <div class="popular">
-        <h3>熱門推薦</h3>
+        <div class="title">
+            <h3>熱門推薦</h3>
+            <p>Popular Recommendation</p>
+        </div>
         <div class="slider">
-            <div class="button leftBtn">left</div>
             <div class="moveSlide">
                 <div @mousedown="dragDown($event, index)" @mousemove="dragMove($event)" @mouseup="dragUp" @mouseout="dragUp"
                      @touchstart="dragDown($event)" @touchmove="dragMove($event)" @touchend="dragUp"
-                     v-for="(item, index) in popularAry" :key="index" :class="`item item${index}`" :style="`left:${leftPos*index}px`">
-                <img :src='item.imgUrl' alt="">
-                <div class="text">
-                    <div class="name"><b>{{item.drinkName}}</b></div>
-                    <div class="price">${{item.price}}</div>
+                     v-for="(item, index) in popularAry" :key="index" :class="`item item${index}`" :style="`left:${leftPos*index}px;`">
+                    <img :src='item.imgUrl' alt="">
+                    <div class="text">
+                        <div class="name">
+                            <p><b>{{item.drinkName}}</b></p>
+                        </div>
+                        <div class="price">
+                            <p>${{item.price}}</p>
+                            <div class="addBtn"><b>+</b></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-            
-            <div class="clearfix"></div>
-            <div class="button leftBtn">right</div>
         </div>
+        <div @click="moveSlider(1)" v-if="!isSlideRight" class="leftBtn"></div>
+        <div @click="moveSlider(-1)" v-if="isSlideRight" class="rightBtn"></div>
     </div>
 </template>
 
@@ -40,33 +46,18 @@ export default {
             newPosX: 0,
             moveSpeed: 350,
             isMoveing: false,
-            
+            isSlideRight: true,
             popularDrink: drink.drinks
         }
     },
     computed: {
         popularAry() {
             return this.popularDrink.filter(item => {
-                console.log('item',item);
                 return item.isPopular === true
             });
         }
-        // isShowLoading: {
-        //     get() {
-        //         return this.$store.state.isShowLoading;
-        //     },
-        //     set(val) {
-        //         return this.$store.commit('SetShowLoading',val);
-        //     }
-        // },
     },
     methods: {
-        // pauseAnim() {
-        //     console.log('hover')
-        //     // for (let i = 0; i < this.ary.length; i++) {
-        //     //     // $(`.item${i}`).animate('pause');
-        //     // }
-        // },
         // 幻燈片自動換位
         slideMoveAnim() {
             for (let i = 0; i < this.popularAry.length; i++) {
@@ -111,9 +102,11 @@ export default {
                 let transform = $('.moveSlide').css('transform')
                 let transformMatrix = transform.slice(7, transform.length - 1).split(', ')[4];
                 if (Number(transformMatrix) > 0 && dir > 0) {
+                    this.isSlideRight = true;
                     $('.moveSlide').css('transform', 'translateX(0px)');
                 } 
                 if ((Number(transformMatrix) < (this.slideWidth * dir) > 0) && dir < 0) {
+                    this.isSlideRight = false;
                     $('.moveSlide').css('transform', `translateX(${this.slideWidth * dir - 110}px)`);
                 }
             }, 300);   
@@ -170,14 +163,12 @@ export default {
             this.moveSpeed = slideBgWidth + 20;
             if (this.isMobile()) {
                 this.moveSpeed = 120;
-                // console.log(this.moveSpeed);
             }
-            // this.moveSpeed = slideBgWidth + 20;
-            // this.moveSpeed = slideBgWidth + 1;
             for (let i = 0; i < this.popularAry.length; i++) {
                 $(`.item${i}`).css('width',`${slideBgWidth}px`);
                 $(`.item${i}`).css('height',`${slideBgWidth + 10}px`);
             }
+            $('.popular').css('height',`${slideBgWidth + 30}px`);
         },
         createTimer() { 
             let timer = 500;
@@ -194,32 +185,10 @@ export default {
             let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
             return flag;
         }
-
-        // // 禁用滾動條
-        // stopScrollBar() {
-        //     var tops = $(document).scrollTop();
-        //     $(document).bind("scroll",function (){$(document).scrollTop(tops); });
-        // },
-        // startScrollBar() {
-        //     $(document).unbind("scroll");
-        // }
     },
     mounted() {
         this.resize();
         this.createTimer();  
-    },
-    watch: {
-        // isShowLoading() {
-        //     if (!this.isShowLoading) return;
-        //     this.stopScrollBar();
-
-        //     let randomSec = this.createRandom(500, 1500)
-        //     this.timeout = setTimeout(() => {
-        //         this.startScrollBar();
-        //         this.isShowLoading = false;
-        //         clearTimeout(this.timeout);
-        //     }, randomSec);
-        // }
     },
     beforeUnmount() {
       this.clearClock();
@@ -232,26 +201,28 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-align: left;
 }
 
-.clearfix  {
-    clear: both;
+.title {
+    margin: 0px 0px 20px 5px;
 }
 
-.button {
-    position: absolute;
+.title p {
+    font-size: 15px;
+    margin-top: 3px;
 }
 
 .popular {
+    position: relative;
     max-width: 1280px;
     width: 80%;
-    height: 360px;
+    height: 265px;
     margin: auto;
 }
 
 .slider {
     overflow: hidden;
-    /* display: flex; */
     justify-content: center;
     position: relative;
     height: 100%;
@@ -288,14 +259,17 @@ export default {
 
 .item {
     max-width: 280px;
-    max-height: 255px;
+    max-height: 280px;
     width: 280px;
-    height: 255px;
+    height: 280px;
     border: 1px solid #ccc;
     margin: 5px;
     position: absolute;
     top: 0;
     left: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.20) 0px 6px 6px;
 }
 
 .item img {
@@ -303,13 +277,76 @@ export default {
 }
 
 .text {
-    padding: 10px;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
 }
 
 .text .price {
     margin-top: 3px;
+}
+
+.leftBtn, .rightBtn {
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background-color: #999;
+    border-radius: 50%;
+    top: calc(50% + 10px);
+    left: -20px;
+    transition: .3s;
+}
+
+.leftBtn:hover, .rightBtn:hover {
+    background-color: #333;
+}
+
+.leftBtn::before, .rightBtn::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 3px solid #fff;
+    border-right: 0;border-bottom: 0;
+}
+
+.leftBtn::before, .rightBtn::before {
+    position: absolute;
+    top: 14px;
+    right: 12px;
+}
+
+.leftBtn {
+    transform: rotate(-45deg);
+}
+
+.rightBtn {
+    transform: rotate(135deg);
+}
+
+.addBtn {
+    position: relative;
+    left: 1px;
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+    color: #fff;
+    line-height: 30px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.item:hover .addBtn {
+    background-color: #333;
+}
+
+@media (max-width: 270px) {
+    .text {
+        padding: 0px 20px;
+    }
 }
 
 </style>

@@ -8,7 +8,7 @@
          <Popular />
          <!-- <ContactForm /> -->
       </div>
-      <div class="marginTop"></div>
+      <div class="marginBottom"></div>
   </div>
 </template>
 
@@ -39,6 +39,10 @@ export default {
 
     .marginTop {
         margin-top: 80px;
+    }
+
+    .marginBottom {
+      margin-top: 130px;
     }
 
     .wrap {
@@ -82,10 +86,6 @@ export default {
 @media (max-width: 720px) {
     .wrap {
         display: block;
-    }
-
-    .marginTop {
-      margin-top: 50px;
     }
 
     .textColumn {
