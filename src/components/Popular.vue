@@ -4,11 +4,13 @@
         <div class="slider">
             <div class="button leftBtn">left</div>
             <div class="moveSlide">
-                <div @mousedown="dragDown($event, index)" @mousemove="dragMove($event)" @mouseup="dragUp" @mouseout="dragUp" v-for="(index) in ary" :key="index" :class="`item item${index}`" :style="`left:${leftPos*index}px`">
-                <img src="https://images.deliveryhero.io/image/fd-tw/Products/3059644.jpg?width=600" alt="">
+                <div @mousedown="dragDown($event, index)" @mousemove="dragMove($event)" @mouseup="dragUp" @mouseout="dragUp"
+                     @touchstart="dragDown($event)" @touchmove="dragMove($event)" @touchend="dragUp"
+                     v-for="(item, index) in popularAry" :key="index" :class="`item item${index}`" :style="`left:${leftPos*index}px`">
+                <img :src='item.imgUrl' alt="">
                 <div class="text">
-                    <div class="name"><b>{{index}}巴黎天空冰沙</b></div>
-                    <div class="price">$55</div>
+                    <div class="name"><b>{{item.drinkName}}</b></div>
+                    <div class="price">${{item.price}}</div>
                 </div>
             </div>
             </div>
@@ -21,6 +23,8 @@
 
 <script>
 import { setInterval, clearInterval } from 'timers'
+import drink from '../assets/data/drink.json';
+
 import jQuery from "jquery";
 const $ = jQuery;
 window.$ = $;
@@ -30,21 +34,23 @@ export default {
     data() {
         return {
             slideWidth: 1280,
-    
             isDrag: false,
             leftPos: 300,
             oldPosX: 0,
             newPosX: 0,
             moveSpeed: 350,
             isMoveing: false,
-
-            isPlaying: false,
-            pageIndex: 0,
             
-            ary: [0,1,2,3,4, 5]
+            popularDrink: drink.drinks
         }
     },
     computed: {
+        popularAry() {
+            return this.popularDrink.filter(item => {
+                console.log('item',item);
+                return item.isPopular === true
+            });
+        }
         // isShowLoading: {
         //     get() {
         //         return this.$store.state.isShowLoading;
@@ -63,7 +69,7 @@ export default {
         // },
         // 幻燈片自動換位
         slideMoveAnim() {
-            for (let i = 0; i < this.ary.length; i++) {
+            for (let i = 0; i < this.popularAry.length; i++) {
                 this.changeIndex(i);
             }
         },
@@ -71,7 +77,7 @@ export default {
             let isPlay = false;
             let oriLeftPos = $(`.item${i}`).css('left').slice(0, -2);
             if (Number(oriLeftPos) <= -250) {
-                $(`.item${i}`).css('left',`${250 * (this.ary.length - 1)}px`);
+                $(`.item${i}`).css('left',`${250 * (this.popularAry.length - 1)}px`);
             }
             oriLeftPos = $(`.item${i}`).css('left').slice(0, -2);
             $(`.item${i}`).animate({left:`${oriLeftPos -250}px`}, 10000, 'linear', () => {
@@ -85,6 +91,9 @@ export default {
         },
         // 幻燈片左右滑動
         getPosX(event){
+            if (event.clientX === undefined) {
+                return event.targetTouches[0].pageX;
+            }
             return event.clientX;
         },
         moveSlider(dir) {
@@ -92,7 +101,7 @@ export default {
             let transformMatrix = transform.slice(7, transform.length - 1).split(', ')[4];
 
             if ((Number(transformMatrix) === 0 && dir > 0) || (Number(transformMatrix) < (this.slideWidth * dir) && dir < 0)) {
-                this.moveSpeed = 50
+                this.moveSpeed = 50;
             }
 
             $('.moveSlide').css('transform', `translateX(${Number(transformMatrix) + (this.moveSpeed * dir)}px)`);
@@ -103,7 +112,7 @@ export default {
                 let transformMatrix = transform.slice(7, transform.length - 1).split(', ')[4];
                 if (Number(transformMatrix) > 0 && dir > 0) {
                     $('.moveSlide').css('transform', 'translateX(0px)');
-                }
+                } 
                 if ((Number(transformMatrix) < (this.slideWidth * dir) > 0) && dir < 0) {
                     $('.moveSlide').css('transform', `translateX(${this.slideWidth * dir - 110}px)`);
                 }
@@ -112,30 +121,30 @@ export default {
         dragMove(event) {
             if (!this.isDrag) return;
             this.isMoveing = true;
-            console.log('move');
+            // console.log('move');
                 this.newPosX = this.getPosX(event);
 
                 $('.item').css('pointer-events','none'); 
                 $('.item').css('user-select','none'); 
 
                 if (this.newPosX > this.oldPosX) {
-                    console.log('右移');
+                    // console.log('右移');
                     this.moveSlider(1);
                 }
                 if (this.newPosX < this.oldPosX) {
                     this.moveSlider(-1);
-                    console.log('左移');
+                    // console.log('左移');
                 }
         },
         dragUp() {
             if (!this.isDrag) return;
-            console.log('up');
+            // console.log('up');
             this.isDrag = false;
             $('.item').css('pointer-events','auto'); 
             $('.item').css('user-select','auto');
         },
-        dragDown(event, index){
-            console.log('down');
+        dragDown(event, index = ''){
+            // console.log('down');
             this.isDrag = true;
             this.oldPosX = this.getPosX(event);
 
@@ -144,6 +153,7 @@ export default {
                 this.newPosX = this.getPosX(event);
                 if (!this.isMoveing) {
                     this.isDrag = false;
+                    if (index === '') return;
                     console.log('click', index);
                     return;
                 }
@@ -153,12 +163,18 @@ export default {
             let slideBgWidth = $('.slider').width();
             this.slideWidth = slideBgWidth;
             if (slideBgWidth > 280) slideBgWidth = 280;
-            this.slideWidth = (slideBgWidth*this.ary.length) - ((this.slideWidth / slideBgWidth ) * slideBgWidth)
+            this.slideWidth = (slideBgWidth * this.popularAry.length) - ((this.slideWidth / slideBgWidth ) * slideBgWidth);
 
             if (this.isMoveing) return;
             this.leftPos = slideBgWidth + 20;
             this.moveSpeed = slideBgWidth + 20;
-            for (let i = 0; i < this.ary.length; i++) {
+            if (this.isMobile()) {
+                this.moveSpeed = 120;
+                // console.log(this.moveSpeed);
+            }
+            // this.moveSpeed = slideBgWidth + 20;
+            // this.moveSpeed = slideBgWidth + 1;
+            for (let i = 0; i < this.popularAry.length; i++) {
                 $(`.item${i}`).css('width',`${slideBgWidth}px`);
                 $(`.item${i}`).css('height',`${slideBgWidth + 10}px`);
             }
@@ -172,7 +188,13 @@ export default {
         clearClock() {
             clearInterval(this.clock);
             this.clock = null
+        },
+        // 判斷裝置是否為手機
+        isMobile() {
+            let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+            return flag;
         }
+
         // // 禁用滾動條
         // stopScrollBar() {
         //     var tops = $(document).scrollTop();
@@ -184,7 +206,7 @@ export default {
     },
     mounted() {
         this.resize();
-        this.createTimer();
+        this.createTimer();  
     },
     watch: {
         // isShowLoading() {
