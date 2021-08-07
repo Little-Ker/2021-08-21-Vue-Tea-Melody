@@ -6,7 +6,7 @@
       <div class="marginTop"></div>
       <div class="wrap">
          <Popular />
-         <!-- <ContactForm /> -->
+         <DrinkList />
       </div>
       <div class="marginBottom"></div>
   </div>
@@ -14,13 +14,13 @@
 
 <script>
 import Popular from '@/components/Popular.vue'
-// import ContactForm from '@/components/ContactForm.vue'
+import DrinkList from '@/components/DrinkList.vue'
 
 export default {
   name: 'Shop',
   components: {
     Popular,
-    // ContactForm
+    DrinkList
   },
 }
 </script>
@@ -46,8 +46,6 @@ export default {
     }
 
     .wrap {
-      display: flex;
-      justify-content: center;
       max-width: 1280px;
       margin: auto;
     }

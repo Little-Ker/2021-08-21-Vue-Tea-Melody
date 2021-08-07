@@ -39,8 +39,8 @@
             "price": 70,
             "imgUrl": "./static/drink/drink01.jpeg",
             "sugarLevel": true,
-            "iceLevel": false,
-            "hot": false
+            "iceLevel": true,
+            "hot": true
         },
         {
             "id": 2,
@@ -68,7 +68,7 @@
             "id": 4,
             "drinkName": "手作布丁烤奶",
             "isPopular": true,
-            "type": "tasty",
+            "type": "milk",
             "price": 55,
             "imgUrl": "./static/drink/drink04.jpeg",
             "sugarLevel": true,
@@ -85,6 +85,193 @@
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
+        },
+        {
+            "id": 6,
+            "drinkName": "日月潭紅茶",
+            "isPopular": false,
+            "type": "tea",
+            "price": 30,
+            "imgUrl": "./static/drink/drink06.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 7,
+            "drinkName": "鐵觀音綠茶",
+            "isPopular": false,
+            "type": "tea",
+            "price": 30,
+            "imgUrl": "./static/drink/drink07.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 8,
+            "drinkName": "香韻青茶",
+            "isPopular": false,
+            "type": "tea",
+            "price": 30,
+            "imgUrl": "./static/drink/drink08.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 9,
+            "drinkName": "寶島 1 號奶茶",
+            "isPopular": false,
+            "type": "NewArrivals",
+            "price": 70,
+            "imgUrl": "./static/drink/drink09.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 10,
+            "drinkName": "芒果優多冰沙",
+            "isPopular": false,
+            "type": "NewArrivals",
+            "price": 70,
+            "imgUrl": "./static/drink/drink10.jpeg",
+            "sugarLevel": true,
+            "iceLevel": false,
+            "hot": false
+        },
+        {
+            "id": 11,
+            "drinkName": "桃膠蜂蜜檸檬",
+            "isPopular": false,
+            "type": "NewArrivals",
+            "price": 70,
+            "imgUrl": "./static/drink/drink11.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 12,
+            "drinkName": "珍珠鮮奶茶",
+            "isPopular": false,
+            "type": "milk",
+            "price": 55,
+            "imgUrl": "./static/drink/drink12.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 13,
+            "drinkName": "鐵觀音鮮奶茶",
+            "isPopular": false,
+            "type": "milk",
+            "price": 55,
+            "imgUrl": "./static/drink/drink13.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 14,
+            "drinkName": "宇治抹茶鮮奶茶",
+            "isPopular": false,
+            "type": "milk",
+            "price": 70,
+            "imgUrl": "./static/drink/drink14.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 15,
+            "drinkName": "芋頭純鮮奶",
+            "isPopular": false,
+            "type": "milk",
+            "price": 70,
+            "imgUrl": "./static/drink/drink15.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 16,
+            "drinkName": "嫩仙草奶茶",
+            "isPopular": false,
+            "type": "milk",
+            "price": 45,
+            "imgUrl": "./static/drink/drink16.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 17,
+            "drinkName": "鮮芋 Q 奶",
+            "isPopular": false,
+            "type": "milk",
+            "price": 50,
+            "imgUrl": "./static/drink/drink17.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 18,
+            "drinkName": "葡萄柚綠茶",
+            "isPopular": false,
+            "type": "fruit",
+            "price": 55,
+            "imgUrl": "./static/drink/drink18.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": false
+        },
+        {
+            "id": 19,
+            "drinkName": "蜂蜜檸檬粉粿",
+            "isPopular": false,
+            "type": "fruit",
+            "price": 60,
+            "imgUrl": "./static/drink/drink19.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": false
+        },
+        {
+            "id": 20,
+            "drinkName": "愛文芒果青茶",
+            "isPopular": false,
+            "type": "fruit",
+            "price": 50,
+            "imgUrl": "./static/drink/drink20.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": false
+        },
+        {
+            "id": 21,
+            "drinkName": "鮮百香綠茶",
+            "isPopular": false,
+            "type": "fruit",
+            "price": 45,
+            "imgUrl": "./static/drink/drink21.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": false
+        },
+        {
+            "id": 22,
+            "drinkName": "檸檬養樂多",
+            "isPopular": false,
+            "type": "fruit",
+            "price": 55,
+            "imgUrl": "./static/drink/drink22.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": false
         }
     ]
 }
