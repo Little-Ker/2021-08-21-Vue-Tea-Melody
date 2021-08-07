@@ -166,9 +166,9 @@ export default {
             }
             for (let i = 0; i < this.popularAry.length; i++) {
                 $(`.item${i}`).css('width',`${slideBgWidth}px`);
-                $(`.item${i}`).css('height',`${slideBgWidth + 10}px`);
+                $(`.item${i}`).css('height',`${slideBgWidth - 20}px`);
             }
-            $('.popular').css('height',`${slideBgWidth + 30}px`);
+            $('.popular').css('height',`${slideBgWidth + 80}px`);
         },
         createTimer() { 
             let timer = 500;
@@ -217,7 +217,7 @@ export default {
     position: relative;
     max-width: 1280px;
     width: 80%;
-    height: 265px;
+    height: 360px;
     margin: auto;
 }
 
@@ -328,19 +328,22 @@ export default {
 
 .addBtn {
     position: relative;
+    top: -100px;
     left: 1px;
-    width: 30px;
-    height: 30px;
-    background-color: #ccc;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(204, 204, 204, 0.6);
     border-radius: 50%;
-    color: #fff;
-    line-height: 30px;
-    font-size: 20px;
+    color: #333;
+    line-height: 50px;
+    font-size: 30px;
     text-align: center;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.616);
 }
 
 .item:hover .addBtn {
-    background-color: #333;
+    background-color: rgba(51, 51, 51);
+    color: #fff;
 }
 
 @media (max-width: 270px) {
