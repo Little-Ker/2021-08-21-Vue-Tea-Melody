@@ -1,0 +1,90 @@
+{
+    "toppings": [{
+            "id": 0,
+            "type": "珍珠",
+            "price": 10
+        },
+        {
+            "id": 1,
+            "type": "仙草凍",
+            "price": 10
+        },
+        {
+            "id": 2,
+            "type": "咖啡凍",
+            "price": 10
+        },
+        {
+            "id": 3,
+            "type": "布丁",
+            "price": 15
+        }
+    ],
+    "drinks": [{
+            "id": 0,
+            "drinkName": "巴黎天空冰沙",
+            "isPopular": true,
+            "type": "NewArrivals",
+            "price": 55,
+            "imgUrl": "https://d1ralsognjng37.cloudfront.net/50762d2f-eca1-40e3-a2e2-3723a4d57e88.jpeg",
+            "sugarLevel": true,
+            "iceLevel": false,
+            "hot": false
+        },
+        {
+            "id": 1,
+            "drinkName": "芒果優多冰沙",
+            "isPopular": true,
+            "type": "NewArrivals",
+            "price": 70,
+            "imgUrl": "https://d1ralsognjng37.cloudfront.net/8f840b5f-32bd-493a-8f65-3c861b9b624a.jpeg",
+            "sugarLevel": true,
+            "iceLevel": false,
+            "hot": false
+        },
+        {
+            "id": 2,
+            "drinkName": "鮮橙Q果綠",
+            "isPopular": true,
+            "type": "fruit",
+            "price": 65,
+            "imgUrl": "https://d1ralsognjng37.cloudfront.net/8f840b5f-32bd-493a-8f65-3c861b9b624a.jpeg",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": false
+        },
+        {
+            "id": 3,
+            "drinkName": "桃膠宇治抹茶",
+            "isPopular": true,
+            "type": "NewArrivals",
+            "price": 70,
+            "imgUrl": "https://images.deliveryhero.io/image/fd-tw/Products/17697843.jpg?width=600",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        },
+        {
+            "id": 4,
+            "drinkName": "手作布丁烤奶",
+            "isPopular": true,
+            "type": "tasty",
+            "price": 55,
+            "imgUrl": "https://images.deliveryhero.io/image/fd-tw/Products/3059593.jpg?width=600",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": false
+        },
+        {
+            "id": 5,
+            "drinkName": "法芙娜可可鮮奶茶",
+            "isPopular": true,
+            "type": "superMilk",
+            "price": 70,
+            "imgUrl": "https://images.deliveryhero.io/image/fd-tw/Products/3059644.jpg?width=600",
+            "sugarLevel": true,
+            "iceLevel": true,
+            "hot": true
+        }
+    ]
+}
