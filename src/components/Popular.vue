@@ -178,7 +178,8 @@ export default {
                 $(`.item${i}`).css('width',`${slideBgWidth + this.subWidth}px`);
                 $(`.item${i}`).css('height',`${slideBgWidth - 20  + (this.subWidth / 2)}px`);
             }
-            $('.popular').css('height',`${slideBgWidth + 80  + (this.subWidth / 2)}px`);
+            $('.popular').css('height',`${slideBgWidth + 60}px`);
+            $('.slider').css('height',`${slideBgWidth + 30 + (this.subWidth / 2)}px}px`);
         },
         createTimer() { 
             let timer = 500;
@@ -237,7 +238,6 @@ export default {
     position: relative;
     height: 100%;
     width: 100%;
-    cursor: pointer;
 }
 
 .slider:after {
@@ -278,6 +278,7 @@ export default {
     top: 0;
     left: 0;
     overflow: hidden;
+    cursor: pointer;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.20) 0px 6px 6px;
 }

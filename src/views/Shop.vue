@@ -4,11 +4,10 @@
       <h1>飲品訂購</h1>
       <p>PRODUCT</p>
       <div class="marginTop"></div>
-      <div class="wrap">
-         <Popular />
-         <DrinkList />
-      </div>
-      <div class="marginBottom"></div>
+      <Popular />
+      <div class="marginTop"></div>
+
+      <div class="stickyNav"><DrinkList /></div>
   </div>
 </template>
 
@@ -26,6 +25,11 @@ export default {
 </script>
 
 <style scoped>
+  .stickyNav {
+      position: sticky;
+      bottom: 0;
+  }
+
     .Shop {
         width: 100%;
         height: 100%;
@@ -43,11 +47,6 @@ export default {
 
     .marginBottom {
       margin-top: 130px;
-    }
-
-    .wrap {
-      max-width: 1280px;
-      margin: auto;
     }
 
     .shop h1 {
