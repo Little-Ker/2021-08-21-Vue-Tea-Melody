@@ -5,7 +5,6 @@
       <p>PRODUCT</p>
       <div class="marginTop"></div>
       <Popular />
-      <div class="marginTop"></div>
       <AllDrink />
       <div class="marginTop"></div>
       <div class="stickyNav"><DrinkList /></div>

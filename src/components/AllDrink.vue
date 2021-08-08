@@ -1,6 +1,7 @@
 <template>
     <div class="allDrink">
         <div v-for="(item,index) in typeList" :key="index" class="item">
+            <div :id="`moveDinkPos${index}`" class="scrollPos">scrollPos</div>
             <div class="marginTop"></div>
             <div class="title">
                 <h3>{{item.type}}</h3>
@@ -76,8 +77,13 @@ export default {
 }
 
 .marginTop {
-    margin-top: 70px;
+    margin-top: 60px;
 }
+
+.scrollPos {
+    opacity: 0;
+}
+
 .allDrink {
     position: relative;
     max-width: 1280px;
