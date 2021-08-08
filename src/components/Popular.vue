@@ -156,11 +156,17 @@ export default {
             let slideBgWidth = $('.slider').width();
             this.slideWidth = slideBgWidth;
             this.subWidth = -50;
-            if (slideBgWidth > 280) {
+
+            if (this.slideWidth > 330) {
                 slideBgWidth = 280;
                 this.subWidth = 0;
             }
-            this.slideWidth = (slideBgWidth * this.popularAry.length) - ((this.slideWidth / slideBgWidth ) * slideBgWidth);
+            if (this.slideWidth <= 330 && this.slideWidth > 260) {
+                slideBgWidth = 260;
+                this.subWidth = -20;
+            }
+
+            this.slideWidth = ((slideBgWidth + this.subWidth) * this.popularAry.length) - ((this.slideWidth / slideBgWidth ) * slideBgWidth);
 
             if (this.isMoveing) return;
             this.leftPos = slideBgWidth + 20 + this.subWidth;
@@ -299,7 +305,7 @@ export default {
     height: 40px;
     background-color: #999;
     border-radius: 50%;
-    top: calc(50% + 10px);
+    top: 50%;
     left: -20px;
     transition: .3s;
 }
@@ -366,10 +372,6 @@ export default {
         height: 35px;
         line-height: 35px;
         top: -85px;
-    }
-
-    .leftBtn, .rightBtn {
-        top: calc(50%);
     }
 }
 
