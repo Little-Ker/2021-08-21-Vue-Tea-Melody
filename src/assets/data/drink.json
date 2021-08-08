@@ -48,6 +48,7 @@
             "type": "New Arrivals",
             "price": 55,
             "imgUrl": "./static/drink/drink00.jpeg",
+            "content": "總熱量最高值 590.0 大卡",
             "sugarLevel": true,
             "iceLevel": false,
             "hot": false
@@ -59,6 +60,7 @@
             "type": "Milk",
             "price": 70,
             "imgUrl": "./static/drink/drink01.jpeg",
+            "content": "總熱量最高值 598.4 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -70,6 +72,7 @@
             "type": "Fruit",
             "price": 50,
             "imgUrl": "./static/drink/drink02.jpeg",
+            "content": "總熱量最高值 550.2  大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": false
@@ -81,6 +84,7 @@
             "type": "New Arrivals",
             "price": 70,
             "imgUrl": "./static/drink/drink03.jpeg",
+            "content": "總熱量最高值 577.2 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -92,6 +96,7 @@
             "type": "Milk",
             "price": 55,
             "imgUrl": "./static/drink/drink04.jpeg",
+            "content": "總熱量最高值 466.3 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": false
@@ -103,6 +108,7 @@
             "type": "Milk",
             "price": 70,
             "imgUrl": "./static/drink/drink05.jpeg",
+            "content": "總熱量最高值 430.5 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -114,6 +120,7 @@
             "type": "Tea",
             "price": 30,
             "imgUrl": "./static/drink/drink06.jpeg",
+            "content": "總熱量最高值 209.5 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -125,6 +132,7 @@
             "type": "Tea",
             "price": 30,
             "imgUrl": "./static/drink/drink07.jpeg",
+            "content": "總熱量最高值 261.8 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -136,6 +144,7 @@
             "type": "Tea",
             "price": 30,
             "imgUrl": "./static/drink/drink08.jpeg",
+            "content": "總熱量最高值 209.5 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -147,6 +156,7 @@
             "type": "New Arrivals",
             "price": 70,
             "imgUrl": "./static/drink/drink09.jpeg",
+            "content": "總熱量最高值 658.5 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -158,6 +168,7 @@
             "type": "New Arrivals",
             "price": 70,
             "imgUrl": "./static/drink/drink10.jpeg",
+            "content": "總熱量最高值 588.4 大卡",
             "sugarLevel": true,
             "iceLevel": false,
             "hot": false
@@ -169,6 +180,7 @@
             "type": "New Arrivals",
             "price": 70,
             "imgUrl": "./static/drink/drink11.jpeg",
+            "content": "總熱量最高值 281.2 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -180,6 +192,7 @@
             "type": "Milk",
             "price": 55,
             "imgUrl": "./static/drink/drink12.jpeg",
+            "content": "總熱量最高值 563.3 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -191,6 +204,7 @@
             "type": "Milk",
             "price": 55,
             "imgUrl": "./static/drink/drink13.jpeg",
+            "content": "總熱量最高值 373.8 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -202,6 +216,7 @@
             "type": "Milk",
             "price": 70,
             "imgUrl": "./static/drink/drink14.jpeg",
+            "content": "總熱量最高值 412.6 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -213,6 +228,7 @@
             "type": "Milk",
             "price": 70,
             "imgUrl": "./static/drink/drink15.jpeg",
+            "content": "總熱量最高值 483.2 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -224,6 +240,7 @@
             "type": "Milk",
             "price": 45,
             "imgUrl": "./static/drink/drink16.jpeg",
+            "content": "總熱量最高值 447.8 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -235,6 +252,7 @@
             "type": "Milk",
             "price": 50,
             "imgUrl": "./static/drink/drink17.jpeg",
+            "content": "總熱量最高值 508.7 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": true
@@ -246,6 +264,7 @@
             "type": "Fruit",
             "price": 55,
             "imgUrl": "./static/drink/drink18.jpeg",
+            "content": "總熱量最高值 408.0 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": false
@@ -257,6 +276,7 @@
             "type": "Fruit",
             "price": 60,
             "imgUrl": "./static/drink/drink19.jpeg",
+            "content": "總熱量最高值 232.6 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": false
@@ -268,6 +288,7 @@
             "type": "Fruit",
             "price": 50,
             "imgUrl": "./static/drink/drink20.jpeg",
+            "content": "總熱量最高值 348.7 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": false
@@ -279,6 +300,7 @@
             "type": "Fruit",
             "price": 45,
             "imgUrl": "./static/drink/drink21.jpeg",
+            "content": "總熱量最高值 479.5 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": false
@@ -290,6 +312,7 @@
             "type": "Fruit",
             "price": 55,
             "imgUrl": "./static/drink/drink22.jpeg",
+            "content": "總熱量最高值 459.8 大卡",
             "sugarLevel": true,
             "iceLevel": true,
             "hot": false
