@@ -270,18 +270,6 @@
             "hot": false
         },
         {
-            "id": 19,
-            "drinkName": "蜂蜜檸檬粉粿",
-            "isPopular": false,
-            "type": "Fruit",
-            "price": 60,
-            "imgUrl": "./static/drink/drink19.jpeg",
-            "content": "總熱量最高值 232.6 大卡",
-            "sugarLevel": true,
-            "iceLevel": true,
-            "hot": false
-        },
-        {
             "id": 20,
             "drinkName": "愛文芒果青茶",
             "isPopular": false,

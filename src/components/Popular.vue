@@ -216,18 +216,19 @@ export default {
 }
 
 .title {
+    font-size: 18px;
     margin: 0px 0px 20px 5px;
 }
 
 .title p {
-    font-size: 15px;
+    font-size: 16px;
     margin-top: 3px;
 }
 
 .popular {
     position: relative;
     max-width: 1280px;
-    width: 80%;
+    width: 90%;
     height: 360px;
     margin: auto;
 }
