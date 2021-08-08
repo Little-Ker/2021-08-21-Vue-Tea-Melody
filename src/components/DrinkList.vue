@@ -10,6 +10,10 @@ import jQuery from "jquery";
 const $ = jQuery;
 window.$ = $;
 
+
+
+
+
 export default {
     name: 'DrinkList',
     data() {

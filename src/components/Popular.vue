@@ -155,20 +155,24 @@ export default {
         resize() {
             let slideBgWidth = $('.slider').width();
             this.slideWidth = slideBgWidth;
-            if (slideBgWidth > 280) slideBgWidth = 280;
+            this.subWidth = -50;
+            if (slideBgWidth > 280) {
+                slideBgWidth = 280;
+                this.subWidth = 0;
+            }
             this.slideWidth = (slideBgWidth * this.popularAry.length) - ((this.slideWidth / slideBgWidth ) * slideBgWidth);
 
             if (this.isMoveing) return;
-            this.leftPos = slideBgWidth + 20;
+            this.leftPos = slideBgWidth + 20 + this.subWidth;
             this.moveSpeed = slideBgWidth + 20;
             if (this.isMobile()) {
                 this.moveSpeed = 120;
             }
             for (let i = 0; i < this.popularAry.length; i++) {
-                $(`.item${i}`).css('width',`${slideBgWidth}px`);
-                $(`.item${i}`).css('height',`${slideBgWidth - 20}px`);
+                $(`.item${i}`).css('width',`${slideBgWidth + this.subWidth}px`);
+                $(`.item${i}`).css('height',`${slideBgWidth - 20  + (this.subWidth / 2)}px`);
             }
-            $('.popular').css('height',`${slideBgWidth + 80}px`);
+            $('.popular').css('height',`${slideBgWidth + 80  + (this.subWidth / 2)}px`);
         },
         createTimer() { 
             let timer = 500;
@@ -283,6 +287,7 @@ export default {
 }
 
 .text .price {
+    text-align: center;
     margin-top: 3px;
 }
 
@@ -346,9 +351,25 @@ export default {
     color: #fff;
 }
 
-@media (max-width: 270px) {
+@media (max-width: 325px) {
     .text {
-        padding: 0px 20px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .text .price {
+        margin-top: 3px;
+    }
+
+    .addBtn {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        top: -85px;
+    }
+
+    .leftBtn, .rightBtn {
+        top: calc(50%);
     }
 }
 
