@@ -56,6 +56,14 @@ a:hover {
     color: #42b983;
 }
 
+@media (max-width: 545px) {
+    a {
+        padding: 20px 10px;
+        letter-spacing: 2px;
+        font-size: 14px;
+    }
+}
+
 @media (max-width: 485px) {
     a {
         writing-mode: vertical-rl;

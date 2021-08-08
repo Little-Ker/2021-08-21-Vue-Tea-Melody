@@ -136,7 +136,7 @@ export default {
     height: 55px;
     position: absolute;
     right: 10px;
-    bottom: 15px;
+    bottom: 75px;
     border-radius: 10px;
     box-shadow: 0px 1px 5px rgb(0 0 0 / 60%);
 }
@@ -183,7 +183,7 @@ export default {
     width: 320px;    
     background-color: #fff;
     position: absolute;
-    bottom: 80px;
+    bottom: 135px;
     right: 10px;
     border: 1px solid #999;
     padding: 20px 30px;
@@ -263,7 +263,7 @@ export default {
     }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 485px) {
     .list {
         max-height: 80vh;
     }
@@ -273,6 +273,10 @@ export default {
         height: 100%;
         bottom: 0;
         right: 0;
+    }
+
+    .icon {
+        bottom: 95px;
     }
 }
 
