@@ -8,7 +8,7 @@
                 <p>{{item.engType}}</p>
             </div>
             <div class="drinWrap">
-                <div class="drink" v-for="(drink,index) in list.typeList[item.engType].drinkList" :key="index">
+                <div class="drink" @click="chooseNewsDrink(drink.id)" v-for="(drink,index) in list.typeList[item.engType].drinkList" :key="index">
                     <img :src="drink.imgUrl" alt="">
                     <div class="drinkContent">
                         <p class="drinkName"><b>{{drink.drinkName}}</b></p>
@@ -42,6 +42,7 @@ export default {
                 typeList: {}
             }
             this.drinkList.forEach(({
+                id,
                 type,
                 drinkName,
                 imgUrl,
@@ -54,6 +55,7 @@ export default {
                     }
                 }
                 let drinkData = {
+                    "id": id,
                     "drinkName": drinkName,
                     "imgUrl": imgUrl,
                     "content": content,
@@ -63,7 +65,29 @@ export default {
             })
             return obj;
         },
-    }
+        isShowDrinkOverlay: {
+            get() {
+                return this.$store.state.isShowDrinkOverlay;
+            },
+            set(val) {
+                return this.$store.commit('SetIsShowDrinkOverlay',val);
+            }
+        },
+        chooseDrinkIndex: {
+            get() {
+                return this.$store.state.chooseDrinkIndex;
+            },
+            set(val) {
+                return this.$store.commit('SetChooseDrinkIndex',val);
+            }
+        }
+    },
+    methods: {
+        chooseNewsDrink(id) {
+            this.chooseDrinkIndex = id;
+            this.isShowDrinkOverlay = true;
+        }
+    },
 }
 </script>
 

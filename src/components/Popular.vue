@@ -6,7 +6,7 @@
         </div>
         <div class="slider">
             <div class="moveSlide">
-                <div @mousedown="dragDown($event, index)" @mousemove="dragMove($event)" @mouseup="dragUp" @mouseout="dragUp"
+                <div @mousedown="dragDown($event, item.id)" @mousemove="dragMove($event)" @mouseup="dragUp" @mouseout="dragUp"
                      @touchstart="dragDown($event)" @touchmove="dragMove($event)" @touchend="dragUp"
                      v-for="(item, index) in popularAry" :key="index" :class="`item item${index}`" :style="`left:${leftPos*index}px;`">
                     <img :src='item.imgUrl' alt="">
@@ -55,31 +55,51 @@ export default {
             return this.popularDrink.filter(item => {
                 return item.isPopular === true
             });
+        },
+        isShowDrinkOverlay: {
+            get() {
+                return this.$store.state.isShowDrinkOverlay;
+            },
+            set(val) {
+                return this.$store.commit('SetIsShowDrinkOverlay',val);
+            }
+        },
+        chooseDrinkIndex: {
+            get() {
+                return this.$store.state.chooseDrinkIndex;
+            },
+            set(val) {
+                return this.$store.commit('SetChooseDrinkIndex',val);
+            }
         }
     },
     methods: {
+        chooseNewsDrink(id) {
+            this.chooseDrinkIndex = id;
+            this.isShowDrinkOverlay = true;
+        },
         // 幻燈片自動換位
-        slideMoveAnim() {
-            for (let i = 0; i < this.popularAry.length; i++) {
-                this.changeIndex(i);
-            }
-        },
-        changeIndex(i) {
-            let isPlay = false;
-            let oriLeftPos = $(`.item${i}`).css('left').slice(0, -2);
-            if (Number(oriLeftPos) <= -250) {
-                $(`.item${i}`).css('left',`${250 * (this.popularAry.length - 1)}px`);
-            }
-            oriLeftPos = $(`.item${i}`).css('left').slice(0, -2);
-            $(`.item${i}`).animate({left:`${oriLeftPos -250}px`}, 10000, 'linear', () => {
-                $(`.item${i}`).css('left',`${oriLeftPos -250}px`);       
-                if (!isPlay) {
-                    isPlay = true;
-                    $(`.item${i}`).stop(true,true);
-                    this.changeIndex(i)
-                }       
-            });
-        },
+        // slideMoveAnim() {
+        //     for (let i = 0; i < this.popularAry.length; i++) {
+        //         this.changeIndex(i);
+        //     }
+        // },
+        // changeIndex(i) {
+        //     let isPlay = false;
+        //     let oriLeftPos = $(`.item${i}`).css('left').slice(0, -2);
+        //     if (Number(oriLeftPos) <= -250) {
+        //         $(`.item${i}`).css('left',`${250 * (this.popularAry.length - 1)}px`);
+        //     }
+        //     oriLeftPos = $(`.item${i}`).css('left').slice(0, -2);
+        //     $(`.item${i}`).animate({left:`${oriLeftPos -250}px`}, 10000, 'linear', () => {
+        //         $(`.item${i}`).css('left',`${oriLeftPos -250}px`);       
+        //         if (!isPlay) {
+        //             isPlay = true;
+        //             $(`.item${i}`).stop(true,true);
+        //             this.changeIndex(i)
+        //         }       
+        //     });
+        // },
         // 幻燈片左右滑動
         getPosX(event){
             if (event.clientX === undefined) {
@@ -136,7 +156,7 @@ export default {
             $('.item').css('pointer-events','auto'); 
             $('.item').css('user-select','auto');
         },
-        dragDown(event, index = ''){
+        dragDown(event, index){
             // console.log('down');
             this.isDrag = true;
             this.oldPosX = this.getPosX(event);
@@ -146,8 +166,7 @@ export default {
                 this.newPosX = this.getPosX(event);
                 if (!this.isMoveing) {
                     this.isDrag = false;
-                    if (index === '') return;
-                    console.log('click', index);
+                    this.chooseNewsDrink(index);
                     return;
                 }
             }, 150);

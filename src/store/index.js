@@ -11,6 +11,9 @@ export default createStore({
         chooseNewsData: [],
         chooseNewsType: 'all',
         newsPageIndex: 1,
+
+        chooseDrinkIndex: 0,
+        isShowDrinkOverlay: false,
     },
     mutations: {
         SetNews(state, newsData) {
@@ -33,6 +36,12 @@ export default createStore({
         },
         SetChooseNewsPageIndex(state, newsPageIndex) {
             state.newsPageIndex = newsPageIndex;
+        },
+        SetChooseDrinkIndex(state, chooseDrinkIndex) {
+            state.chooseDrinkIndex = chooseDrinkIndex;
+        },
+        SetIsShowDrinkOverlay(state, isShowDrinkOverlay) {
+            state.isShowDrinkOverlay = isShowDrinkOverlay;
         }
     },
     actions: {

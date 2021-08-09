@@ -1,23 +1,23 @@
 <template>
-    <div  class="chooseDrink">
+    <div v-show="isShowDrinkOverlay" class="chooseDrink">
         <div class="overlay">
             <div class="chooseList">
                 <div class="topBlock">
-                    <p>{{testDrink.drinkName}}</p>
-                    <div class="close"></div>
+                    <p>{{chooseDrinkData.drinkName}}</p>
+                    <div @click="closeFn" class="close"></div>
                 </div>
-                <img :src="testDrink.imgUrl" alt="">
+                <img :src="chooseDrinkData.imgUrl" alt="">
                 <div class="drinkData">
                     <div class="drinkName">
-                        <h2>{{testDrink.drinkName}}</h2>
-                        <p>{{testDrink.content}}</p>
+                        <h2>{{chooseDrinkData.drinkName}}</h2>
+                        <p>{{chooseDrinkData.content}}</p>
                     </div>
                     <hr>
                     <div class="choose">
                         <h3>甜度選擇</h3>
                         <div class="wrap">
                             <label v-for="(item, index) in showSugar" :key="index" class="container">{{item.level}}
-                                <input v-model="sugarLevel" checked="checked" type="radio" name="sugar" :value="item.value">
+                                <input v-model="sugarLevel" type="radio" name="sugar" :value="item.value">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -27,7 +27,7 @@
                         <h3>冰量選擇</h3>
                         <div class="wrap">
                             <label v-for="(item, index) in showIce" :key="index" class="container">{{item.level}}
-                                <input v-model="iceLevel" type="radio" checked="checked" :value="item.value" name="ice">
+                                <input v-model="iceLevel" type="radio" :value="item.value" name="ice">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -45,7 +45,7 @@
                     <hr>
                     <div class="choose">
                         <h3>備註</h3>
-                        <textarea id="subject" name="subject" placeholder="Write something..."></textarea>
+                        <textarea v-model="note" id="subject" name="subject" placeholder="Write something..."></textarea>
                     </div>
                 </div>
                 <div class="addCar">
@@ -71,13 +71,13 @@ export default {
     name: 'ChooseDrink',
     data() {
         return {
-            sugarLevel: 0,
-            iceLevel: 0,
+            sugarLevel: 'sugarAll',
+            iceLevel: 'iceAll',
             toppingsAry: [],
             count: 1,
             drinkPrice: 0,
+            note: '',
             toppings: drink.toppings,
-            testDrink: drink.drinks[4],
         }
     },
     computed: {
@@ -87,7 +87,7 @@ export default {
         },
         showSugar() {
             let sugarAry = [];
-            if (!this.testDrink.sugarLevel) {
+            if (!this.chooseDrinkData.sugarLevel) {
                 sugarAry.push(drink.sugarList[0]);
                 return sugarAry;
             }
@@ -95,26 +95,31 @@ export default {
         },
         showIce() {
             let iceAry = [];
-            if (!this.testDrink.iceLevel) {
+            if (!this.chooseDrinkData.iceLevel) {
                 iceAry.push(drink.iceList[0]);
                 return iceAry;
             }
             iceAry = drink.iceList;
-            if (!this.testDrink.hot) {
+            if (!this.chooseDrinkData.hot) {
                 const newIceAry = iceAry.slice(0, iceAry.length - 1)
                 return newIceAry;
             }
             return iceAry;         
         },
-
-        // isShowLoading: {
-        //     get() {
-        //         return this.$store.state.isShowLoading;
-        //     },
-        //     set(val) {
-        //         return this.$store.commit('SetShowLoading',val);
-        //     }
-        // },
+        chooseDrinkData() {
+            return drink.drinks[this.chooseDrinkIndex];
+        },
+        chooseDrinkIndex() {
+            return this.$store.state.chooseDrinkIndex;
+        },
+        isShowDrinkOverlay: {
+            get() {
+                return this.$store.state.isShowDrinkOverlay;
+            },
+            set(val) {
+                return this.$store.commit('SetIsShowDrinkOverlay',val);
+            }
+        },
     },
     methods: {
         changeCount(num) {
@@ -122,25 +127,32 @@ export default {
             this.count = this.count + num; 
         },
         changePrice() {
-            this.drinkPrice = this.testDrink.price;
+            this.drinkPrice = this.chooseDrinkData.price;
             this.toppingsAry.forEach(element => {
                 let price = this.toppings.filter(item => item.type === element)[0].price;
                 this.drinkPrice += price;
             });
         },
-
-
-        // 禁用滾動條
-        stopScrollBar() {
-            var tops = $(document).scrollTop();
-            $(document).bind("scroll",function (){$(document).scrollTop(tops); });
+        closeFn() {
+            this.isShowDrinkOverlay = false;
         },
-        startScrollBar() {
-            $(document).unbind("scroll");
-        }
+        isShowScrollBar() {
+            $('.overlay').scrollTop(0);
+            if (this.isShowDrinkOverlay) {
+                $('body').css('overflow', 'hidden');
+            } else {
+                $('body').css('overflow', 'auto');
+            }
+        },
     },
     watch: {
-
+        isShowDrinkOverlay() {
+            this.sugarLevel =  'sugarAll';
+            this.iceLevel = 'iceAll';
+            this.toppingsAry = [];
+            this.count = 1;
+            this.isShowScrollBar();
+        }
     }
 }
 </script>
