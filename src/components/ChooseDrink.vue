@@ -3,37 +3,21 @@
         <div class="overlay">
             <div class="chooseList">
                 <div class="topBlock">
-                    <p>巴黎天空冰沙</p>
+                    <p>{{testDrink.drinkName}}</p>
                     <div class="close"></div>
                 </div>
-                <img src="../assets/drink00.jpeg" alt="">
+                <img :src="testDrink.imgUrl" alt="">
                 <div class="drinkData">
                     <div class="drinkName">
-                        <h2>巴黎天空冰沙</h2>
-                        <p>總熱量最高值 590.0 大卡</p>
+                        <h2>{{testDrink.drinkName}}</h2>
+                        <p>{{testDrink.content}}</p>
                     </div>
                     <hr>
                     <div class="choose">
                         <h3>甜度選擇</h3>
                         <div class="wrap">
-                            <label class="container">全糖
-                                <input type="radio" checked="checked" name="sugar">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">8 分糖
-                                <input type="radio" name="sugar">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">5 分糖
-                                <input type="radio" name="sugar">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">3 分糖
-                                <input type="radio" name="sugar">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">無糖
-                                <input type="radio" name="sugar">
+                            <label v-for="(item, index) in showSugar" :key="index" class="container">{{item.level}}
+                                <input v-model="sugarLevel" checked="checked" type="radio" name="sugar" :value="item.value">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -42,24 +26,8 @@
                     <div class="choose">
                         <h3>冰量選擇</h3>
                         <div class="wrap">
-                            <label class="container">正常冰
-                                <input type="radio" checked="checked" name="ice">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">少冰
-                                <input type="radio" name="ice">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">微冰
-                                <input type="radio" name="ice">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">去冰
-                                <input type="radio" name="ice">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">熱
-                                <input type="radio" name="ice">
+                            <label v-for="(item, index) in showIce" :key="index" class="container">{{item.level}}
+                                <input v-model="iceLevel" type="radio" checked="checked" :value="item.value" name="ice">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -69,7 +37,7 @@
                         <h3>加料選擇（可複選）</h3>
                         <div class="wrap">
                             <label v-for="(item, index) in toppings" :key="index" class="container">{{item.type}} +${{item.price}}
-                                <input type="checkbox" name="add" :value="item.type">
+                                <input v-model="toppingsAry" type="checkbox" name="add" :value="item.type">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -77,16 +45,16 @@
                     <hr>
                     <div class="choose">
                         <h3>備註</h3>
-                        <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
+                        <textarea id="subject" name="subject" placeholder="Write something..."></textarea>
                     </div>
                 </div>
                 <div class="addCar">
                     <div class="chooseCount">
-                        <div class="countBtn subCountBtn">-</div>
-                        <p> 1 </p>
-                        <div class="countBtn addCountBtn">+</div>
+                        <div @click="changeCount(-1)" class="countBtn subCountBtn">-</div>
+                        <p>{{ count }}</p>
+                        <div @click="changeCount(1)" class="countBtn addCountBtn">+</div>
                     </div>
-                    <div class="addBtn">加入購物車</div>
+                    <div class="addBtn">加入購物車&nbsp;&nbsp;${{showPrice}}</div>
                 </div>
             </div> 
         </div>
@@ -103,10 +71,42 @@ export default {
     name: 'ChooseDrink',
     data() {
         return {
-            toppings: drink.toppings
+            sugarLevel: 0,
+            iceLevel: 0,
+            toppingsAry: [],
+            count: 1,
+            drinkPrice: 0,
+            toppings: drink.toppings,
+            testDrink: drink.drinks[4],
         }
     },
     computed: {
+        showPrice() {
+            this.changePrice();
+            return this.drinkPrice;
+        },
+        showSugar() {
+            let sugarAry = [];
+            if (!this.testDrink.sugarLevel) {
+                sugarAry.push(drink.sugarList[0]);
+                return sugarAry;
+            }
+            return sugarAry = drink.sugarList;        
+        },
+        showIce() {
+            let iceAry = [];
+            if (!this.testDrink.iceLevel) {
+                iceAry.push(drink.iceList[0]);
+                return iceAry;
+            }
+            iceAry = drink.iceList;
+            if (!this.testDrink.hot) {
+                const newIceAry = iceAry.slice(0, iceAry.length - 1)
+                return newIceAry;
+            }
+            return iceAry;         
+        },
+
         // isShowLoading: {
         //     get() {
         //         return this.$store.state.isShowLoading;
@@ -117,6 +117,19 @@ export default {
         // },
     },
     methods: {
+        changeCount(num) {
+            if (this.count === 1 && num < 0) return;
+            this.count = this.count + num; 
+        },
+        changePrice() {
+            this.drinkPrice = this.testDrink.price;
+            this.toppingsAry.forEach(element => {
+                let price = this.toppings.filter(item => item.type === element)[0].price;
+                this.drinkPrice += price;
+            });
+        },
+
+
         // 禁用滾動條
         stopScrollBar() {
             var tops = $(document).scrollTop();
@@ -199,6 +212,7 @@ textarea {
     border: 1px solid #aaa;
     border-radius: 8px;
     background-color: #fff;
+    user-select: none;
 }
 
 .chooseCount p {

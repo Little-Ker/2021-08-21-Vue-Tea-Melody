@@ -20,6 +20,48 @@
             "engType": "Fruit"
         }
     ],
+    "sugarList": [{
+            "level": "全糖",
+            "value": "sugarAll"
+        },
+        {
+            "level": "8 分糖",
+            "value": "sugar8"
+        },
+        {
+            "level": "5 分糖",
+            "value": "sugar5"
+        },
+        {
+            "level": "3 分糖",
+            "value": "sugar3"
+        },
+        {
+            "level": "無糖",
+            "value": "sugar0"
+        }
+    ],
+    "iceList": [{
+            "level": "正常冰",
+            "value": "iceAll"
+        },
+        {
+            "level": "少冰",
+            "value": "ice8"
+        },
+        {
+            "level": "微冰",
+            "value": "ice5"
+        },
+        {
+            "level": "去冰",
+            "value": "ice0"
+        },
+        {
+            "level": "熱",
+            "value": "hot"
+        }
+    ],
     "toppings": [{
             "id": 0,
             "type": "珍珠",
