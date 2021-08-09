@@ -8,6 +8,7 @@
       <AllDrink />
       <div class="marginTop"></div>
       <div class="stickyNav"><DrinkList /></div>
+      <ChooseDrink />
   </div>
 </template>
 
@@ -15,13 +16,15 @@
 import Popular from '@/components/Popular.vue'
 import DrinkList from '@/components/DrinkList.vue'
 import AllDrink from '@/components/AllDrink.vue'
+import ChooseDrink from '@/components/ChooseDrink.vue'
 
 export default {
   name: 'Shop',
   components: {
     Popular,
     DrinkList,
-    AllDrink
+    AllDrink,
+    ChooseDrink
   },
 }
 </script>
