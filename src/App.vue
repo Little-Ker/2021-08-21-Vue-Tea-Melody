@@ -30,6 +30,30 @@
   background: #888;
 }
 
+/* 刪除按鈕 */
+.deleteBtn:hover img{
+    background-color: #999;
+}
+
+.deleteBtn:hover .deleteHover{
+    opacity: 0.8;
+}
+
+.deleteBtn img {
+    cursor: pointer;
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    padding: 5px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+.deleteHover {
+    position: absolute;
+    opacity: 0;
+}
+
 /* Handle on hover */
 /* ::-webkit-scrollbar-thumb:hover {
   background: #888; 

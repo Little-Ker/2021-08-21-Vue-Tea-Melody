@@ -29,7 +29,9 @@
                     </div>
                 </div>
             </div>
-            <div class="buyBtn">訂單結帳</div>
+            <router-link to='order'>
+                <div class="buyBtn">訂單結帳</div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -83,6 +85,7 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 .left {
@@ -231,29 +234,6 @@ export default {
     position: relative;
     margin-right: 25px;
     bottom: 28px;
-}
-
-.deleteBtn:hover img{
-    background-color: #999;
-}
-
-.deleteBtn:hover .deleteHover{
-    opacity: 0.8;
-}
-
-.deleteBtn img {
-    cursor: pointer;
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    padding: 5px;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-}
-
-.deleteHover {
-    position: absolute;
-    opacity: 0;
 }
 
 .item {
