@@ -8,32 +8,21 @@
         </div>
         <div v-if="isShowShopping" class="shoppingList">
             <h3 class="left">購物清單</h3>
-            <div @click="clickCarFn" class="closeBtn right"></div>
+            <div @click="clickCarFn" class="closeArea right">
+                <div class="closeBtn"></div>
+            </div>
             <div class="clearBox"></div>
             <hr>
             <div class="list">
-                <div class="item">
+                <div class="item" v-for="(item, index) in shoppingCarList" :key="index">
                     <div class="itemName">
-                        <p><b>桃膠蜂蜜檸檬</b></p>
-                        <p class="addContent">七分糖 / 完全去冰</p>
-                        <p class="addContent">加 珍珠、芋園</p>
+                        <p><b>{{item.drinkName}}</b></p>
+                        <p class="addContent">{{item.sugarLevel}} / {{item.iceLevel}}</p>
+                        <p class="addContent">{{(item.toppingsAry.length !== 0) ? '加' : ''}} {{addTopping(item.toppingsAry)}}</p>
                     </div>
                     <div class="wrap-column">
-                        <div class="countNum"><b>1 杯</b></div>
-                        <div class="deleteBtn">
-                            <img src="../assets/shop/can2.png" alt="">
-                            <img class="deleteHover" src="../assets/shop/can.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemName">
-                        <p><b>寶島1號奶茶</b></p>
-                        <p class="addContent">七分糖 / 完全去冰</p>
-                    </div>
-                    <div class="wrap-column">
-                        <div class="countNum"><b>1 杯</b></div>
-                        <div class="deleteBtn">
+                        <div class="countNum"><b>{{item.count}} 杯</b></div>
+                        <div @click="deleteFn(index)" class="deleteBtn">
                             <img src="../assets/shop/can2.png" alt="">
                             <img class="deleteHover" src="../assets/shop/can.png" alt="">
                         </div>
@@ -54,15 +43,34 @@ export default {
     name: 'ShoppingCar',
     data() {
         return {
-            isShopping: true,
-            isShowShopping: true
+            isShowShopping: false
         }
     },
     computed: {
+        isShopping() {
+            return (this.shoppingCarList.length === 0) ? false : true;
+        },
+        shoppingCarList: {
+            get() {
+                return this.$store.state.shoppingCarList;
+            },
+            set(val) {
+                return this.$store.commit('SetShoppingCarList',val);
+            }
+        },
     },
     methods: {
+        addTopping(toppingAry) {
+            return toppingAry.join('、');
+        },
         clickCarFn() {
             this.isShowShopping = !this.isShowShopping
+        },
+        deleteFn(index) {
+            const drinkName = this.shoppingCarList[index].drinkName;
+            if (confirm(`是否刪除 ${drinkName} ?`)) {
+                this.shoppingCarList.splice(index, 1);
+            }
         }
     },
     watch: {
@@ -149,8 +157,13 @@ export default {
     opacity: 0.8;
 }
 
-.closeBtn {
+.closeArea {
     cursor: pointer;
+    width: 30px;
+    height: 25px;
+}
+
+.closeBtn {
     position: relative;
     top: 8px;
     width: 30px;
@@ -211,7 +224,7 @@ export default {
 .itemName {
     text-align: left;
     line-height: 26px;
-    width: 55%;
+    width: 85%;
 }
 
 .deleteBtn {

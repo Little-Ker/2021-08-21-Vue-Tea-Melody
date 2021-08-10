@@ -14,6 +14,7 @@ export default createStore({
 
         chooseDrinkIndex: 0,
         isShowDrinkOverlay: false,
+        shoppingCarList: [],
     },
     mutations: {
         SetNews(state, newsData) {
@@ -42,7 +43,10 @@ export default createStore({
         },
         SetIsShowDrinkOverlay(state, isShowDrinkOverlay) {
             state.isShowDrinkOverlay = isShowDrinkOverlay;
-        }
+        },
+        SetShoppingCarList(state, shoppingCarList) {
+            state.shoppingCarList = shoppingCarList;
+        },
     },
     actions: {
         // 更新所有最新消息

@@ -1,10 +1,19 @@
 <template>
-    <div v-show="isShowDrinkOverlay" class="chooseDrink">
-        <div class="overlay">
+    <div class="chooseDrink">
+            <div v-if="isShowNotice" class="noticeContainer">
+                <transition @after-enter='afterEnterFn' name='fadeIn' appear>
+                <div class="showBuyNotice">
+                    <p>已將
+                    <br>{{chooseDrinkName}}
+                    <br>加入至購物清單</p>
+                </div>
+                </transition>
+            </div>
+        <div v-show="isShowDrinkOverlay" @click="closeFn($event)" class="overlay">
             <div class="chooseList">
                 <div class="topBlock">
                     <p>{{chooseDrinkData.drinkName}}</p>
-                    <div @click="closeFn" class="close"></div>
+                    <div class="close"></div>
                 </div>
                 <img :src="chooseDrinkData.imgUrl" alt="">
                 <div class="drinkData">
@@ -17,7 +26,7 @@
                         <h3>甜度選擇</h3>
                         <div class="wrap">
                             <label v-for="(item, index) in showSugar" :key="index" class="container">{{item.level}}
-                                <input v-model="sugarLevel" type="radio" name="sugar" :value="item.value">
+                                <input v-model="sugarLevel" type="radio" name="sugar" :value="item.level">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -27,7 +36,7 @@
                         <h3>冰量選擇</h3>
                         <div class="wrap">
                             <label v-for="(item, index) in showIce" :key="index" class="container">{{item.level}}
-                                <input v-model="iceLevel" type="radio" :value="item.value" name="ice">
+                                <input v-model="iceLevel" type="radio" :value="item.level" name="ice">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -54,7 +63,7 @@
                         <p>{{ count }}</p>
                         <div @click="changeCount(1)" class="countBtn addCountBtn">+</div>
                     </div>
-                    <div class="addBtn">加入購物車&nbsp;&nbsp;${{showPrice}}</div>
+                    <div @click="addCarFn" class="addBtn">加入購物車&nbsp;&nbsp;${{showPrice}}</div>
                 </div>
             </div> 
         </div>
@@ -71,16 +80,20 @@ export default {
     name: 'ChooseDrink',
     data() {
         return {
-            sugarLevel: 'sugarAll',
-            iceLevel: 'iceAll',
+            sugarLevel: '全糖',
+            iceLevel: '正常冰',
             toppingsAry: [],
             count: 1,
             drinkPrice: 0,
             note: '',
             toppings: drink.toppings,
+            isShowNotice: false,
         }
     },
     computed: {
+        chooseDrinkName() {
+            return this.chooseDrinkData.drinkName;
+        },
         showPrice() {
             this.changePrice();
             return this.drinkPrice;
@@ -120,6 +133,14 @@ export default {
                 return this.$store.commit('SetIsShowDrinkOverlay',val);
             }
         },
+        shoppingCarList: {
+            get() {
+                return this.$store.state.shoppingCarList;
+            },
+            set(val) {
+                return this.$store.commit('SetShoppingCarList',val);
+            }
+        },
     },
     methods: {
         changeCount(num) {
@@ -127,14 +148,19 @@ export default {
             this.count = this.count + num; 
         },
         changePrice() {
-            this.drinkPrice = this.chooseDrinkData.price;
+            let oneDrinkPrice = this.chooseDrinkData.price;
             this.toppingsAry.forEach(element => {
                 let price = this.toppings.filter(item => item.type === element)[0].price;
-                this.drinkPrice += price;
+                oneDrinkPrice += price;
             });
+            this.drinkPrice = oneDrinkPrice * this.count;
         },
-        closeFn() {
-            this.isShowDrinkOverlay = false;
+        closeFn(event) {
+            const el = event.target.getAttribute('class');
+            if (el === 'overlay' || el === 'close') this.isShowDrinkOverlay = false;
+        },
+        afterEnterFn() {
+            this.isShowNotice = false;
         },
         isShowScrollBar() {
             $('.overlay').scrollTop(0);
@@ -144,11 +170,27 @@ export default {
                 $('body').css('overflow', 'auto');
             }
         },
+        addCarFn() {
+            const buyDrinkData = {
+                id: this.chooseDrinkIndex,
+                drinkName: this.chooseDrinkData.drinkName,
+                sugarLevel: this.sugarLevel,
+                iceLevel: this.iceLevel,
+                toppingsAry: this.toppingsAry,
+                note: this.note,
+                count: this.count,
+                drinkPrice: this.drinkPrice
+            }
+            this.shoppingCarList.push(buyDrinkData);
+
+            this.isShowDrinkOverlay = false;
+            this.isShowNotice = true;
+        }
     },
     watch: {
         isShowDrinkOverlay() {
-            this.sugarLevel =  'sugarAll';
-            this.iceLevel = 'iceAll';
+            this.sugarLevel =  '全糖';
+            this.iceLevel = '正常冰';
             this.toppingsAry = [];
             this.count = 1;
             this.isShowScrollBar();
@@ -162,8 +204,61 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    text-align: left;
     list-style: none;
+}
+
+/* 提示框進出場動畫 */
+.fadeIn-enter-active {
+  animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        top: 0px;
+    }
+    20% {
+        opacity: 1;
+        top: -20px;
+    }
+    80% {
+        opacity: 1;
+        top: -20px;
+    }
+    100% {
+        opacity: 0;
+        top: -20px;
+    }
+}
+
+.noticeContainer {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.showBuyNotice {
+    position: relative;
+    max-width: 400px;
+    max-height: 230px;
+    width: 80%;
+    height: 30%;
+    text-align: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    line-height: 40px;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #000000c4;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 textarea {
@@ -335,6 +430,7 @@ textarea {
 }
 
 .chooseList {
+    text-align: left;
     position: relative;
     max-width: 500px;
     width: 80%;

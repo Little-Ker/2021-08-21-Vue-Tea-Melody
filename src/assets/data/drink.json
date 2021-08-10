@@ -312,7 +312,7 @@
             "hot": false
         },
         {
-            "id": 20,
+            "id": 19,
             "drinkName": "愛文芒果青茶",
             "isPopular": false,
             "type": "Fruit",
@@ -324,7 +324,7 @@
             "hot": false
         },
         {
-            "id": 21,
+            "id": 20,
             "drinkName": "鮮百香綠茶",
             "isPopular": false,
             "type": "Fruit",
@@ -336,7 +336,7 @@
             "hot": false
         },
         {
-            "id": 22,
+            "id": 21,
             "drinkName": "檸檬養樂多",
             "isPopular": false,
             "type": "Fruit",
