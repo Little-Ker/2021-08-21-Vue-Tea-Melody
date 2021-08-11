@@ -16,6 +16,7 @@ export default createStore({
         isShowDrinkOverlay: false,
         shoppingCarList: [],
         isHideShoppingCar: false,
+        orderLevel: 1,
     },
     mutations: {
         SetNews(state, newsData) {
@@ -50,6 +51,9 @@ export default createStore({
         },
         SetIsHideShoppingCar(state, isHideShoppingCar) {
             state.isHideShoppingCar = isHideShoppingCar;
+        },
+        SetOrderLevel(state, orderLevel) {
+            state.orderLevel = orderLevel;
         },
     },
     actions: {

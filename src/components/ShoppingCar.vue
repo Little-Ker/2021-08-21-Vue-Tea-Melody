@@ -31,7 +31,7 @@
             </div>
             <div v-if="!isShopping" class="buyBtn btnLock">訂單結帳</div>
             <router-link v-if="isShopping" to='order'>
-                <div @click="clickBuyFn" class="buyBtn btnUnLock">訂單結帳</div>
+                <div @click="clickBuyFn(1)" class="buyBtn btnUnLock">訂單結帳</div>
             </router-link>
         </div>
     </div>
@@ -77,6 +77,14 @@ export default {
                 return this.$store.commit('SetIsHideShoppingCar',val);
             }
         },
+        orderLevel: {
+            get() {
+                return this.$store.state.orderLevel;
+            },
+            set(val) {
+                return this.$store.commit('SetOrderLevel',val);
+            }
+        }
     },
     methods: {
         addTopping(toppingAry) {
@@ -91,8 +99,9 @@ export default {
                 this.shoppingCarList.splice(index, 1);
             }
         },
-        clickBuyFn() {
+        clickBuyFn(index) {
             this.goTop();
+            this.orderLevel = index;
             this.isShowShopping = false;
             this.isHideShoppingCar = true;
             this.isShowLoading = true;

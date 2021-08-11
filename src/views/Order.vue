@@ -6,11 +6,14 @@
         <!-- <div class="marginTop"></div> -->
         <div class="listContainer">
             <TimeLine />
-            <div v-if="shoppingCarList.length !== 0">
+            <div v-if="shoppingCarList.length !== 0 && orderLevel === 1">
               <CreateOrder />
             </div>
             <div v-if="shoppingCarList.length === 0">
               <OrderNull />
+            </div>
+            <div v-if="orderLevel === 2">
+              <OrderContact />
             </div>
         </div>
       
@@ -31,17 +34,22 @@
 import TimeLine from '@/components/TimeLine.vue'
 import CreateOrder from '@/components/CreateOrder.vue'
 import OrderNull from '@/components/OrderNull.vue'
+import OrderContact from '@/components/OrderContact.vue'
 
 export default {
   name: 'Order',
   components: {
     TimeLine,
     CreateOrder,
-    OrderNull
+    OrderNull,
+    OrderContact
   },
   computed: {
     shoppingCarList() {
         return this.$store.state.shoppingCarList;
+    },
+    orderLevel() {
+        return this.$store.state.orderLevel;
     },
     isHideShoppingCar: {
         get() {

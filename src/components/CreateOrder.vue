@@ -117,7 +117,7 @@
                         <p><b>總計</b></p>
                         <p><b>$ {{totalPrice}}</b></p>
                     </div>
-                    <div class="nextBtn"><p>填寫資料</p></div>
+                    <div @click="clickNextFn(2)" class="nextBtn"><p>填寫資料</p></div>
                 </div>
             </div>
         </div>
@@ -199,6 +199,14 @@ export default {
         shoppingCarList() {
             return this.$store.state.shoppingCarList;
         },
+        orderLevel: {
+            get() {
+                return this.$store.state.orderLevel;
+            },
+            set(val) {
+                return this.$store.commit('SetOrderLevel',val);
+            }
+        }
     },
     methods: {
         changeAreaValue(areaList) {
@@ -225,6 +233,13 @@ export default {
                 this.shoppingCarList.splice(index, 1);
             }
         },
+        clickNextFn(index) {
+            this.orderLevel = index;
+            this.goTop();
+        },
+        goTop() {
+            $('html,body').scrollTop(0, 0);
+        }
     },
     watch: {
         purchase() {
@@ -234,7 +249,6 @@ export default {
     },
     mounted() {
         this.randomTime = this.buyRandomTime();
-        // randomTime
     },
 }
 </script>
