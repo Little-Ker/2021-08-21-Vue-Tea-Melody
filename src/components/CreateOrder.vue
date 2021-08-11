@@ -1,8 +1,9 @@
 <template>
     <div class="createOrder">
-        <div class="allList">
-                <div class="item">
-                    <div class="itemData">
+        <div class="allList rwd-Large">
+            <h3>購物內容</h3>
+            <div class="item title">
+                <div class="itemData">
                     <div class="choose widthL"><b>飲品名稱</b></div>
                     <div class="choose widthL"><b>甜度冰量</b></div>
                     <div class="choose widthL"><b>加料</b></div>
@@ -15,7 +16,7 @@
             <hr>
             <div class="item">
                 <div class="itemData">
-                    <div class="chooseData widthL">百香Q果綠</div>
+                    <div class="chooseData widthL"><b>百香Q果綠</b></div>
                     <div class="chooseData widthL">七分糖 / 正常冰</div>
                     <div class="chooseData widthL">仙草凍、咖啡凍、布丁</div>
                     <div class="chooseData widthL">123456</div>
@@ -28,15 +29,21 @@
                 </div>
             </div>
             <hr>
+        </div>
+        <div class="allList rwd-mideum">
+            <h3>購物內容</h3>
             <div class="item">
                 <div class="itemData">
-                    <div class="chooseData widthL">百香Q果綠</div>
-                    <div class="chooseData widthL">七分糖 / 正常冰</div>
-                    <div class="chooseData widthL">仙草凍、咖啡凍、布丁</div>
-                    <div class="chooseData widthL">123456</div>
-                    <div class="chooseData widthM">1 杯</div>
-                    <div class="chooseData widthM">$50</div>
-                    <div class="chooseData deleteBtn widthM">
+                    <div class="choose widthM drinkName"><b>百香Q果綠</b></div>
+                    <div class="choose widthL">
+                        <div class="noteMargin" style="margin-right:5px"><p>七分糖 / 正常冰 / 仙草凍、咖啡凍、布丁</p></div>
+                        <div>/ alias nihil quam minus placeat!</div>
+                    </div>
+                    <div class="choose widthS rwd-mideum-flex">
+                        <div class="noteMargin"><b> 1 杯</b></div>
+                        <div class="priceMargin"><b>$50</b></div>
+                    </div>
+                    <div class="chooseData deleteBtn widthS">
                         <img src="../assets/shop/can2.png" alt="">
                         <img class="deleteHover" src="../assets/shop/can.png" alt="">
                     </div>
@@ -134,6 +141,10 @@ export default {
     box-sizing: border-box;
 }
 
+.rwd-mideum {
+    display: none;
+}
+
 .widthM {
     width: 10%;
 }
@@ -174,13 +185,13 @@ export default {
     cursor: pointer;
     display: flex;
     justify-content: flex-end;
+    margin-top: 20px;
 }
 
 .pickUpData {
     display: flex;
     justify-content: space-between;
     text-align: left;
-    padding: 0px 10px;
 }
 
 .delivery {
@@ -196,7 +207,8 @@ export default {
     padding: 0px 5px;
 }
 
-.total h3, .delivery h3 {
+.total h3, .delivery h3, .allList h3 {
+    text-align: left;
     line-height: 30px;
     margin-top: 20px;
     border-bottom: 1px dashed #999;
@@ -236,7 +248,8 @@ export default {
 }
 
 .allList {
-    margin-bottom: 80px;
+    padding: 0px 5px;
+    margin-bottom: 50px;
 }
 
 .itemData {
@@ -244,13 +257,13 @@ export default {
 }
 
 .item {
-    padding: 10px 0px;
+    padding: 15px 0px;
 }
 
 .createOrder {
     max-width: 1280px;
     width: 90%;
-    padding: 0px 5px;
+    padding: 5px 5px 0px 5px;
     margin: auto;
     background-color: #fff;
     padding-bottom: 70px;
@@ -341,5 +354,123 @@ select {
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }
+
+@media (max-width: 920px) {
+    .chooseShop {
+        flex-wrap: wrap;
+    }
+
+    .rwd-Large {
+        display: none;
+    }
+
+    .rwd-mideum {
+        display: block;
+    }
+
+    .itemData {
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    .noteMargin {
+        margin-bottom: 7px;
+    }
+    
+    .choose {
+        padding: 0px 5px;
+    }
+
+    .widthM {
+        width: 20%;
+    }
+
+    .widthL {
+        width: 60%;
+    }
+
+    .widthS {
+        width: 10%;
+    }
+
+    .deleteBtn img {
+        top: calc(50% - 14px);
+    }
+}
+
+@media (max-width: 690px) {
+    .itemData {
+        flex-wrap: wrap;
+    }
+
+    .drinkName {
+        margin-bottom: 10px
+    }
+
+    .widthM {
+        width: 100%;
+    }
+
+    .widthL {
+        width: 75%;
+    }
+}
+
+@media (max-width: 650px) {
+    .pickUpData {
+        flex-wrap: wrap;
+    }
+
+    .delivery, .total {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 460px) {
+    .itemData {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .item {
+        position: relative;
+    }
+
+    .widthM {
+        width: 100%;
+    }
+
+    .widthL {
+        width: 100%;
+    }
+
+    .widthS {
+        width: auto;
+    }
+
+    .rwd-mideum-flex {
+        margin-top: 10px;
+        margin-right: 25px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .noteMargin {
+        margin-right: 10px;
+    }
+
+    .priceMargin {
+        margin-top: 3px;
+    }
+
+    .deleteBtn {
+        position: absolute;
+        right: 0;
+        margin-right: 25px;
+        top: 20px;
+    }
+}
+
 
 </style>
