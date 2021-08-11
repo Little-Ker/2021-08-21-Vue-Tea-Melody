@@ -5,9 +5,13 @@
         <p>SHOPPING LIST</p>
         <!-- <div class="marginTop"></div> -->
         <div class="listContainer">
-            <!-- <div class="list"></div> -->
             <TimeLine />
-            <CreateOrder />
+            <div v-if="shoppingCarList.length !== 0">
+              <CreateOrder />
+            </div>
+            <div v-if="shoppingCarList.length === 0">
+              <OrderNull />
+            </div>
         </div>
       
        
@@ -26,15 +30,20 @@
 <script>
 import TimeLine from '@/components/TimeLine.vue'
 import CreateOrder from '@/components/CreateOrder.vue'
-// import AboutText from '@/components/AboutText.vue'
+import OrderNull from '@/components/OrderNull.vue'
 
 export default {
   name: 'Order',
   components: {
     TimeLine,
     CreateOrder,
-    // AboutText
+    OrderNull
   },
+  computed: {
+    shoppingCarList() {
+        return this.$store.state.shoppingCarList;
+    },
+  }
 }
 </script>
 
