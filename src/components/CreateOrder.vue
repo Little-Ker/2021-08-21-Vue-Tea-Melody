@@ -1,5 +1,6 @@
 <template>
     <div class="createOrder">
+        <!-- 電腦版 -->
         <div class="allList rwd-Large">
             <h3>購物內容</h3>
             <div class="item title">
@@ -14,42 +15,43 @@
                 </div>
             </div>
             <hr>
-            <div class="item">
+            <div class="item" v-for="(item, index) in shoppingCarList" :key="index">
                 <div class="itemData">
-                    <div class="chooseData widthL"><b>百香Q果綠</b></div>
-                    <div class="chooseData widthL">七分糖 / 正常冰</div>
-                    <div class="chooseData widthL">仙草凍、咖啡凍、布丁</div>
-                    <div class="chooseData widthL">123456</div>
-                    <div class="chooseData widthM">1 杯</div>
-                    <div class="chooseData widthM">$50</div>
+                    <div class="chooseData widthL"><b>{{item.drinkName}}</b></div>
+                    <div class="chooseData widthL">{{item.sugarLevel}} / {{item.iceLevel}}</div>
+                    <div class="chooseData widthL">{{(item.toppingsAry.length !== 0) ? '加' : ''}} {{addTopping(item.toppingsAry)}}</div>
+                    <div class="chooseData widthL">{{item.note}}</div>
+                    <div class="chooseData widthM">{{item.count}} 杯</div>
+                    <div class="chooseData widthM">${{item.drinkPrice}}</div>
                     <div class="chooseData deleteBtn widthM">
                         <img src="../assets/shop/can2.png" alt="">
                         <img class="deleteHover" src="../assets/shop/can.png" alt="">
                     </div>
                 </div>
+                <hr>
             </div>
-            <hr>
         </div>
+        <!-- 平板手機板 -->
         <div class="allList rwd-mideum">
             <h3>購物內容</h3>
-            <div class="item">
+            <div class="item" v-for="(item, index) in shoppingCarList" :key="index">
                 <div class="itemData">
-                    <div class="choose widthM drinkName"><b>百香Q果綠</b></div>
+                    <div class="choose widthM drinkName"><b>{{item.drinkName}}</b></div>
                     <div class="choose widthL">
-                        <div class="noteMargin" style="margin-right:5px"><p>七分糖 / 正常冰 / 仙草凍、咖啡凍、布丁</p></div>
-                        <div>/ alias nihil quam minus placeat!</div>
+                        <div class="noteMargin" style="margin-right:5px"><p>{{item.sugarLevel}} / {{item.iceLevel}} {{(item.toppingsAry.length !== 0) ? '/ 加' : ''}} {{addTopping(item.toppingsAry)}}</p></div>
+                        <div>{{(item.note.length !== 0) ? '/ ' : ''}} {{item.note}}</div>
                     </div>
                     <div class="choose widthS rwd-mideum-flex">
-                        <div class="noteMargin"><b> 1 杯</b></div>
-                        <div class="priceMargin"><b>$50</b></div>
+                        <div class="noteMargin"><b>{{item.count}} 杯</b></div>
+                        <div class="priceMargin"><b>${{item.drinkPrice}}</b></div>
                     </div>
                     <div class="chooseData deleteBtn widthS">
                         <img src="../assets/shop/can2.png" alt="">
                         <img class="deleteHover" src="../assets/shop/can.png" alt="">
                     </div>
                 </div>
+                <hr>
             </div>
-            <hr>
         </div>
         <div class="pickUpData">
             <div class="delivery">
@@ -59,20 +61,26 @@
                         <p>分店選擇</p>
                         <div class="chooseShop">
                             <div class="city">
-                                縣市 <select>
-                                    <option>台中市</option>
+                                縣市 <select v-model="select.city">
+                                    <option :value="item" v-for="item in cityList.totalCity" :key="item">
+                                        {{ item }}
+                                    </option>
                                 </select>
                                 <span class="customSelect"></span>
                             </div>
                             <div class="area">
-                                區域 <select>
-                                    <option>太平區</option>
+                                區域 <select v-model="select.area">
+                                    <option :value="item" v-for="(item, index) in areaList.areaList" :key="index">
+                                        {{ item }}
+                                    </option>
                                 </select>
                                 <span class="customSelect"></span>
                             </div>
                             <div class="shop">
-                                店名 <select class="selectShop">
-                                    <option>太平長億店</option>
+                                店名 <select v-model="select.shopName" class="selectShop">
+                                    <option :value="item" v-for="(item, index) in showView" :key="index">
+                                        {{ item }}
+                                    </option>
                                 </select>
                                 <span class="customSelect"></span>
                             </div>
@@ -80,16 +88,16 @@
                     </div>
                     <div class="method">
                         <label class="container">外帶自取
-                            <input type="radio" checked value="" name="pickuUp">
+                            <input v-model="purchase" type="radio" checked value="外帶自取" name="pickuUp">
                             <span class="checkmark"></span>
                         </label>
                         <label class="container">外送
-                            <input type="radio" value="" name="pickuUp">
+                            <input v-model="purchase" type="radio" value="外送" name="pickuUp">
                             <span class="checkmark"></span>
                         </label>
                     </div>
                     <div class="method">
-                       <p>等候時間約 5 min</p> 
+                       <p>等候時間約 {{randomTime}} min</p> 
                     </div>
                 </div>
             </div>
@@ -98,16 +106,16 @@
                 <div class="method">
                     <div class="text">
                         <p>小計</p>
-                        <p>$ 1000</p>
+                        <p>$ {{drinkPrice}}</p>
                     </div>
                     <div class="text">
                         <p>運費</p>
-                        <p>$ 0</p>
+                        <p>$ {{purchasePrice}}</p>
                     </div>
                     <p></p>
                     <div class="text totalPrice">
                         <p><b>總計</b></p>
-                        <p><b>$ 1000</b></p>
+                        <p><b>$ {{totalPrice}}</b></p>
                     </div>
                     <div class="nextBtn"><p>填寫資料</p></div>
                 </div>
@@ -117,20 +125,111 @@
 </template>
 
 <script>
+import shopPointData from '../assets/data/shopPointData.json';
+
 import jQuery from "jquery";
 const $ = jQuery;
 window.$ = $;
 
 export default {
     name: 'CreateOrder',
+    data() {
+        return {
+            shopPointData: shopPointData.shop,
+            select: {
+                city: '台中市',
+                area: '太平區',
+                shopName: "太平長億店",
+            },
+            purchase: "外帶自取",
+            purchasePrice: 0,
+            randomTime: 0
+        }
+    },
     computed: {
+        drinkPrice() {
+            let price = 0;
+            this.shoppingCarList.forEach((item) => {
+                price += item.drinkPrice;
+            })
+            return price;
+        },
+        totalPrice() {
+            let price = this.drinkPrice + this.purchasePrice;
+            return price;
+        },
+        cityList() {
+            let obj = {
+                totalCity: [],
+                cityList: {}
+            }
+            this.shopPointData.forEach(({
+                city,
+                area,
+                shopName
+            }, index) => {
+                if (!obj.cityList[city]) {
+                    obj.totalCity.push(city);
+                    obj.cityList[city] = {
+                        viewData: {},
+                        areaList: []
+                    }
+                }
+                if (!obj.cityList[city].viewData[area]) {
+                    obj.cityList[city].areaList.push(area);
+                    obj.cityList[city].viewData[area] = {
+                        index: index,
+                        shopList: []
+                    }
+                }
+                obj.cityList[city].viewData[area].shopList.push(shopName);
+            })
+            return obj;
+        },
+        areaList() {
+            let list = this.cityList.cityList[this.select.city];
+            this.changeAreaValue(list.areaList);
+            return list;
+        },
+        showView() {
+            let list = this.areaList.viewData[this.select.area].shopList
+            this.changeShopValue(list)
+            return list;
+        },
+        shoppingCarList() {
+            return this.$store.state.shoppingCarList;
+        },
     },
     methods: {
-        
+        changeAreaValue(areaList) {
+            this.select.area = areaList[0];
+        },
+        changeShopValue(shopList) {
+            this.select.shopName = shopList[0];
+        },
+        addTopping(toppingAry) {
+            return toppingAry.join('、');
+        },
+        buyRandomTime() {
+            let max = 40;
+            let min = 15;
+            if (this.purchase === '外帶自取') {
+                max = 13;
+                min = 5;
+            }
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        },
     },
     watch: {
-        
-    }
+        purchase() {
+            this.purchasePrice = (this.purchase === '外帶自取') ? 0 : 60;
+            this.randomTime = this.buyRandomTime();
+        }
+    },
+    mounted() {
+        this.randomTime = this.buyRandomTime();
+        // randomTime
+    },
 }
 </script>
 
@@ -253,11 +352,9 @@ export default {
 }
 
 .itemData {
-    display: flex;
-}
-
-.item {
+    position: relative;
     padding: 15px 0px;
+    display: flex;
 }
 
 .createOrder {
@@ -382,7 +479,7 @@ select {
     }
 
     .widthM {
-        width: 20%;
+        width: 30%;
     }
 
     .widthL {
@@ -396,9 +493,13 @@ select {
     .deleteBtn img {
         top: calc(50% - 14px);
     }
+
+    .deleteBtn {
+        top: 10px;
+    }
 }
 
-@media (max-width: 690px) {
+@media (max-width: 710px) {
     .itemData {
         flex-wrap: wrap;
     }
@@ -427,14 +528,10 @@ select {
 }
 
 
-@media (max-width: 460px) {
+@media (max-width: 500px) {
     .itemData {
         flex-wrap: wrap;
         justify-content: flex-end;
-    }
-
-    .item {
-        position: relative;
     }
 
     .widthM {
@@ -451,7 +548,6 @@ select {
 
     .rwd-mideum-flex {
         margin-top: 10px;
-        margin-right: 25px;
         display: flex;
         justify-content: space-between;
     }
@@ -467,10 +563,9 @@ select {
     .deleteBtn {
         position: absolute;
         right: 0;
-        margin-right: 25px;
+        margin-right: 10px;
         top: 20px;
     }
 }
-
 
 </style>

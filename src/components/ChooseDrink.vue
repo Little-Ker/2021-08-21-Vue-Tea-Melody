@@ -193,6 +193,7 @@ export default {
             this.iceLevel = '正常冰';
             this.toppingsAry = [];
             this.count = 1;
+            this.note = '';
             this.isShowScrollBar();
         }
     }
