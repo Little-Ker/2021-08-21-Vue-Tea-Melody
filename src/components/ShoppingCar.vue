@@ -1,5 +1,5 @@
 <template>
-    <div class="shoppingCar">
+    <div v-if="!isHideShoppingCar" class="shoppingCar">
         <div @click="clickCarFn" class="icon">
             <div class="iconBg"></div>
             <img src="../assets/shop/car2.png" alt="">
@@ -69,6 +69,14 @@ export default {
                 return this.$store.commit('SetShowLoading',val);
             }
         },
+        isHideShoppingCar: {
+            get() {
+                return this.$store.state.isHideShoppingCar;
+            },
+            set(val) {
+                return this.$store.commit('SetIsHideShoppingCar',val);
+            }
+        },
     },
     methods: {
         addTopping(toppingAry) {
@@ -85,6 +93,8 @@ export default {
         },
         clickBuyFn() {
             this.goTop();
+            this.isShowShopping = false;
+            this.isHideShoppingCar = true;
             this.isShowLoading = true;
         },
         goTop() {

@@ -15,6 +15,7 @@ export default createStore({
         chooseDrinkIndex: 0,
         isShowDrinkOverlay: false,
         shoppingCarList: [],
+        isHideShoppingCar: false,
     },
     mutations: {
         SetNews(state, newsData) {
@@ -46,6 +47,9 @@ export default createStore({
         },
         SetShoppingCarList(state, shoppingCarList) {
             state.shoppingCarList = shoppingCarList;
+        },
+        SetIsHideShoppingCar(state, isHideShoppingCar) {
+            state.isHideShoppingCar = isHideShoppingCar;
         },
     },
     actions: {

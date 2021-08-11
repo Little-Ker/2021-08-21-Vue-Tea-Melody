@@ -43,7 +43,18 @@ export default {
     shoppingCarList() {
         return this.$store.state.shoppingCarList;
     },
-  }
+    isHideShoppingCar: {
+        get() {
+            return this.$store.state.isHideShoppingCar;
+        },
+        set(val) {
+            return this.$store.commit('SetIsHideShoppingCar',val);
+        }
+    }
+  },
+  unmounted() {
+    this.isHideShoppingCar = false;
+  },
 }
 </script>
 
