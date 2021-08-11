@@ -4,7 +4,7 @@
         <div class="allList rwd-Large">
             <h3>購物內容</h3>
             <div class="item title">
-                <div class="itemData">
+                <div class="itemData titleBg">
                     <div class="choose widthL"><b>飲品名稱</b></div>
                     <div class="choose widthL"><b>甜度冰量</b></div>
                     <div class="choose widthL"><b>加料</b></div>
@@ -23,7 +23,7 @@
                     <div class="chooseData widthL">{{item.note}}</div>
                     <div class="chooseData widthM">{{item.count}} 杯</div>
                     <div class="chooseData widthM">${{item.drinkPrice}}</div>
-                    <div class="chooseData deleteBtn widthM">
+                    <div @click="deleteFn(index)" class="chooseData deleteBtn widthM">
                         <img src="../assets/shop/can2.png" alt="">
                         <img class="deleteHover" src="../assets/shop/can.png" alt="">
                     </div>
@@ -45,7 +45,7 @@
                         <div class="noteMargin"><b>{{item.count}} 杯</b></div>
                         <div class="priceMargin"><b>${{item.drinkPrice}}</b></div>
                     </div>
-                    <div class="chooseData deleteBtn widthS">
+                    <div @click="deleteFn(index)" class="chooseData deleteBtn widthS">
                         <img src="../assets/shop/can2.png" alt="">
                         <img class="deleteHover" src="../assets/shop/can.png" alt="">
                     </div>
@@ -212,12 +212,18 @@ export default {
         },
         buyRandomTime() {
             let max = 40;
-            let min = 15;
+            let min = 30;
             if (this.purchase === '外帶自取') {
                 max = 13;
                 min = 5;
             }
             return Math.floor(Math.random() * (max - min + 1) + min);
+        },
+        deleteFn(index) {
+            const drinkName = this.shoppingCarList[index].drinkName;
+            if (confirm(`是否刪除 ${drinkName} ?`)) {
+                this.shoppingCarList.splice(index, 1);
+            }
         },
     },
     watch: {
@@ -275,8 +281,14 @@ export default {
     width: 100%;
     height: 50px;
     line-height: 50px;
-    background-color: #42b983;
+    background-color: #666;
     color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    transition: .3s;
+}
+
+.nextBtn p:hover {
+    background-color: #222;
 }
 
 .nextBtn {
@@ -450,6 +462,12 @@ select {
     border: solid white;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
+}
+
+.titleBg {
+    background-color: #888;
+    color: #fff;
+    padding: 0px 0px;
 }
 
 @media (max-width: 920px) {

@@ -29,8 +29,9 @@
                     </div>
                 </div>
             </div>
-            <router-link to='order'>
-                <div class="buyBtn">訂單結帳</div>
+            <div v-if="!isShopping" class="buyBtn btnLock">訂單結帳</div>
+            <router-link v-if="isShopping" to='order'>
+                <div @click="clickBuyFn" class="buyBtn btnUnLock">訂單結帳</div>
             </router-link>
         </div>
     </div>
@@ -60,6 +61,14 @@ export default {
                 return this.$store.commit('SetShoppingCarList',val);
             }
         },
+        isShowLoading: {
+            get() {
+                return this.$store.state.isShowLoading;
+            },
+            set(val) {
+                return this.$store.commit('SetShowLoading',val);
+            }
+        },
     },
     methods: {
         addTopping(toppingAry) {
@@ -73,6 +82,13 @@ export default {
             if (confirm(`是否刪除 ${drinkName} ?`)) {
                 this.shoppingCarList.splice(index, 1);
             }
+        },
+        clickBuyFn() {
+            this.goTop();
+            this.isShowLoading = true;
+        },
+        goTop() {
+            $('html,body').scrollTop(0, 0);
         }
     },
     watch: {
@@ -214,6 +230,15 @@ export default {
     padding: 7px;
     background-color: #8bc672;
     color: #fff;
+    transition: .3s;
+}
+
+.btnLock {
+    background-color: #ccc
+}
+
+.btnUnLock:hover {
+    background-color: #78aa62;
 }
 
 .shoppingList hr {
