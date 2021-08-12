@@ -104,31 +104,6 @@ export default {
   animation: fade-in .5s reverse;
 }
 
-@keyframes bounce-in {
-  0% {
-      opacity: 0;
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-      opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    transform: translateY(-50%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0%);
-    opacity: 1;
-  }
-}
-
 .text {
     line-height: 26px;
     margin: 10px 0px;

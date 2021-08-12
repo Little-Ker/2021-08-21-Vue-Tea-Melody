@@ -15,6 +15,7 @@
             <div v-if="orderLevel === 2">
               <OrderContact />
             </div>
+            <!-- <ChooseDate /> -->
             <!-- <div v-if="orderLevel === 3">
               <OrderComplete />
             </div> -->
@@ -38,6 +39,7 @@ import TimeLine from '@/components/TimeLine.vue'
 import CreateOrder from '@/components/CreateOrder.vue'
 import OrderMessage from '@/components/OrderMessage.vue'
 import OrderContact from '@/components/OrderContact.vue'
+// import ChooseDate from '@/components/ChooseDate.vue'
 
 export default {
   name: 'Order',
@@ -46,6 +48,7 @@ export default {
     CreateOrder,
     OrderMessage,
     OrderContact,
+    // ChooseDate
   },
   computed: {
     shoppingCarList: {

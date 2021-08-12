@@ -4,10 +4,12 @@
             <div class="product">
                 <h3>訂單資料</h3>
                 <div class="data">
-                    <p class="totalPrice"><b>付款總額 $ 1000</b></p>
-                    <p>XXX分店</p>
-                    <p>外帶自取</p>
-                    <p>領取時間</p>
+                    <p class="totalPrice"><b>付款總額 $ {{ordertData.totalPrice}}</b></p>
+                    <p>{{ordertData.chooseShop.shop}}</p>
+                    <p>{{ordertData.chooseMethod}}</p>
+                    <p>
+                        {{chooseGetTime.chooseDate.date}} {{chooseGetTime.chooseDate.week}} {{chooseGetTime.chooseTime}}
+                    </p>
                 </div>
             </div>
             <div class="customer">
@@ -80,6 +82,17 @@ export default {
                 return this.$store.commit('SetShowLoading',val);
             }
         },
+        ordertData: {
+            get() {
+                return this.$store.state.ordertData;
+            },
+            set(val) {
+                return this.$store.commit('SetOrdertData',val);
+            }
+        },
+        chooseGetTime() {
+            return this.ordertData.chooseGetTime;
+        }
     },
     methods: {
         clickBtn(index) {

@@ -54,6 +54,31 @@
     opacity: 0;
 }
 
+/* 進出場動畫 */
+@keyframes bounce-in {
+  0% {
+      opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+      opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
 /* Handle on hover */
 /* ::-webkit-scrollbar-thumb:hover {
   background: #888; 

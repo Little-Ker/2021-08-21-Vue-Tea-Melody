@@ -17,6 +17,19 @@ export default createStore({
         shoppingCarList: [],
         isHideShoppingCar: false,
         orderLevel: 1,
+        ordertData: {
+            chooseShop: {
+                city: '台中市',
+                area: '太平區',
+                shop: "太平長億店",
+            },
+            chooseMethod: '外帶自取',
+            chooseGetTime: {
+                chooseDate: '',
+                chooseTime: '',
+            },
+            totalPrice: 0
+        },
     },
     mutations: {
         SetNews(state, newsData) {
@@ -54,6 +67,9 @@ export default createStore({
         },
         SetOrderLevel(state, orderLevel) {
             state.orderLevel = orderLevel;
+        },
+        SetOrdertData(state, ordertData) {
+            state.getOrdertData = ordertData;
         },
     },
     actions: {

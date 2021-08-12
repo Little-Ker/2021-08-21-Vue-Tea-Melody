@@ -61,7 +61,7 @@
                         <p>分店選擇</p>
                         <div class="chooseShop">
                             <div class="city">
-                                縣市 <select v-model="select.city">
+                                縣市 <select v-model="chooseShop.city">
                                     <option :value="item" v-for="item in cityList.totalCity" :key="item">
                                         {{ item }}
                                     </option>
@@ -69,7 +69,7 @@
                                 <span class="customSelect"></span>
                             </div>
                             <div class="area">
-                                區域 <select v-model="select.area">
+                                區域 <select v-model="chooseShop.area">
                                     <option :value="item" v-for="(item, index) in areaList.areaList" :key="index">
                                         {{ item }}
                                     </option>
@@ -77,7 +77,7 @@
                                 <span class="customSelect"></span>
                             </div>
                             <div class="shop">
-                                店名 <select v-model="select.shopName" class="selectShop">
+                                店名 <select v-model="chooseShop.shop" class="selectShop">
                                     <option :value="item" v-for="(item, index) in showView" :key="index">
                                         {{ item }}
                                     </option>
@@ -88,16 +88,16 @@
                     </div>
                     <div class="method">
                         <label class="container">外帶自取
-                            <input v-model="purchase" type="radio" checked value="外帶自取" name="pickuUp">
+                            <input v-model="ordertData.chooseMethod" type="radio" checked value="外帶自取" name="pickuUp">
                             <span class="checkmark"></span>
                         </label>
                         <label class="container">外送
-                            <input v-model="purchase" type="radio" value="外送" name="pickuUp">
+                            <input v-model="ordertData.chooseMethod" type="radio" value="外送" name="pickuUp">
                             <span class="checkmark"></span>
                         </label>
                     </div>
                     <div class="method">
-                       <p>等候時間約 {{randomTime}} min</p> 
+                        <ChooseDate />
                     </div>
                 </div>
             </div>
@@ -126,6 +126,7 @@
 
 <script>
 import shopPointData from '../assets/data/shopPointData.json';
+import ChooseDate from '@/components/ChooseDate.vue'
 
 import jQuery from "jquery";
 const $ = jQuery;
@@ -133,20 +134,27 @@ window.$ = $;
 
 export default {
     name: 'CreateOrder',
+    components: {
+        ChooseDate
+    },
     data() {
         return {
             shopPointData: shopPointData.shop,
-            select: {
-                city: '台中市',
-                area: '太平區',
-                shopName: "太平長億店",
-            },
-            purchase: "外帶自取",
             purchasePrice: 0,
-            randomTime: 0
         }
     },
     computed: {
+        ordertData: {
+            get() {
+                return this.$store.state.ordertData;
+            },
+            set(val) {
+                return this.$store.commit('SetOrdertData',val);
+            }
+        },
+        chooseShop() {
+            return this.ordertData.chooseShop;
+        },
         drinkPrice() {
             let price = 0;
             this.shoppingCarList.forEach((item) => {
@@ -156,6 +164,8 @@ export default {
         },
         totalPrice() {
             let price = this.drinkPrice + this.purchasePrice;
+            console.log('this.purchasePrice',this.purchasePrice);
+            this.resetTotalPrice(price);
             return price;
         },
         cityList() {
@@ -187,13 +197,11 @@ export default {
             return obj;
         },
         areaList() {
-            let list = this.cityList.cityList[this.select.city];
-            this.changeAreaValue(list.areaList);
+            let list = this.cityList.cityList[this.chooseShop.city];
             return list;
         },
         showView() {
-            let list = this.areaList.viewData[this.select.area].shopList
-            this.changeShopValue(list)
+            let list = this.areaList.viewData[this.chooseShop.area].shopList
             return list;
         },
         shoppingCarList() {
@@ -210,22 +218,16 @@ export default {
     },
     methods: {
         changeAreaValue(areaList) {
-            this.select.area = areaList[0];
+            this.chooseShop.area = areaList[0];
         },
         changeShopValue(shopList) {
-            this.select.shopName = shopList[0];
+            this.chooseShop.shop = shopList[0];
+        },
+        resetTotalPrice(price) {
+            this.ordertData.totalPrice = price;
         },
         addTopping(toppingAry) {
             return toppingAry.join('、');
-        },
-        buyRandomTime() {
-            let max = 40;
-            let min = 30;
-            if (this.purchase === '外帶自取') {
-                max = 13;
-                min = 5;
-            }
-            return Math.floor(Math.random() * (max - min + 1) + min);
         },
         deleteFn(index) {
             const drinkName = this.shoppingCarList[index].drinkName;
@@ -242,13 +244,21 @@ export default {
         }
     },
     watch: {
-        purchase() {
-            this.purchasePrice = (this.purchase === '外帶自取') ? 0 : 60;
-            this.randomTime = this.buyRandomTime();
+        ['chooseShop.city']() {
+            let list = this.cityList.cityList[this.chooseShop.city];
+            this.changeAreaValue(list.areaList);
+        },
+        ['chooseShop.area']() {
+            let list = this.areaList.viewData[this.chooseShop.area].shopList
+            this.changeShopValue(list)
+        },
+        ['ordertData.chooseMethod']() {
+            console.log('this.ordertData.chooseMethod',this.ordertData.chooseMethod);
+            this.purchasePrice = (this.ordertData.chooseMethod === '外帶自取') ? 0 : 60;
         }
     },
     mounted() {
-        this.randomTime = this.buyRandomTime();
+        this.purchasePrice = (this.ordertData.chooseMethod === '外帶自取') ? 0 : 60;
     },
 }
 </script>
@@ -310,7 +320,7 @@ export default {
     cursor: pointer;
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    margin-top: 43px
 }
 
 .pickUpData {
@@ -484,6 +494,16 @@ select {
     padding: 0px 0px;
 }
 
+@media (max-width: 896px) {
+    .totalPrice {
+        margin-top: 100px;
+    }
+
+    .nextBtn {
+        margin-top: 30px;
+    }
+}
+
 @media (max-width: 920px) {
     .chooseShop {
         flex-wrap: wrap;
@@ -557,8 +577,11 @@ select {
     .delivery, .total {
         width: 100%;
     }
-}
 
+    .totalPrice {
+        margin-top: 50px;
+    }
+}
 
 @media (max-width: 500px) {
     .itemData {
