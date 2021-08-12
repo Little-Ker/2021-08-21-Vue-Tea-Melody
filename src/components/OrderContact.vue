@@ -71,10 +71,20 @@ export default {
             set(val) {
                 return this.$store.commit('SetOrderLevel',val);
             }
-        }
+        },
+        isShowLoading: {
+            get() {
+                return this.$store.state.isShowLoading;
+            },
+            set(val) {
+                return this.$store.commit('SetShowLoading',val);
+            }
+        },
     },
     methods: {
         clickBtn(index) {
+            if (index === 3) this.isShowLoading = true;
+            
             this.orderLevel = index;
             this.goTop();
         },

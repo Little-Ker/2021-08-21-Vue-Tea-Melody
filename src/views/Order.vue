@@ -48,8 +48,13 @@ export default {
     OrderContact,
   },
   computed: {
-    shoppingCarList() {
-        return this.$store.state.shoppingCarList;
+    shoppingCarList: {
+        get() {
+            return this.$store.state.shoppingCarList;
+        },
+        set(val) {
+            return this.$store.commit('SetShoppingCarList',val);
+        }
     },
     orderLevel() {
         return this.$store.state.orderLevel;
@@ -63,8 +68,17 @@ export default {
         }
     }
   },
+  methods: {
+      resetList() {
+          if (this.orderLevel === 3) {
+              this.shoppingCarList = [];
+          }
+          this.orderLevel = 1;
+      }
+  },
   unmounted() {
     this.isHideShoppingCar = false;
+    this.resetList();
   },
 }
 </script>

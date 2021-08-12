@@ -4,12 +4,12 @@
             <div class="block runPos">
                 <p>1</p>
             </div>
-            <div class="line"></div>
-            <div class="block">
+            <div id="line2" class="line"></div>
+            <div id="block2" class="block">
                 <p>2</p>
             </div>
-            <div class="line"></div>
-            <div class="block">
+            <div id="line3" class="line"></div>
+            <div  id="block3" class="block">
                 <p>3</p>
             </div>
         </div>
@@ -29,13 +29,33 @@ export default {
         }
     },
     computed: {
+        orderLevel() {
+            return this.$store.state.orderLevel;
+        }
     },
     methods: {
-        
+        clearBlock() {
+            for (let i = 0; i < 3; i++) {
+                $(`#block${i+1}`).removeClass('runPos');
+                $(`#line${i+1}`).removeClass('runPos');
+            }
+        },
+        showBlock() {
+            this.clearBlock();
+            for (let i = 0; i < this.orderLevel; i++) {
+                $(`#block${i+1}`).addClass('runPos');
+                $(`#line${i+1}`).addClass('runPos');
+            }
+        }
     },
     watch: {
-        
-    }
+        orderLevel() {
+            this.showBlock();
+        }
+    },
+    mounted() {
+        this.showBlock();
+    },
 }
 </script>
 
