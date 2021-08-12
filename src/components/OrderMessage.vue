@@ -1,8 +1,8 @@
 <template>
-    <div class="orderNull">
-        <img src="/img/car.a8a6677f.png" alt="">
-        <p>您的購物車沒有任何品項</p>
-        <div @click="returnFn" class="returnBtn">返回點餐</div>
+    <div class="orderMessage">
+        <img :src="imgUrl" alt="">
+        <p>{{message}}</p>
+        <div @click="returnFn" class="returnBtn">返回點餐畫面</div>
     </div>
 </template>
 
@@ -12,7 +12,26 @@ const $ = jQuery;
 window.$ = $;
 
 export default {
-    name: 'OrderNull',
+    name: 'OrderMessage',
+    data() {
+        return {
+            message: '',
+            imgUrl: '',
+        }
+    },
+    computed: {
+        orderLevel() {
+            return this.$store.state.orderLevel;
+        },
+        shoppingCarList: {
+            get() {
+                return this.$store.state.shoppingCarList;
+            },
+            set(val) {
+                return this.$store.commit('SetShoppingCarList',val);
+            }
+        },
+    },
     methods: {
         returnFn() {
             this.goTop();
@@ -21,7 +40,17 @@ export default {
         goTop() {
             $('html,body').scrollTop(0, 0);
         }
-    }
+    },
+    mounted() {
+        if (this.orderLevel === 1) {
+            this.message = '您的購物車沒有任何品項';
+            this.imgUrl = require('../assets/shop/car.png');
+            return;
+        }
+        this.message = '您的訂單已完成！';
+        this.imgUrl = require('../assets/shop/complete.png');
+        this.shoppingCarList = [];
+    },
 }
 </script>
 
@@ -32,7 +61,7 @@ export default {
     box-sizing: border-box;
 }
 
-.orderNull {
+.orderMessage {
     max-width: 1280px;
     width: 90%;
     padding: 50px 5px 50px 5px;

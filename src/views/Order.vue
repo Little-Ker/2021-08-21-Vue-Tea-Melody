@@ -9,12 +9,15 @@
             <div v-if="shoppingCarList.length !== 0 && orderLevel === 1">
               <CreateOrder />
             </div>
-            <div v-if="shoppingCarList.length === 0">
-              <OrderNull />
+            <div v-if="(shoppingCarList.length === 0) || (orderLevel === 3)">
+              <OrderMessage />
             </div>
             <div v-if="orderLevel === 2">
               <OrderContact />
             </div>
+            <!-- <div v-if="orderLevel === 3">
+              <OrderComplete />
+            </div> -->
         </div>
       
        
@@ -33,7 +36,7 @@
 <script>
 import TimeLine from '@/components/TimeLine.vue'
 import CreateOrder from '@/components/CreateOrder.vue'
-import OrderNull from '@/components/OrderNull.vue'
+import OrderMessage from '@/components/OrderMessage.vue'
 import OrderContact from '@/components/OrderContact.vue'
 
 export default {
@@ -41,8 +44,8 @@ export default {
   components: {
     TimeLine,
     CreateOrder,
-    OrderNull,
-    OrderContact
+    OrderMessage,
+    OrderContact,
   },
   computed: {
     shoppingCarList() {

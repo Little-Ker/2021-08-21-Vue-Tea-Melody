@@ -28,16 +28,8 @@
                 <div class="payData">
                     <h3>付款方式</h3>
                     <div class="data">
-                        <label class="container">信用卡付款
-                            <input type="radio" checked name="payType" value="type">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container">ATM轉帳
-                            <input type="radio" name="payType" value="type">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container">現場付款
-                            <input type="radio" name="payType" value="type">
+                        <label v-for="(item, index) in payTypeAry" :key="index" class="container">{{item}}
+                            <input type="radio" checked name="payType" :value="item">
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -49,8 +41,8 @@
             </div>
         </div>
         <div class="wrap btnWrap">
-            <div class="btn preBtn">回上一步</div>
-            <div class="btn submitBtn">提交訂單</div>
+            <div @click="clickBtn(1)" class="btn preBtn">回上一步</div>
+            <div @click="clickSubmitBtn(3)" class="btn submitBtn">提交訂單</div>
         </div>
     </div>
 </template>
@@ -62,8 +54,40 @@ window.$ = $;
 
 export default {
     name: 'OrderContact',
+    data() {
+        return {
+            payTypeAry: [
+                '信用卡付款',
+                'ATM轉帳',
+                '現場付款'
+            ]
+        }
+    },
+    computed: {
+        orderLevel: {
+            get() {
+                return this.$store.state.orderLevel;
+            },
+            set(val) {
+                return this.$store.commit('SetOrderLevel',val);
+            }
+        }
+    },
     methods: {
-        
+        clickBtn(index) {
+            this.orderLevel = index;
+            this.goTop();
+        },
+        goTop() {
+            $('html,body').scrollTop(0, 0);
+        },
+        clickSubmitBtn(index) {
+            // 是否有未填寫的資料
+            // if () {
+
+            // }
+            this.clickBtn(index);
+        }
     }
 }
 </script>
