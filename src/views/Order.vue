@@ -15,10 +15,6 @@
             <div v-if="orderLevel === 2">
               <OrderContact />
             </div>
-            <!-- <ChooseDate /> -->
-            <!-- <div v-if="orderLevel === 3">
-              <OrderComplete />
-            </div> -->
         </div>
       
        
@@ -39,7 +35,6 @@ import TimeLine from '@/components/TimeLine.vue'
 import CreateOrder from '@/components/CreateOrder.vue'
 import OrderMessage from '@/components/OrderMessage.vue'
 import OrderContact from '@/components/OrderContact.vue'
-// import ChooseDate from '@/components/ChooseDate.vue'
 
 export default {
   name: 'Order',
@@ -48,7 +43,6 @@ export default {
     CreateOrder,
     OrderMessage,
     OrderContact,
-    // ChooseDate
   },
   computed: {
     shoppingCarList: {
@@ -59,8 +53,13 @@ export default {
             return this.$store.commit('SetShoppingCarList',val);
         }
     },
-    orderLevel() {
-        return this.$store.state.orderLevel;
+    orderLevel: {
+        get() {
+            return this.$store.state.orderLevel;
+        },
+        set(val) {
+            return this.$store.commit('SetOrderLevel',val);
+        }
     },
     isHideShoppingCar: {
         get() {
@@ -69,11 +68,30 @@ export default {
         set(val) {
             return this.$store.commit('SetIsHideShoppingCar',val);
         }
-    }
+    },
+    ordertData: {
+        get() {
+            return this.$store.state.ordertData;
+        },
+        set(val) {
+            return this.$store.commit('SetOrdertData',val);
+        }
+    },
   },
   methods: {
       resetList() {
           if (this.orderLevel === 3) {
+              this.ordertData.chooseShop = {
+                    city: '台中市',
+                    area: '太平區',
+                    shop: "太平長億店",
+              };
+              this.ordertData.chooseMethod = '外帶自取';
+              this.ordertData.chooseGetTime = {
+                  chooseDate: '',
+                  chooseTime: '',
+              };
+              this.ordertData.totalPrice = 0;
               this.shoppingCarList = [];
           }
           this.orderLevel = 1;
