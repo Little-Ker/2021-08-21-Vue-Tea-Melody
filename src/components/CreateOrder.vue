@@ -87,12 +87,8 @@
                         </div>
                     </div>
                     <div class="method">
-                        <label class="container">外帶自取
-                            <input v-model="ordertData.chooseMethod" type="radio" checked value="外帶自取" name="pickuUp">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container">外送
-                            <input v-model="ordertData.chooseMethod" type="radio" value="外送" name="pickuUp">
+                        <label v-for="(item, index) in methodAry" :key="index" class="container">{{item}}
+                            <input v-model="ordertData.chooseMethod" type="radio" :value="item" name="pickuUp">
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -141,6 +137,9 @@ export default {
         return {
             shopPointData: shopPointData.shop,
             purchasePrice: 0,
+            methodAry: [
+                '外帶自取', '外送'
+            ]
         }
     },
     computed: {
@@ -164,7 +163,6 @@ export default {
         },
         totalPrice() {
             let price = this.drinkPrice + this.purchasePrice;
-            console.log('this.purchasePrice',this.purchasePrice);
             this.resetTotalPrice(price);
             return price;
         },
@@ -241,6 +239,9 @@ export default {
         },
         goTop() {
             $('html,body').scrollTop(0, 0);
+        },
+        changePurchasePrice() {
+            this.purchasePrice = (this.ordertData.chooseMethod === '外帶自取') ? 0 : 60;
         }
     },
     watch: {
@@ -253,12 +254,11 @@ export default {
             this.changeShopValue(list)
         },
         ['ordertData.chooseMethod']() {
-            console.log('this.ordertData.chooseMethod',this.ordertData.chooseMethod);
-            this.purchasePrice = (this.ordertData.chooseMethod === '外帶自取') ? 0 : 60;
+            this.changePurchasePrice();
         }
     },
     mounted() {
-        this.purchasePrice = (this.ordertData.chooseMethod === '外帶自取') ? 0 : 60;
+        this.changePurchasePrice();
     },
 }
 </script>

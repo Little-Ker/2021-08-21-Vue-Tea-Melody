@@ -1,5 +1,6 @@
 <template>
     <div class="orderContact">
+        <form @submit.prevent="clickBtn(3)">
         <div class="wrap">
             <div class="product">
                 <h3>訂單資料</h3>
@@ -17,13 +18,13 @@
                     <h3>聯絡資料</h3>
                     <div class="data">
                         <div class="inputData">
-                            <p>姓名</p><input type="text" id="name" name="name" required>
+                            <p>姓名</p><input type="text" placeholder="請輸入取貨人姓名" id="name" name="name" required>
                         </div>
                         <div class="inputData">
-                            <p>電話</p><input type="text" placeholder="請輸入聯絡電話" name="uname" required>
+                            <p>電話</p><input type="text" placeholder="請輸入聯絡電話" name="cellphone" required>
                         </div>
-                        <div class="inputData">
-                            <p>地址</p><input type="text" placeholder="請輸入外送地址" name="uname" required>
+                        <div v-if="ordertData.chooseMethod === '外送'" class="inputData">
+                            <p>地址</p><input type="text" placeholder="請輸入外送地址" name="address" required>
                         </div>
                     </div>
                 </div>
@@ -36,16 +37,13 @@
                         </label>
                     </div>
                 </div>
-                <!-- <div class="wrap">
-                    <div class="btn preBtn">回上一步</div>
-                    <div class="btn submitBtn">提交訂單</div>
-                </div> -->
             </div>
         </div>
         <div class="wrap btnWrap">
             <div @click="clickBtn(1)" class="btn preBtn">回上一步</div>
-            <div @click="clickSubmitBtn(3)" class="btn submitBtn">提交訂單</div>
+            <button class="btn submitBtn">提交訂單</button>
         </div>
+        </form>
     </div>
 </template>
 
@@ -103,13 +101,6 @@ export default {
         },
         goTop() {
             $('html,body').scrollTop(0, 0);
-        },
-        clickSubmitBtn(index) {
-            // 是否有未填寫的資料
-            // if () {
-
-            // }
-            this.clickBtn(index);
         }
     }
 }
