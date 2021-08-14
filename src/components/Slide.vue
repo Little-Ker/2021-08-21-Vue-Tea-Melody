@@ -113,6 +113,8 @@ export default {
   img {
     display: block;
     width: 100%;
+    min-height: 320px;
+    object-fit: cover;
     vertical-align: bottom;
     transition: 1s;
   }
