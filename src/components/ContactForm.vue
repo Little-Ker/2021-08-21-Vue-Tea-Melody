@@ -110,8 +110,8 @@ textarea {
 }
 
 .chooseBox input:checked + label {
-    background-color: #8bc672;
-    border: 2px solid #8bc672;
+    background-color: #6fc560;
+    border: 2px solid #6fc560;
     color: #fff;
 }
 
@@ -133,7 +133,7 @@ input:focus + p {
     max-width: 360px;
     cursor: pointer;
     text-align: center;
-    background-color: #8bc672;
+    background-color: #6fc560;
     color: #fff;
     font-weight: bold;
     border-radius: 8px;
@@ -157,7 +157,7 @@ input:focus + p {
 }
 
 .submitBtn:hover {
-    background-color: #8bc672;
+    background-color: #6fc560;
     opacity: 0.9;
 }
 

@@ -2,7 +2,6 @@
   <div class="news">
       <div class="navBarMargin"></div>
       <div class="banner"></div>
-
       <h1>最新消息</h1>
       <p>NEWS</p>
       <NewsList />
@@ -31,12 +30,18 @@ export default {
     .news {
         width: 100%;
         height: 100%;
-        /* background-image: url('../assets/bg/bg02.jpg'); */
         z-index: -10;
     }
 
+    .news h1 {
+      font-family: 'simsun', 'A-OTF';
+      margin-top: 55px;
+    }
+
     .news p {
-      letter-spacing: 3px;
+      font-family: 'simsun';
+      margin-bottom: 60px;
+      letter-spacing: 2px;
     }
 
     .news p::before {
@@ -59,25 +64,24 @@ export default {
       margin-left: 35px;
     }
 
-    /* .news {
-        width: 100%;
-        height: 100%;
-        background-image: url('../assets/about/aboutBg.png');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        z-index: -10;
-    } */
-
     .banner {
-        /* width: 100%; */
-        /* background-color: #fff; */
         height: 450px;
         background-image: url('../assets/news/pic1.jpg');
         background-repeat: no-repeat;
         background-size: cover;
-        /* background-size: contain; */
-         background-position:55% 50%;
+        background-position:55% 50%;
         background-attachment: fixed;
+    }
+
+    @media (max-width: 910px) {
+        .banner {
+            background-position: 35% 50%;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .banner {
+            background-position: 40% 50%;
+        }
     }
 </style>

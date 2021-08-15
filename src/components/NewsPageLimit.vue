@@ -92,7 +92,7 @@ export default {
 }
 
 .chooseIndexBg {
-    background-color: #8bc672;
+    background-color: #6fc560;
 }
 
 .chooseIndexColor {
@@ -100,8 +100,7 @@ export default {
 }
 
 .newsPageLimit {
-    padding-top: 30px;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
 }
 
 ul {
@@ -121,7 +120,7 @@ li {
     width: 38px;
     height: 38px;
     line-height: 37px;
-    color: #8bc672;
+    color: #6fc560;
     border-radius: 50%;
     font-size: 16px;
     font-weight: bold;
@@ -131,7 +130,7 @@ li {
 
 .block:hover {
     color: #fff;
-    background-color: #8bc672;
+    background-color: #6fc560;
 }
 
 .block:hover .btn {
@@ -141,7 +140,7 @@ li {
 .btn {
     width: 13px;
     height: 13px;
-    border: 3px solid #8bc672;
+    border: 3px solid #6fc560;
     transform: rotate(45deg);
     position: absolute;
 }

@@ -3,10 +3,8 @@
         <div class="newsList">
             <ul class="chooseWrap">
                 <li v-for='(item, index) in chooseAry' :key='index'>
-                    <div class="typeBtn">
-                        <input v-model="chooseNewsType" :id="`type0${index}}`" type="radio" name='newsType' :value="item.value">
-                        <label :for="`type0${index}}`" class="radioStyle"><p>{{item.type}}</p></label>  
-                    </div>
+                    <input v-model="chooseNewsType" :id="`type0${index}}`" type="radio" name='newsType' :value="item.value">
+                    <label :for="`type0${index}}`" class="radioStyle"><p>{{item.type}}</p></label>  
                 </li>
             </ul>
             <ul class="newsWrap">
@@ -17,11 +15,14 @@
                             <div class="more">MORE</div>
                         </div>
                         <div class="textBlock">
-                            <div class="title">{{item.title}}</div>
-                            <div class="date">
-                                <div class="greenBlock"></div>
-                                <div>{{item.date}}</div>
+                            <div class="wrap">
+                                <div class="date">
+                                    <div class="greenBlock"></div>
+                                    <div>{{item.date}}</div>
+                                </div>
+                                <div class="type">{{showNewsType(item.type)[0].type}}</div>
                             </div>
+                            <div class="title">{{item.title}}</div>
                         </div>  
                     </div>
                 </li>
@@ -118,6 +119,9 @@ export default {
         }
     },
     methods: {
+        showNewsType(type) {
+            return this.chooseAry.filter(item => item.value === type)
+        },
         setChooseNewsData(chooseNewsData) {
             this.chooseNewsData = chooseNewsData;
         },
@@ -126,8 +130,6 @@ export default {
             this.chooseNewsIndex = id;
         },
         goTop() {
-            // console.log($(".chooseWrap").offset().top);
-            // $('html,body').animate({ scrollTop: 300 }, 'slow');
             $('html,body').scrollTop(300)
         }
     },
@@ -164,6 +166,20 @@ export default {
         padding: 20px;
     }
 
+    .wrap {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+
+    .type {
+        background-color: #42b983;
+        color: #fff;
+        padding: 3px 5px;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
     ol, ul {
         list-style: none;
     }
@@ -189,22 +205,22 @@ export default {
 
     .newsWrap li {
         width: 25%;
+        display: flex;
+        justify-content: center;
     }
 
     .card {
         cursor: pointer;
-        width: 97%;
+        width: 85%;
+        padding: 10px;
         margin: 15px 5px;
-        /* border: 1px solid #ccc; */
         background-color: #fff;
-        /* border-radius: 15px; */
         border-radius: 5px;
         overflow: hidden;
-        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.418);
     }
 
     .textBlock {
-        padding: 15px 20px;
+        padding: 15px 0px;
         text-align: left;
     }
 
@@ -217,7 +233,7 @@ export default {
         width: 4px;
         height: 25px;
         margin: 0px 12px 0px 2px;
-        background-color: #8bc672;
+        background-color: #42b983;
     }
 
     .newsImg {
@@ -228,6 +244,7 @@ export default {
     }
 
     .newsImg img {
+        width: 100%;
         vertical-align: bottom;
     }
 
@@ -237,13 +254,11 @@ export default {
         width: 100%;
         height: 100%;
         bottom: -100%;
-        /* left: -100%; */
         background: rgba(12, 12, 12, 0.6);
         transition: .5s;
     }
 
     .card:hover .newsImg::before {
-        /* left: 0%; */
         height: 100%;
         bottom: 0%;
     }
@@ -267,8 +282,67 @@ export default {
         font-weight: bold;
     }
 
-    .card img {
-        width: 100%;
+    /* 選單 */
+    .chooseWrap {
+        text-align: center;
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+
+    label p {
+        position: relative;
+        box-sizing: border-box;
+        width: 80px;
+        height: 45px;
+        border: 2px solid #fff;
+        color: #6fc560;
+        z-index: 2;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+    .radioStyle {
+        cursor: pointer;
+        display: inline-block;
+        width: 80px;
+        line-height: 40px;
+        margin: 5px 15px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .radioStyle::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0%;
+        height: 100%;
+        background-color: #6fc560;
+        transition: .6s;
+    }
+
+    .radioStyle:hover:before {
+        width: 180%;
+    }
+
+    label p:hover {
+        color: #fff;
+    }
+
+    input:checked + label {
+        background-color: #6fc560;
+    }
+
+    input:checked + label p {
+        color: #fff;
+    }
+
+    input {
+        display: none;
     }
 
     @media (max-width: 1215px) {
@@ -303,71 +377,21 @@ export default {
         .card {
             margin: 7px 5px;
         }
-    }
 
-    /* 選單 */
-    .chooseWrap {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
+        .radioStyle {
+            width: 70px;
+            margin: 5px;
+        }
 
-    label p {
-        position: relative;
-        box-sizing: border-box;
-        width: 80px;
-        height: 43px;
-        border: 2px solid #8bc672;
-        border-left: 0px;
-        border-right: 0px;
-        color: #8bc672;
-        z-index: 2;
-        font-weight: 600;
-        transition: .3s;
-    }
+        label p {
+            width: 70px;
+            height: 45px;
+            font-weight: 600;
+            font-size: 14px;
+        }
 
-    .radioStyle {
-        cursor: pointer;
-        display: inline-block;
-        width: 80px;
-        line-height: 38px;
-        margin: 5px 10px;
-        /* background-color: #fff; */
-        color: #8bc672;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .radioStyle::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 0%;
-        background-color: #8bc672;
-        /* z-index: -1; */
-        transition: .6s;
-    }
-
-    .radioStyle:hover:before {
-        height: 180%;
-    }
-
-    label p:hover {
-        color: #fff;
-    }
-
-    input:checked + label {
-        background-color: #8bc672;
-    }
-
-    input:checked + label p {
-        color: #fff;
-    }
-
-    input {
-        display: none;
+        .chooseWrap {
+            justify-content: flex-start;
+        }
     }
 </style>

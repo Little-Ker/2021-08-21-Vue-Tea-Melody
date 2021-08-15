@@ -118,7 +118,7 @@ export default {
     width: 4px;
     height: 25px;
     margin: 0px 12px 0px 2px;
-    background-color: #8bc672;
+    background-color: #42b983;
 }
 
 .date {
