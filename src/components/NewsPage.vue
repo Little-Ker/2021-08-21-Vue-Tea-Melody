@@ -101,7 +101,7 @@ export default {
 }
 
 .bounce-leave-active {
-  animation: fade-in .5s reverse;
+  animation: flyDown-in .5s reverse;
 }
 
 .text {

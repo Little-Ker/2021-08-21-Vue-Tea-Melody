@@ -1,9 +1,8 @@
 <template>
   <div class="shpoPoint">
       <div class="navBarMargin"></div>
-
       <h1>門市據點</h1>
-      <p>SHOP LIST</p>
+      <p>SHOP Point</p>
       <Map />
   </div>
 </template>

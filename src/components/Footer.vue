@@ -5,7 +5,7 @@
                     <div class="upFooter">
                         <div class="left">
                             <div class="naverbar titleMargin">
-                                <a v-for='(item, index) in navBarAry' :key='index' href="">{{item.title}}</a>
+                                <router-link :to='item.path' @click="goTop" v-for='(item, index) in navBarAry' :key='index' href="">{{item.title}}</router-link>
                             </div>
                             <div class="logo">
                                 <img src="../assets/footer/logo02.png" alt="">
@@ -13,7 +13,7 @@
                         </div>
                         <div class="contact right">
                             <p class="titleMargin followText">Follow Us</p>
-                            <a v-for='(item, index) in followAry' :key='index' :href="item.path">
+                            <a v-for='(item, index) in followAry' :key='index'>
                                 <div class="circle">
                                     <img :src="item.icon" alt="">
                                     <img class="hoverIcon" :src="item.iconHover" alt="">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="footerBox"></div>
                     <p>© 2021 Vue Tea Melody</p>
-                    <div @click='goTop' class="btn titleMargin"><p>↑</p></div>
+                    <div @click='goTopSlide' class="btn titleMargin"><p>↑</p></div>
                 </div>
             </div>
         </div>
@@ -41,22 +41,35 @@ export default {
         return {
             navBarAry: [
                 { path:'/about', title:'關於我們' },
-                { path:'/about', title:'活動新訊' },
-                { path:'/about', title:'飲品訂購' },
-                { path:'/about', title:'門市據點' },
-                { path:'/about', title:'聯絡我們' }
+                { path:'/news', title:'活動新訊' },
+                { path:'/shop', title:'飲品訂購' },
+                { path:'/shopPoint', title:'門市據點' },
+                { path:'/contact', title:'聯絡我們' }
             ],
             followAry: [
-                { path:'#/about', title:'FB' ,icon: require('../assets/footer/fb.png'), iconHover: require('../assets/footer/fb01.png') },
-                { path:'#/about', title:'IG' ,icon: require('../assets/footer/ig.png'), iconHover: require('../assets/footer/ig01.png') },
-                { path:'#/about', title:'WEB' ,icon: require('../assets/footer/web.png'), iconHover: require('../assets/footer/web01.png') }
+                { title:'FB' ,icon: require('../assets/footer/fb.png'), iconHover: require('../assets/footer/fb01.png') },
+                { title:'IG' ,icon: require('../assets/footer/ig.png'), iconHover: require('../assets/footer/ig01.png') },
+                { title:'WEB' ,icon: require('../assets/footer/web.png'), iconHover: require('../assets/footer/web01.png') }
             ]
         }
     },
     methods: {
         // 回到到最上面
-        goTop() {
+        goTopSlide() {
             $('html,body').animate({ scrollTop: 0 }, 'slow');
+        },
+        goTop() {
+            $('html,body').scrollTop(0, 0);
+        },
+        // 判斷裝置是否為手機
+        isMobile() {
+            let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+            return flag;
+        }
+    },
+    mounted() {
+        if (this.isMobile()) {
+             $('.btn p').css('top', '-10px');
         }
     },
 }
@@ -98,6 +111,7 @@ export default {
     }
 
     .circle {
+        cursor: pointer;
         display: inline-block;
         position: relative;
         width: 25px;
@@ -158,7 +172,6 @@ export default {
         background-color: #fff;
         color: #8bc672;
         /* color: #8bc6726e; */
-        font-weight: bold;
         font-size: 50px;
         margin: auto;
         margin-top: 50px;

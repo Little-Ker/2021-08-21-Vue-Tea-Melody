@@ -1,24 +1,24 @@
 <template>
     <div class="mobileMenu">
-        <transition @after-enter='afterEnterFn' name='downIn' appear>
+        <transition @after-enter='afterEnterFn' @before-leave='beforeLeaveFn' name='downIn' appear>
             <div v-show="isShowMenu" class="menuBg">
                 <div class="logo">
                     <img src="../assets/footer/logo02.png" alt="">
                 </div>
-                <div class="menuWrap">
+                <div v-show="isShowLink" class="menuWrap">
                     <div class="menu">
-                        <div class="link" v-for="(item, index) in navBarAry" :key="index">
+                        <router-link @click="goTop" :to='item.path' :class="`link addAnim${index}`" v-for="(item, index) in navBarAry" :key="index">
                             <img :src="item.imgUrl" alt="">
                             <div class="text">
                                 <p>{{item.eng}}</p>
                                 <p>{{item.title}}</p>
                             </div>
-                        </div>
+                        </router-link>
                     </div>
                     <div class="follow">
                         <p class="followText">Follow Us</p>
                         <div class="iconList">
-                            <a v-for='(item, index) in followAry' :key='index' :href="item.path">
+                            <a v-for='(item, index) in followAry' :key='index'>
                                 <div class="circle">
                                     <img :src="item.icon" alt="">
                                     <img class="hoverIcon" :src="item.iconHover" alt="">
@@ -41,62 +41,58 @@ export default {
     name: 'MobileMenu',
     data() {
         return {
-            isShowMenu: false,
+            isShowLink: false,
             navBarAry: [
                 { path:'/about', title:'關於我們', eng:'About Us', imgUrl:require('../assets/nav/home3.png') },
-                { path:'/about', title:'活動新訊', eng:'News', imgUrl:require('../assets/nav/news3.png') },
-                { path:'/about', title:'飲品訂購', eng:'Product', imgUrl:require('../assets/nav/drink3.png') },
-                { path:'/about', title:'門市據點', eng:'Shop Point', imgUrl:require('../assets/nav/point3.png') },
-                { path:'/about', title:'購物清單', eng:'Shop List', imgUrl:require('../assets/nav/contact3.png') }
+                { path:'/news', title:'活動新訊', eng:'News', imgUrl:require('../assets/nav/news3.png') },
+                { path:'/shop', title:'飲品訂購', eng:'Product', imgUrl:require('../assets/nav/drink3.png') },
+                { path:'/shopPoint', title:'門市據點', eng:'Shop Point', imgUrl:require('../assets/nav/point3.png') },
+                { path:'/contact', title:'購物清單', eng:'Shop List', imgUrl:require('../assets/nav/contact3.png') }
             ],
             followAry: [
-                { path:'#/about', title:'FB' ,icon: require('../assets/footer/fb.png'), iconHover: require('../assets/footer/fb02.png') },
-                { path:'#/about', title:'IG' ,icon: require('../assets/footer/ig.png'), iconHover: require('../assets/footer/ig02.png') },
-                { path:'#/about', title:'WEB' ,icon: require('../assets/footer/web.png'), iconHover: require('../assets/footer/web02.png') }
+                { title:'FB' ,icon: require('../assets/footer/fb.png'), iconHover: require('../assets/footer/fb02.png') },
+                { title:'IG' ,icon: require('../assets/footer/ig.png'), iconHover: require('../assets/footer/ig02.png') },
+                { title:'WEB' ,icon: require('../assets/footer/web.png'), iconHover: require('../assets/footer/web02.png') }
             ]
         }
     },
     computed: {
-        // isShowLoading: {
-        //     get() {
-        //         return this.$store.state.isShowLoading;
-        //     },
-        //     set(val) {
-        //         return this.$store.commit('SetShowLoading',val);
-        //     }
-        // },
+        isShowMenu: {
+            get() {
+                return this.$store.state.isShowMenu;
+            },
+            set(val) {
+                return this.$store.commit('SetIsShowMenu',val);
+            }
+        },
     },
     methods: {
         // 背景出現後
         afterEnterFn() {
-
-        }
-        // createRandom(min, max) {
-        //     return Math.floor(Math.random() * (max - min + 1) + min);
-        // },
-
-        // // 禁用滾動條
-        // stopScrollBar() {
-        //     var tops = $(document).scrollTop();
-        //     $(document).bind("scroll",function (){$(document).scrollTop(tops); });
-
-        // },
-        // startScrollBar() {
-        //     $(document).unbind("scroll");
-        // }
+            this.isShowLink = true;
+            this.linkBeforeEnterFn();
+        },
+        linkBeforeEnterFn() {
+            for (let i = 0; i < this.navBarAry.length; i++) {
+                $(`.addAnim${i}`).addClass('linkAnim');
+                $(`.addAnim${i}`).css("animationDelay",`${i*0.15}s`);
+            }
+            $('.follow').addClass('followAnim')
+        },
+        beforeLeaveFn() {
+            for (let i = 0; i < this.navBarAry.length; i++) {
+                $(`.addAnim${i}`).removeClass('linkAnim');
+            }
+        },
+        goTop() {
+            this.isShowMenu = false;
+            $('html,body').scrollTop(0, 0);
+        },
     },
     watch: {
-        // isShowLoading() {
-        //     if (!this.isShowLoading) return;
-        //     this.stopScrollBar();
-
-        //     let randomSec = this.createRandom(500, 1500)
-        //     this.timeout = setTimeout(() => {
-        //         this.startScrollBar();
-        //         this.isShowLoading = false;
-        //         clearTimeout(this.timeout);
-        //     }, randomSec);
-        // }
+        isShowMenu() {
+            this.isShowLink = false;
+        }
     }
 }
 </script>
@@ -108,10 +104,35 @@ export default {
     box-sizing: border-box;
     color: #fff;
     text-align: left;
+    text-decoration: none;
+}
+
+.downIn-leave-to {
+    animation: downIn .6s reverse;
 }
 
 .downIn-enter-active {
-  animation: downIn 1.2s;
+  animation: downIn 1s;
+}
+
+.followAnim {
+    animation: fade-in 1s;
+}
+
+.linkAnim {
+    animation: runIn .5s ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes runIn {
+    0% {
+        left: -100px;
+        opacity: 0;
+    }
+    100% {
+        left: 0px;
+        opacity: 1;
+    }
 }
 
 @keyframes downIn {
@@ -135,6 +156,7 @@ export default {
 }
 
 .link {
+    opacity: 0;
     cursor: pointer;
     display: flex;
     position: relative;
@@ -154,7 +176,7 @@ export default {
 }
 
 .link:hover::before {
-    width: 100%;
+    width: 90%;
 }
 
 .link img {
@@ -199,6 +221,7 @@ export default {
 }
 
 .circle {
+    cursor: pointer;
     display: inline-block;
     position: relative;
     width: 40px;

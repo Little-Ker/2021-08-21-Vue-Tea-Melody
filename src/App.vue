@@ -69,7 +69,7 @@
   }
 }
 
-@keyframes fade-in {
+@keyframes flyDown-in {
   0% {
     transform: translateY(-50%);
     opacity: 0;
@@ -79,6 +79,16 @@
     opacity: 1;
   }
 }
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 /* Handle on hover */
 /* ::-webkit-scrollbar-thumb:hover {
   background: #888; 

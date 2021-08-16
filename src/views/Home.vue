@@ -6,7 +6,7 @@
             <img src="../assets/nav/logo.png" alt="">
           </div>
           <div class="rightWrap">
-            <div @mouseover='hover' v-for='(item,index) in navList' :key='index' class="link">
+            <div v-for='(item,index) in navList' :key='index' class="link">
               <router-link @click="goTop" :to='item.path' class="nav-item">
                 <img class='overHover' :src='item.icon' alt="">
                 <img class='showHover' :src='item.iconHover' alt="">
@@ -55,7 +55,6 @@ export default {
   },
   data() {
     return {
-      isShowMenu: true,
       navList: [
         { path:'/about', title:'關於我們' ,icon: require('../assets/nav/home1.png'), iconHover: require('../assets/nav/home2.png') },
         { path:'/news', title:'最新消息' ,icon: require('../assets/nav/news1.png'), iconHover: require('../assets/nav/news2.png') },
@@ -65,13 +64,39 @@ export default {
       ]
     }
   },
+  computed:{
+    isShowMenu: {
+        get() {
+            return this.$store.state.isShowMenu;
+        },
+        set(val) {
+            return this.$store.commit('SetIsShowMenu',val);
+        }
+    },
+    isHideShoppingCar: {
+        get() {
+            return this.$store.state.isHideShoppingCar;
+        },
+        set(val) {
+            return this.$store.commit('SetIsHideShoppingCar',val);
+        }
+    },
+  },
   methods: {
     goTop() {
         $('html,body').scrollTop(0, 0);
         // $('html,body').animate({ scrollTop: 0 }, 'slow');
     },
     clickMenuFn() {
-      $('.menu-btn').toggleClass('showMenu');
+      this.isShowMenu = !this.isShowMenu;
+    },
+    // 禁用滾動條
+    stopScrollBar() {
+        var tops = $(document).scrollTop();
+        $(document).bind("scroll",function (){$(document).scrollTop(tops); });
+    },
+    startScrollBar() {
+        $(document).unbind("scroll");
     }
     // reover() {
       // console.log(11);
@@ -85,6 +110,13 @@ export default {
     //   document.querySelector('.logo').appendChild(str);
     //   str.innerHTML = '<h1 class="blue">1234</h1>'
     // }
+  },
+  watch: {
+    isShowMenu() {
+      $('.menu-btn').toggleClass('showMenu');
+      this.isHideShoppingCar = !this.isHideShoppingCar;
+      (this.isShowMenu) ? this.stopScrollBar() : this.startScrollBar();
+    }
   }
 }
 // $("#img_keleyi_com").attr("src", "http:///keleyi/phtml/picnext/images/k03.jpg");
@@ -115,6 +147,7 @@ export default {
      width: 40px;
      height: 50px;
      top: 10px;
+     z-index: 99;
    }
 
   .menu-btn span {

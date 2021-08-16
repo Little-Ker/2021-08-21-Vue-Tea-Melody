@@ -30,6 +30,8 @@ export default createStore({
             },
             totalPrice: 0
         },
+
+        isShowMenu: false,
     },
     mutations: {
         SetNews(state, newsData) {
@@ -69,7 +71,10 @@ export default createStore({
             state.orderLevel = orderLevel;
         },
         SetOrdertData(state, ordertData) {
-            state.getOrdertData = ordertData;
+            state.ordertData = ordertData;
+        },
+        SetIsShowMenu(state, isShowMenu) {
+            state.isShowMenu = isShowMenu;
         },
     },
     actions: {
