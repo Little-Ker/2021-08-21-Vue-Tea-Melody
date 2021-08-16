@@ -61,14 +61,6 @@ export default {
                 return this.$store.commit('SetShoppingCarList',val);
             }
         },
-        isShowLoading: {
-            get() {
-                return this.$store.state.isShowLoading;
-            },
-            set(val) {
-                return this.$store.commit('SetShowLoading',val);
-            }
-        },
         isHideShoppingCar: {
             get() {
                 return this.$store.state.isHideShoppingCar;
@@ -104,7 +96,6 @@ export default {
             this.orderLevel = index;
             this.isShowShopping = false;
             this.isHideShoppingCar = true;
-            this.isShowLoading = true;
         },
         goTop() {
             $('html,body').scrollTop(0, 0);

@@ -16,17 +16,6 @@
               <OrderContact />
             </div>
         </div>
-      
-       
-    <!-- <div>
-      <router-link :to="{name: 'Slide'}">Info</router-link> | 
-      <router-link :to="{name: 'AboutText'}">Img</router-link>
-    </div>
-    <router-view></router-view> -->
-
-    <!-- <Slide />
-    <AboutText/> -->
-    <!-- <h1>This is an about page</h1> -->
   </div>
 </template>
 
@@ -77,6 +66,14 @@ export default {
             return this.$store.commit('SetOrdertData',val);
         }
     },
+    isShowLoading: {
+        get() {
+            return this.$store.state.isShowLoading;
+        },
+        set(val) {
+            return this.$store.commit('SetShowLoading',val);
+        }
+    },
   },
   methods: {
       resetList() {
@@ -96,6 +93,10 @@ export default {
           }
           this.orderLevel = 1;
       }
+  },
+  mounted() {
+    this.isShowLoading = true;
+    this.isHideShoppingCar = true;
   },
   unmounted() {
     this.isHideShoppingCar = false;

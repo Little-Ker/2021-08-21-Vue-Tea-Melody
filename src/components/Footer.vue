@@ -8,7 +8,8 @@
                                 <router-link :to='item.path' @click="goTop" v-for='(item, index) in navBarAry' :key='index' href="">{{item.title}}</router-link>
                             </div>
                             <div class="logo">
-                                <img src="../assets/footer/logo02.png" alt="">
+                                <img class="horialLogo" src="../assets/footer/logo02.png" alt="">
+                                <img class="verticalLogo" src="../assets/footer/logo03.png" alt="">
                             </div>
                         </div>
                         <div class="contact right">
@@ -44,7 +45,7 @@ export default {
                 { path:'/news', title:'活動新訊' },
                 { path:'/shop', title:'飲品訂購' },
                 { path:'/shopPoint', title:'門市據點' },
-                { path:'/contact', title:'聯絡我們' }
+                { path:'/order', title:'購物清單' }
             ],
             followAry: [
                 { title:'FB' ,icon: require('../assets/footer/fb.png'), iconHover: require('../assets/footer/fb01.png') },
@@ -90,6 +91,10 @@ export default {
 
     .right {
         float: right;
+    }
+
+    .verticalLogo {
+        display: none;
     }
 
     .clearBox {
@@ -208,5 +213,19 @@ export default {
         background-color: #8bc672;
         /* background-color: #8bc6726e; */
         background-blend-mode: screen;
+    }
+
+    @media (max-width: 685px) {
+        .naverbar, .horialLogo  {
+            display: none;
+        }
+
+        .logo img {
+            width:85px;
+        }
+
+        .verticalLogo {
+            display: block;
+        }
     }
 </style>

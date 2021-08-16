@@ -33,6 +33,7 @@ export default createStore({
 
         isShowMenu: false,
     },
+    // 改state資料
     mutations: {
         SetNews(state, newsData) {
             state.newsData = newsData;
@@ -77,6 +78,7 @@ export default createStore({
             state.isShowMenu = isShowMenu;
         },
     },
+    // 讀api
     actions: {
         // 更新所有最新消息
         GetNews(context) {

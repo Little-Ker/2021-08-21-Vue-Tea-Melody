@@ -47,7 +47,7 @@ export default {
                 { path:'/news', title:'活動新訊', eng:'News', imgUrl:require('../assets/nav/news3.png') },
                 { path:'/shop', title:'飲品訂購', eng:'Product', imgUrl:require('../assets/nav/drink3.png') },
                 { path:'/shopPoint', title:'門市據點', eng:'Shop Point', imgUrl:require('../assets/nav/point3.png') },
-                { path:'/contact', title:'購物清單', eng:'Shop List', imgUrl:require('../assets/nav/contact3.png') }
+                { path:'/order', title:'購物清單', eng:'Shop List', imgUrl:require('../assets/nav/contact3.png') }
             ],
             followAry: [
                 { title:'FB' ,icon: require('../assets/footer/fb.png'), iconHover: require('../assets/footer/fb02.png') },
@@ -195,7 +195,7 @@ export default {
 }
 
 .logo {
-    padding: 15px;
+    padding: 7px 12px;
     border-bottom: 1px solid #fff;
 }
 
