@@ -6,27 +6,27 @@ const routes = [{
     name: 'Home',
     component: Home,
     children: [{
-        path: '/about',
+        path: 'about',
         name: 'About',
         component: () =>
             import ('../views/About.vue')
     }, {
-        path: '/news',
+        path: 'news',
         name: 'News',
         component: () =>
             import ('../views/News.vue')
     }, {
-        path: '/shop',
+        path: 'shop',
         name: 'Shop',
         component: () =>
             import ('../views/Shop.vue')
     }, {
-        path: '/shopPoint',
+        path: 'shopPoint',
         name: 'ShopPoint',
         component: () =>
             import ('../views/ShopPoint.vue')
     }, {
-        path: '/order',
+        path: 'order',
         name: 'Order',
         component: () =>
             import ('../views/Order.vue')

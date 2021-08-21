@@ -7,7 +7,7 @@
         <div class="slider">
             <div class="moveSlide">
                 <div @mousedown="dragDown($event, item.id)" @mousemove="dragMove($event)" @mouseup="dragUp" @mouseout="dragUp"
-                     @touchstart="dragDown($event)" @touchmove="dragMove($event)" @touchend="dragUp"
+                     @touchstart="dragDown($event, item.id)" @touchmove="dragMove($event)" @touchend="dragUp"
                      v-for="(item, index) in popularAry" :key="index" :class="`item item${index}`" :style="`left:${leftPos*index}px;`">
                     <img :src='item.imgUrl' alt="">
                     <div class="text">
@@ -157,6 +157,7 @@ export default {
             $('.item').css('user-select','auto');
         },
         dragDown(event, index){
+            this.chooseDrinkIndex = index;
             // console.log('down');
             this.isDrag = true;
             this.oldPosX = this.getPosX(event);
