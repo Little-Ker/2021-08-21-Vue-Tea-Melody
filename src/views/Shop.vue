@@ -38,7 +38,6 @@ export default {
     .Shop {
         width: 100%;
         height: 100%;
-        /* background-image: url('../assets/bg/bg.png'); */
         z-index: -10;
     }
 

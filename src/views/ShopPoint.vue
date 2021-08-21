@@ -22,7 +22,6 @@ export default {
     .shpoPoint {
         width: 100%;
         height: 100%;
-        /* background-image: url('../assets/bg/bg02.jpg'); */
         z-index: -10;
     }
 
