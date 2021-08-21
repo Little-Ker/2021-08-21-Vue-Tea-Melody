@@ -299,7 +299,7 @@ export default {
         width: 80px;
         height: 45px;
         border: 2px solid #fff;
-        color: #6fc560;
+        color: #42b983;
         z-index: 2;
         font-weight: 600;
         transition: .3s;
@@ -322,7 +322,7 @@ export default {
         top: 0;
         width: 0%;
         height: 100%;
-        background-color: #6fc560;
+        background-color: #42b983;
         transition: .6s;
     }
 
@@ -335,7 +335,7 @@ export default {
     }
 
     input:checked + label {
-        background-color: #6fc560;
+        background-color: #42b983;
     }
 
     input:checked + label p {

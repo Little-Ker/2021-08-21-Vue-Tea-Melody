@@ -92,7 +92,7 @@ export default {
 }
 
 .chooseIndexBg {
-    background-color: #6fc560;
+    background-color: #42b983;
 }
 
 .chooseIndexColor {
@@ -120,7 +120,7 @@ li {
     width: 38px;
     height: 38px;
     line-height: 37px;
-    color: #6fc560;
+    color: #42b983;
     border-radius: 50%;
     font-size: 16px;
     font-weight: bold;
@@ -130,7 +130,7 @@ li {
 
 .block:hover {
     color: #fff;
-    background-color: #6fc560;
+    background-color: #42b983;
 }
 
 .block:hover .btn {
@@ -140,7 +140,7 @@ li {
 .btn {
     width: 13px;
     height: 13px;
-    border: 3px solid #6fc560;
+    border: 3px solid #42b983;
     transform: rotate(45deg);
     position: absolute;
 }

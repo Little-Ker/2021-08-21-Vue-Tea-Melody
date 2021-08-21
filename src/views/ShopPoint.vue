@@ -31,10 +31,12 @@ export default {
     }
 
     .shpoPoint h1 {
+      font-family: 'simsun';
       margin-top: 100px;
     }
 
     .shpoPoint p {
+      font-family: 'simsun';
       margin-bottom: 30px;
       letter-spacing: 3px;
     }

@@ -146,7 +146,7 @@ export default {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: #8bc672;
+    background-color: #42b983;
     box-shadow: 0px 1px 5px rgb(0 0 0 / 60%);
 }
 
@@ -241,7 +241,7 @@ export default {
     width: 100%;
     cursor: pointer;
     padding: 7px;
-    background-color: #8bc672;
+    background-color: #42b983;
     color: #fff;
     transition: .3s;
 }
@@ -251,7 +251,7 @@ export default {
 }
 
 .btnUnLock:hover {
-    background-color: #78aa62;
+    background-color: rgba(66, 185, 131, 0.8);
 }
 
 .shoppingList hr {

@@ -142,7 +142,7 @@ export default {
                 ).addTo(openStreetMap);
 
                 // 點選標記時有說明框
-                marker.bindPopup(`<p><strong style="font-size: 20px; color:#6ba723; letter-spacing: 1px">${shop.shopName}</strong></p>
+                marker.bindPopup(`<p><strong style="font-size: 20px; color:#42b983; letter-spacing: 1px">${shop.shopName}</strong></p>
                     <p style="font-size: 14px; letter-spacing: 2px;">地址: ${shop.address}<br>電話: ${shop.phone}<br></p>`);
 
                 // 滑鼠靠近地標時有說明文字
@@ -179,15 +179,15 @@ export default {
 
         this.updateMap();
 
-        // 點擊地圖取得經緯度
-        var popup = L.popup();
-        function onMapClick(e) {
-            popup
-                .setLatLng(e.latlng)
-                .setContent("經緯度座標：" + e.latlng.toString())
-                .openOn(openStreetMap);
-        }
-        openStreetMap.on('click', onMapClick);
+        // // 點擊地圖取得經緯度
+        // var popup = L.popup();
+        // function onMapClick(e) {
+        //     popup
+        //         .setLatLng(e.latlng)
+        //         .setContent("經緯度座標：" + e.latlng.toString())
+        //         .openOn(openStreetMap);
+        // }
+        // openStreetMap.on('click', onMapClick);
     },
 }
 </script>
