@@ -15,7 +15,6 @@
             </div>
             <MobileMenu />
             <div @click="clickMenuFn" class="menu-btn">
-            <!-- <div class="menu-btn showMenu"> -->
                 <span></span>
                 <span></span>
                 <span></span>
