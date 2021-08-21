@@ -24,7 +24,7 @@
                         <div class="clearBox "></div>
                     </div>
                     <div class="footerBox"></div>
-                    <p>© 2021 Vue Tea Melody</p>
+                    <p>2021 Vue Tea Melody Design by Vivi</p>
                     <div @click='goTopSlide' class="btn titleMargin"><p>↑</p></div>
                 </div>
             </div>
