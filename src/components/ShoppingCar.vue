@@ -29,7 +29,9 @@
                     </div>
                 </div>
             </div>
-            <div v-if="!isShopping" class="buyBtn btnLock">訂單結帳</div>
+            <router-link v-if="!isShopping" to='shop'>
+                <div @click="goTop()" class="buyBtn btnUnLock">前往訂購畫面</div>
+            </router-link>
             <router-link v-if="isShopping" to='order'>
                 <div @click="clickBuyFn(1)" class="buyBtn btnUnLock">訂單結帳</div>
             </router-link>
@@ -98,6 +100,7 @@ export default {
             this.isHideShoppingCar = true;
         },
         goTop() {
+            this.isShowShopping = false;
             $('html,body').scrollTop(0, 0);
         }
     },

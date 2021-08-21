@@ -318,6 +318,11 @@ export default {
     margin-top: 3px;
 }
 
+.price p {
+    color: #42b983;
+    font-weight: bold;
+}
+
 .leftBtn, .rightBtn {
     position: absolute;
     z-index: 2;
