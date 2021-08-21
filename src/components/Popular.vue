@@ -189,9 +189,9 @@ export default {
 
             if (this.isMoveing) return;
             this.leftPos = slideBgWidth + 20 + this.subWidth;
-            this.moveSpeed = slideBgWidth + 20;
-            if (this.isMobile()) {
-                this.moveSpeed = 120;
+            this.moveSpeed = 150;
+            if (!this.isMobile()) {
+                this.moveSpeed = slideBgWidth + 20;
             }
             for (let i = 0; i < this.popularAry.length; i++) {
                 $(`.item${i}`).css('width',`${slideBgWidth + this.subWidth}px`);

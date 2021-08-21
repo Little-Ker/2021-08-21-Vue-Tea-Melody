@@ -199,12 +199,13 @@ export default {
 
     .newsWrap {
         width: 100%;
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(4,  1fr);
     }
 
     .newsWrap li {
-        width: 25%;
+        margin: auto;
+        width: 300px;
         display: flex;
         justify-content: center;
     }
@@ -345,15 +346,15 @@ export default {
         display: none;
     }
 
-    @media (max-width: 1215px) {
-        .newsWrap li {
-            width: 33.33%;
+    @media (max-width: 1140px) {
+        .newsWrap {
+            grid-template-columns: repeat(3,  1fr);
         }
     }
 
-    @media (max-width: 916px) {
-        .newsWrap li {
-            width: 50%;
+    @media (max-width:840px) {
+        .newsWrap {
+            grid-template-columns: repeat(2,  1fr);
         }
 
         .topPadding {
@@ -365,9 +366,9 @@ export default {
         }
     }
 
-    @media (max-width: 616px) {
-        .newsWrap li {
-            width: 100%;
+    @media (max-width: 590px) {
+        .newsWrap {
+            grid-template-columns: repeat(1,  1fr);
         }
 
         .topPadding {
