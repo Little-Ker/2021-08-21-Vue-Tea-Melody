@@ -1,9 +1,9 @@
 # Vue Tea Melody 十二韻
 
-> 以十二韻茶飲為主題，使用vue cli框架製作的飲料購物網站。
+> 以十二韻茶飲為主題，使用 Vue CLI 框架製作的飲料購物網站。
 
 ## Demo網站
-
+https://little-ker.github.io/2021-08-21-Vue-Tea-Melody/#/about
 
 ## 圖片、資料來源
 - [十二韻連鎖茶飲專賣店](http://tea-melody.com.tw/menu.html)
@@ -12,11 +12,9 @@
 - [flaticon](https://www.flaticon.com/)
 
 ## 使用技術
-- Vue Cli3、Vue Router、Vuex
+- Vue CLI3、Vue Router、Vuex
 - Leaflet、google Map
-- RWD、Flex、Grid、JQery
-
-## 專案說明
+- RWD、Flex、Grid、jQery
 
 ## 聲明
 此網站僅作為前端設計練習用, 不使用於商業用途
